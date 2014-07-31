@@ -80,6 +80,26 @@ button:disabled:hover {
   right: 30px;
   top: 30px; }
 
+#make-planks,
+#make-crafting {
+  display: none; }
+
+#crafting {
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  width: 303px;
+  height: 303px;
+  margin-top: 30px;
+  margin-left: 15px;
+  display: none; }
+  #crafting .craft-square {
+    width: 100px;
+    height: 100px;
+    float: left;
+    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    background: #333; }
+
 #footer {
   position: fixed;
   bottom: 5px;

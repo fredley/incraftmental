@@ -91,6 +91,27 @@ button:disabled:hover{
     right: 30px;
     top: 30px;
 }
+#make-planks,
+#make-crafting{
+    display:none;
+}
+#crafting{
+    border-top:1px solid $light;
+    border-left:1px solid $light;
+    width:303px;
+    height:303px;
+    margin-top:30px;
+    margin-left:15px;
+    display: none;
+    .craft-square{
+        width:100px;
+        height:100px;
+        float:left;
+        border-bottom:1px solid $light;
+        border-right:1px solid $light;
+        background: #333;
+    }
+}
 #footer{
     position: fixed;
     bottom: 5px;
