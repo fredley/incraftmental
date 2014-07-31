@@ -1,49 +1,133 @@
 var inventory = {
 
+  selected : null,
+
   blocks : {
-    air:            {display:'Air'},
-    stone:          {display:'Stone'},
-    grass:          {display:'Grass'},
-    dirt:           {display:'Dirt'},
-    cobble:         {display:'Cobblestone'},
-    planks:         {display:'Planks'},
-    sapling:        {display:'Sapling'},
-    bedrock:        {display:'Bedrock'},
-    sand:           {display:'Sand'},
-    gravel:         {display:'Gravel'},
-    gold_ore:       {display:'Gold Ore'},
-    iron_ore:       {display:'Iron Ore'},
-    coal_ore:       {display:'Coal Ore'},
-    wood:           {display:'Wood'},
-    glass:          {display:'Glass'},
-    lapis_ore:      {display:'Lapis Lazuli Ore'},
-    lapis:          {display:'Lapis Lazuli Block'},
-    bed:            {display:'Bed'},
-    wool:           {display:'Wool'},
-    mushroom:       {display:'Mushroom'},
-    gold:           {display:'Block of Gold'},
-    iron:           {display:'Block of Iron'},
-    tnt:            {display:'TNT'},
-    obsidian:       {display:'Obsidian'},
-    torch:          {display:'Torch'},
-    chest:          {display:'Chest'},
-    diamond_ore:    {display:'Diamond Ore'},
-    diamond:        {display:'Block of Diamond'},
-    crafting_table: {display:'Crafting Table'},
-    wheat:          {display:'Wheat'},
-    furnace:        {display:'Furnace'},
-    redstone_ore:   {display:'Redstone Ore'},
-    redstone:       {display:'Redstone'},
-    cactus:         {display:'Cactus'},
-    clay:           {display:'Clay'},
-    sugar_cane:     {display:'Sugar Cane'},
-    cake:           {display:'Cake'}
+    stone:          {display:'Stone'              , symbol: 's',                         },
+    grass:          {display:'Grass'              , symbol: '-',                         },
+    dirt:           {display:'Dirt'               , symbol: '%',                         },
+    cobble:         {display:'Cobblestone'        , symbol: 'C',                         },
+    planks:         {display:'Planks'             , symbol: 'P', recipe:'='              },
+    sand:           {display:'Sand'               , symbol: 'S',                         },
+    gravel:         {display:'Gravel'             , symbol: '$',                         },
+    gold_ore:       {display:'Gold Ore'           , symbol: 'G',                         },
+    iron_ore:       {display:'Iron Ore'           , symbol: 'I',                         },
+    wood:           {display:'Wood'               , symbol: '=',                         },
+    glass:          {display:'Glass'              , symbol: '~',                         },
+    bed:            {display:'Bed'                , symbol: 'B', recipe:'WWPPP',         },
+    wool:           {display:'Wool'               , symbol: 'W',                         },
+    tnt:            {display:'TNT'                , symbol: 'X', recipe:'xSxSxSxSx'      },
+    obsidian:       {display:'Obsidian'           , symbol: 'O',                         },
+    torch:          {display:'Torch'              , symbol: 'L', recipe:'c  |'           },
+    chest:          {display:'Chest'              , symbol: '&', recipe:'PPPP PPPP'      },
+    crafting_table: {display:'Crafting Table'     , symbol: 'T', recipe:'PP PP'          },
+    furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      },
+    cactus:         {display:'Cactus'             , symbol: '!',                         },
+    clay:           {display:'Clay'               , symbol: '.',                         },
+    cake:           {display:'Cake'               , symbol: '*', recipe: 'MMM,o,;;;'     }
+  },
+
+  items: {
+    apple :           {display:'Apple',           symbol: 'a',                           },
+    arrow :           {display:'Arrow',           symbol: '^', recipe: 'Y   |   f'       },
+    coal :            {display:'Coal',            symbol: 'c',                           },
+    diamond :         {display:'Diamond',         symbol: 'd',                           },
+    iron_ingot :      {display:'Iron Ingot',      symbol: 'i',                           },
+    gold_ingot :      {display:'Gold Ingot',      symbol: 'g',                           },
+    stick :           {display:'Stick',           symbol: '|', recipe: 'P  P'            },
+    bowl :            {display:'Bowl',            symbol: 'U', recipe: 'P P P'           },
+    mushrooom :       {display:'Mushroom',        symbol: 'm',                           },
+    stew :            {display:'Mushroom Stew',   symbol: 'V', recipe: 'm  m  b'         },
+    string :          {display:'String',          symbol: '@',                           },
+    feather :         {display:'Feather',         symbol: 'f',                           },
+    gunpowder :       {display:'Gunpowder',       symbol: 'x',                           },
+    seeds :           {display:'Seeds',           symbol: ':',                           },
+    wheat :           {display:'Wheat',           symbol: ';', recipe: ':::'             },
+    bread :           {display:'Bread',           symbol: 'b',                           },
+    flint :           {display:'Flint',           symbol: 'Y',                           },
+    porkchop :        {display:'Raw Porkchop',    symbol: 'q',                           },
+    cooked_porkchop : {display:'Cooked Porkchop', symbol: 'Q',                           },
+    redstone :        {display:'Redstone',        symbol: 'r',                           },
+    boat :            {display:'Boat',            symbol: '+', recipe: 'P PPPP'          },
+    leather :         {display:'Leather',         symbol: 'l',                           },
+    milk :            {display:'Milk',            symbol: 'M',                           },
+    brick :           {display:'Brick',           symbol: '[',                           },
+    cane :            {display:'Sugar Cane',      symbol: '/',                           },
+    paper :           {display:'Paper',           symbol: '_', recipe: '///'             },
+    book :            {display:'Book',            symbol: 'p', recipe: '___l'            },
+    egg :             {display:'Egg',             symbol: 'o',                           },
+    compass :         {display:'Compass',         symbol: '>',                           },
+    fish :            {display:'Raw Fish',        symbol: 'z',                           },
+    cooked_fish :     {display:'Cooked Fish',     symbol: 'Z',                           },
+    sugar :           {display:'Sugar',           symbol: ',', recipe: '/'               },
+    sapling:          {display:'Sapling',         symbol: 's',                           }
+  },
+
+  tools : {
+    wooden_sword : {display:'Wooden Sword',       recipe: 'P  P  |' },
+    wooden_shovel : {display:'Wooden Shovel',     recipe: 'P  |  |' },
+    wooden_pickaxe : {display:'Wooden Pickaxe',   recipe: 'PPP |  |'},
+    wooden_axe : {display:'Wooden Axe',           recipe: 'PP P|  |'},
+    stone_sword : {display:'Stone Sword',         recipe: 'C  C  |' },
+    stone_shovel : {display:'Stone Shovel',       recipe: 'C  |  |' },
+    stone_pickaxe : {display:'Stone Pickaxe',     recipe: 'CCC |  |'},
+    stone_axe : {display:'Stone Axe',             recipe: 'CC C|  |'},
+    iron_sword : {display:'Iron Sword',           recipe: 'i  i  |' },
+    iron_shovel : {display:'Iron Shovel',         recipe: 'i  |  |' },
+    iron_picaxe : {display:'Iron Pickaxe',        recipe: 'iii |  |'},
+    iron_axe : {display:'Iron Axe',               recipe: 'ii i|  |'},
+    gold_sword : {display:'Golden Sword',         recipe: 'g  g  |' },
+    gold_shovel : {display:'Golden Shovel',       recipe: 'g  |  |' },
+    gold_pickaxe : {display:'Golden Pickaxe',     recipe: 'ggg |  |'},
+    gold_axe : {display:'Golden Axe',             recipe: 'gg g|  |'},
+    diamond_sword : {display:'Diamond Sword',     recipe: 'd  d  |' },
+    diamond_shovel : {display:'Diamond Shovel',   recipe: 'd  |  |' },
+    diamond_pickaxe : {display:'Diamond Pickaxe', recipe: 'ddd |  |'},
+    diamond_axe : {display:'Diamond Axe',         recipe: 'dd d|  |'},
+    wooden_hoe : {display:'Wooden Hoe',           recipe: 'PP  |  |'},
+    stone_hoe : {display:'Stone Hoe',             recipe: 'CC  |  |'},
+    iron_hoe : {display:'Iron Hoe',               recipe: 'ii  |  |'},
+    gold_hoe : {display:'Gold Hoe',               recipe: 'gg  |  |'},
+    diamond_hoe : {display:'Diamond Hoe',         recipe: 'dd  |  |'},
+    fishing_rod : {display:'Fishing Rod',         recipe: '| |@| @' },
+    bow : {display:'Bow',                         recipe: '|@| @ |@'}
+  },
+
+  armour : {
+    leather_helmet : {display:'Leather Cap',        },
+    leather_chest : {display:'Leather Tunic',       },
+    leather_pants : {display:'Leather Pants',       },
+    leather_boots : {display:'Leather Boots',       },
+    iron_helmet : {display:'Iron Helmet',           },
+    iron_chest : {display:'Iron Chestplate',        },
+    iron_leggings : {display:'Iron Leggings',       },
+    iron_boots : {display:'Iron Boots',             },
+    diamond_helmet : {display:'Diamond Helmet',     },
+    diamond_chest : {display:'Diamond Chestplate',  },
+    diamond_leggings : {display:'Diamond Leggings', },
+    diamond_boots : {display:'Diamond Boots',       },
+    gold_helmet : {display:'Golden Helmet',         },
+    gold_chest : {display:'Golden Chestplate',      },
+    gold_leggings : {display:'Golden Leggings',     },
+    gold_boots : {display:'Golden Boots',           }
   },
 
   init : function(){
     for(var block in this.blocks){
       this.blocks[block].quantity = 0;
       this.blocks[block].hasOwned = false;
+    }
+    for(var item in this.items){
+      this.items[item].quantity = 0;
+      this.items[item].hasOwned = false;
+    }
+    for(var tool in this.tools){
+      this.tools[tool].quantity = 0;
+      this.tools[tool].hasOwned = false;
+    }
+    for(var piece in this.armour){
+      this.armour[piece].quantity = 0;
+      this.armour[piece].hasOwned = false;
     }
   },
 
@@ -53,13 +137,56 @@ var inventory = {
   },
 
   updateDisplay : function(){
-    var inventoryText = "";
+    var inventoryText = "<h3>Blocks</h3>";
     for(var block in inventory.blocks){
       if(inventory.blocks[block].hasOwned){
-        inventoryText += inventory.blocks[block].display + " - " + inventory.blocks[block].quantity + '<br>';
+        inventoryText += '<div class="inventory-item';
+        inventoryText += (this.selected == block) ? " selected" : "";
+        inventoryText += '" data-block="' + block + '">' + inventory.blocks[block].display + " - " + inventory.blocks[block].quantity + '</div>';
+      }
+    }
+    inventoryText += "<h3>Items</h3>";
+    for(var item in inventory.items){
+      if(inventory.items[item].hasOwned){
+        inventoryText += '<div class="inventory-block';
+        inventoryText += (this.selected == item) ? " selected" : "";
+        inventoryText += '" data-block="' + item + '">' + inventory.items[item].display + " - " + inventory.items[item].quantity + '</div>';
+      }
+    }
+    inventoryText += "<h3>Tools</h3>";
+    for(var tool in inventory.tools){
+      if(inventory.tools[tool].hasOwned){
+        inventoryText += '<div class="inventory-block';
+        inventoryText += (this.selected == tool) ? " selected" : "";
+        inventoryText += '" data-block="' + tool + '">' + inventory.tools[tool].display + " - " + inventory.tools[tool].quantity + '</div>';
+      }
+    }
+    inventoryText += "<h3>Armour</h3>";
+    for(var piece in inventory.armour){
+      if(inventory.armour[piece].hasOwned){
+        inventoryText += '<div class="inventory-block';
+        inventoryText += (this.selected == piece) ? " selected" : "";
+        inventoryText += '" data-block="' + piece + '">' + inventory.armour[piece].display + " - " + inventory.armour[piece].quantity + '</div>';
       }
     }
     $('#inventory').html(inventoryText);
+    buttons.hook_inventory();
+  },
+
+  craft : function(object){
+    if(object in this.blocks){
+      this.blocks[object].quantity++;
+      this.blocks[object].hasOwned = true;
+    }else if(object in this.items){
+      this.items[object].quantity++;
+      this.items[object].hasOwned = true;
+    }else if(object in this.tools){
+      this.tools[object].quantity++;
+      this.tools[object].hasOwned = true;
+    }else if(object in this.armour){
+      this.armour[object].quantity++;
+      this.armour[object].hasOwned = true;
+    }
   }
 
 };

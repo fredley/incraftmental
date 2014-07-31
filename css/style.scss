@@ -95,6 +95,12 @@ button:disabled:hover{
 #make-crafting{
     display:none;
 }
+.inventory-item{
+    padding:2px 5px;
+    &.selected{
+        background: #555;
+    }
+}
 #crafting{
     border-top:1px solid $light;
     border-left:1px solid $light;
@@ -110,6 +116,10 @@ button:disabled:hover{
         border-bottom:1px solid $light;
         border-right:1px solid $light;
         background: #333;
+        text-align:center;
+        padding-top:40px;
+        font-size:20px;
+        box-sizing: border-box;
     }
 }
 #footer{

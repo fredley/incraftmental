@@ -28,6 +28,53 @@ init : function(){
       $('#crafting').show();
     }
   });
+  $('.craft-square').on('click',function(){
+    if($(this).attr('data-block')){
+      $(this).html("");
+      inventory.blocks[$(this).attr('data-block')].quantity += 10;
+      $(this).removeAttr('data-block');
+      inventory.updateDisplay();
+      return;
+    }
+    var block = inventory.selected;
+    if(block === undefined){
+      return;
+    }
+    if(inventory.blocks[block].quantity >= 10){
+      inventory.blocks[block].quantity -= 10;
+      $(this).html(inventory.blocks[block].symbol);
+      $(this).attr('data-block',block);
+      inventory.updateDisplay();
+    }
+  });
+  $('#craft').on('click',function(){
+    var code = '';
+    $('.craft-square').each(function(){
+      if($(this).attr('data-block')){
+        code += inventory.blocks[$(this).attr('data-block')].symbol;
+      }else{
+        code += ' ';
+      }
+    });
+    console.log(code);
+    code = code.trim();
+    var allCraftables = $.extend({},inventory.blocks,inventory.items,inventory.tools,inventory.armour);
+    for(block in allCraftables){
+      if(allCraftables[block].recipe == code){
+        inventory.craft(block);
+        inventory.updateDisplay();
+      }
+    }
+  });
+  this.hook_inventory();
+},
+
+hook_inventory : function(){
+  $('.inventory-item').on('click',function(){
+    $('.inventory-item').removeClass('selected');
+    $(this).addClass('selected');
+    inventory.selected = $(this).attr('data-block');
+  });
 }
 
 };
