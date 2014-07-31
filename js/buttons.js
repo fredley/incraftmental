@@ -22,7 +22,7 @@ init : function(){
   });
   $('#make-crafting').on('click',function(){
     if(inventory.blocks.planks.quantity >= 4){
-      inventory.blocks.wood.quantity -= 4;
+      inventory.blocks.planks.quantity -= 4;
       inventory.addBlock('crafting_table');
       inventory.updateDisplay();
       $('#crafting').show();
