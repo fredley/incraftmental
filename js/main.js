@@ -47,6 +47,11 @@ addMouseAlert : function(text,e){
     alert.remove();
   });
   $('body').append(alert);
+},
+
+hideTables : function(){
+	$("#crafting").hide();
+	$("#smelting").hide();
 }
 
 };

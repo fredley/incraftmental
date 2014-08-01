@@ -52,6 +52,36 @@ init : function(){
       main.addMouseAlert('Not enough to craft (10 required)!',e);
     }
   });
+  $('.smelt-square').on('click',function(e){
+    if($(this).attr('data-object')){
+      $(this).html("");
+      inventory.getObject($(this).attr('data-object')).quantity += 10;
+      $(this).removeAttr('data-object');
+      inventory.updateDisplay();
+      return;
+    }
+    var object = inventory.selected;
+    if(!object){
+      main.addMouseAlert('Select an item!',e);
+      return;
+    }
+    if(inventory.getObject(object).quantity >= 10){
+      inventory.getObject(object).quantity -= 10;
+      $(this).html(inventory.getObject(object).symbol);
+      $(this).attr('data-object',object);
+      inventory.updateDisplay();
+    }else{
+      main.addMouseAlert('Not enough to smelt (10 required)!',e);
+    }
+  });
+  $("#lnkCrafting").on('click',function(){
+	main.hideTables();
+	$("#crafting").show();
+  });
+  $("#lnkSmelting").on('click',function(){
+	main.hideTables();
+	$("#smelting").show();
+  });
   $('#craft').on('click',function(){
     var code = '';
     var needed = {};
@@ -101,6 +131,14 @@ init : function(){
       }
     }
   });
+  $('#smelt').on('click',function(){
+	var fuel, input, output;
+	fuel=$("#smelt_1").attr('data-object');
+	input=$("#smelt_0").attr('data-object');
+	if(inventory.objects.blocks.furnace.fuelLevel<=0){
+	  inventory.objects.blocks.furnace.fuelLevel=10;
+	}
+  });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){
     $('#make-planks').show();
@@ -111,6 +149,10 @@ init : function(){
   }
   if(inventory.objects.blocks.crafting_table.hasOwned){
     $('#crafting').show();
+    $('#lnkCrafting').show();
+  }
+  if(inventory.objects.blocks.crafting_table.hasOwned){
+    $('#lnkSmelting').show();
   }
   this.hook_inventory();
   this.hook_villagers();
