@@ -7,7 +7,23 @@ var villagers = {
       // find a smeltable and smelt
     },
     builder : function(level){
-      // find a craftable and craft
+      craftables = [];
+      for(var group in inventory.objects){
+        for(var object in inventory.objects[group]){
+          var o = inventory.objects[group][object];
+          if(o.recipe && o.hasOwned && inventory.canCraft(object)){ // only build things that have been built before
+            craftables.push(object);
+          }
+        }
+      }
+      if(craftables.length > 0){
+        for(var i=0; i < level; i++){
+          var craftable = randomChoice(craftables);
+          if(inventory.canCraft(craftable)){
+            inventory.craft(craftable);
+          }
+        }
+      }
     },
     farmer : function(level){
       // find a growable and grow
@@ -58,9 +74,9 @@ var villagers = {
     return name.capitalize();
   },
 
-  assignVillager : function(name, profession, level){
-    this.population[name].profession = profession;
-    this.population[name].level = level;
+  assignVillager : function(id, profession, level){
+    this.population[id].profession = profession;
+    this.population[id].level = level;
     this.updateDisplay();
   },
 
@@ -76,7 +92,7 @@ var villagers = {
   updateDisplay : function(){
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
-      villagerText += '<div class="villager" data-name="' + this.population[villager].name + '">' + this.population[villager].name.capitalize();
+      villagerText += '<div class="villager" data-id="' + villager + '">' + this.population[villager].name.capitalize();
       if(this.population[villager].level > 0){
         villagerText += ' the ' + this.levels[this.population[villager].level] + ' ' + this.population[villager].profession.capitalize();
       }

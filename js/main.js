@@ -5,6 +5,9 @@ onload : function(){
   if('objects' in localStorage){
     inventory.objects = JSON.parse(localStorage['objects']);
   }
+  if('villagers' in localStorage){
+    villagers.population = JSON.parse(localStorage["villagers"]);
+  }
   buttons.init();
   window.setInterval(function(){main.tick()}, 1000);
 },
