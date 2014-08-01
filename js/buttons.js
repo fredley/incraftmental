@@ -132,18 +132,19 @@ init : function(){
     }
   });
   $('#smelt').on('click',function(){
+<<<<<<< HEAD
 	var fuel, input, output, timer;
 	fuel =$("#smelt_1").attr('data-object');
 	input=$("#smelt_0").attr('data-object');
 	output=inventory.getObject(input).smelts_to;
 	
-	if(inventory.objects.blocks.furnace.fuelLevel.cur<=0){
-	  if(inventory.getObject(fuel).fuelSource==undefined)
+	if(inventory.objects.blocks.furnace.fuel_level.cur<=0){
+	  if(inventory.getObject(fuel).fuel_source==undefined)
 		return false;
-	  inventory.objects.blocks.furnace.fuelLevel.max = inventory.getObject(fuel).fuelSource;
-	  inventory.objects.blocks.furnace.fuelLevel.cur = inventory.objects.blocks.furnace.fuelLevel.max;
+	  inventory.objects.blocks.furnace.fuel_level.max = inventory.getObject(fuel).fuel_source;
+	  inventory.objects.blocks.furnace.fuel_level.cur = inventory.objects.blocks.furnace.fuel_level.max;
 	}
-	inventory.objects.blocks.furnace.fuelLevel.cur--;
+	inventory.objects.blocks.furnace.fuel_level.cur--;
 	timer=10;
 	
 	if(output==undefined)
@@ -153,6 +154,14 @@ init : function(){
 	//	inventory.addObject(output,1);
 	//	main.addAlert('Smelting Completed');
 	//},10000);
+=======
+  	var fuel, input, output;
+  	fuel = $("#smelt_fuel").attr('data-object');
+  	input = $("#smelt_input").attr('data-object');
+  	if(inventory.objects.blocks.furnace.fuel_level <= 0){
+  	  inventory.objects.blocks.furnace.fuel_level = 10;
+  	}
+>>>>>>> upstream/master
   });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){
@@ -193,6 +202,11 @@ hook_villagers : function(){
     }else{
       main.addMouseAlert('Select a tool to assign a villager.',e);
     }
+  });
+  $('.pause').on('click',function(e){
+    e.stopPropagation();
+    villagers.population[$(this).attr('data-id')].enabled = !villagers.population[$(this).attr('data-id')].enabled;
+    villagers.updateDisplay();
   });
 }
 
