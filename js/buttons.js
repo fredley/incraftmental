@@ -62,7 +62,7 @@ init : function(){
     for(var group in inventory.objects){
       for(var object in inventory.objects[group]){
         if(inventory.objects[group][object].recipe == code){
-          inventory.addObject(object);
+          inventory.addObject(object,inventory.objects[group][object].yield);
           inventory.updateDisplay();
           $('.craft-square').removeAttr('data-object');
           $('.craft-square').html("");

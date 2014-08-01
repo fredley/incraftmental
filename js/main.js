@@ -13,6 +13,7 @@ onload : function(){
 },
 
 tick : function(){
+  inventory.doTools();
   inventory.updateDisplay();
 },
 

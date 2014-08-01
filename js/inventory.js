@@ -20,7 +20,7 @@ var inventory = {
       wool:           {display:'Wool'               , symbol: 'W',                         },
       tnt:            {display:'TNT'                , symbol: 'X', recipe:'xSxSxSxSx'      },
       obsidian:       {display:'Obsidian'           , symbol: 'O',                         },
-      torch:          {display:'Torch'              , symbol: 'L', recipe:'c  |'           },
+      torch:          {display:'Torch'              , symbol: 'L', recipe:'c  |', yield:4  },
       chest:          {display:'Chest'              , symbol: '&', recipe:'PPPP PPPP'      },
       crafting_table: {display:'Crafting Table'     , symbol: 'T', recipe:'PP PP'          },
       furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      },
@@ -36,7 +36,7 @@ var inventory = {
       diamond :         {display:'Diamond',         symbol: 'd',                           },
       iron_ingot :      {display:'Iron Ingot',      symbol: 'i',                           },
       gold_ingot :      {display:'Gold Ingot',      symbol: 'g',                           },
-      stick :           {display:'Stick',           symbol: '|', recipe: 'P  P'            },
+      stick :           {display:'Stick',           symbol: '|', recipe: 'P  P', yield:4   },
       bowl :            {display:'Bowl',            symbol: 'U', recipe: 'P P P'           },
       mushrooom :       {display:'Mushroom',        symbol: 'm',                           },
       stew :            {display:'Mushroom Stew',   symbol: 'V', recipe: 'm  m  b'         },
@@ -55,7 +55,7 @@ var inventory = {
       milk :            {display:'Milk',            symbol: 'M',                           },
       brick :           {display:'Brick',           symbol: '[',                           },
       cane :            {display:'Sugar Cane',      symbol: '/',                           },
-      paper :           {display:'Paper',           symbol: '_', recipe: '///'             },
+      paper :           {display:'Paper',           symbol: '_', recipe: '///', yield:3    },
       book :            {display:'Book',            symbol: 'p', recipe: '___l'            },
       egg :             {display:'Egg',             symbol: 'o',                           },
       compass :         {display:'Compass',         symbol: '>',                           },
@@ -66,33 +66,33 @@ var inventory = {
     },
 
     tools : {
-      wooden_sword :    {display:'Wooden Sword',    recipe: 'P  P  |' },
-      wooden_shovel :   {display:'Wooden Shovel',   recipe: 'P  |  |' },
-      wooden_pickaxe :  {display:'Wooden Pickaxe',  recipe: 'PPP |  |'},
-      wooden_axe :      {display:'Wooden Axe',      recipe: 'PP P|  |'},
-      stone_sword :     {display:'Stone Sword',     recipe: 'C  C  |' },
-      stone_shovel :    {display:'Stone Shovel',    recipe: 'C  |  |' },
-      stone_pickaxe :   {display:'Stone Pickaxe',   recipe: 'CCC |  |'},
-      stone_axe :       {display:'Stone Axe',       recipe: 'CC C|  |'},
-      iron_sword :      {display:'Iron Sword',      recipe: 'i  i  |' },
-      iron_shovel :     {display:'Iron Shovel',     recipe: 'i  |  |' },
-      iron_picaxe :     {display:'Iron Pickaxe',    recipe: 'iii |  |'},
-      iron_axe :        {display:'Iron Axe',        recipe: 'ii i|  |'},
-      gold_sword :      {display:'Golden Sword',    recipe: 'g  g  |' },
-      gold_shovel :     {display:'Golden Shovel',   recipe: 'g  |  |' },
-      gold_pickaxe :    {display:'Golden Pickaxe',  recipe: 'ggg |  |'},
-      gold_axe :        {display:'Golden Axe',      recipe: 'gg g|  |'},
-      diamond_sword :   {display:'Diamond Sword',   recipe: 'd  d  |' },
-      diamond_shovel :  {display:'Diamond Shovel',  recipe: 'd  |  |' },
-      diamond_pickaxe : {display:'Diamond Pickaxe', recipe: 'ddd |  |'},
-      diamond_axe :     {display:'Diamond Axe',     recipe: 'dd d|  |'},
-      wooden_hoe :      {display:'Wooden Hoe',      recipe: 'PP  |  |'},
-      stone_hoe :       {display:'Stone Hoe',       recipe: 'CC  |  |'},
-      iron_hoe :        {display:'Iron Hoe',        recipe: 'ii  |  |'},
-      gold_hoe :        {display:'Gold Hoe',        recipe: 'gg  |  |'},
-      diamond_hoe :     {display:'Diamond Hoe',     recipe: 'dd  |  |'},
-      fishing_rod :     {display:'Fishing Rod',     recipe: '| |@| @' },
-      bow :             {display:'Bow',             recipe: '|@| @ |@'}
+      wooden_sword :    {display:'Wooden Sword',    recipe: 'P  P  |' , bonus:1, gives: {'porkchop':0.05}                                                                              },
+      wooden_shovel :   {display:'Wooden Shovel',   recipe: 'P  |  |' , bonus:1, gives: {'dirt':0.5}                                                                                   },
+      wooden_pickaxe :  {display:'Wooden Pickaxe',  recipe: 'PPP |  |', bonus:1, gives: {'cobble':0.5, 'coal':0.05}                                                                    },
+      wooden_axe :      {display:'Wooden Axe',      recipe: 'PP P|  |', bonus:1, gives: {'wood':0.5}                                                                                   },
+      stone_sword :     {display:'Stone Sword',     recipe: 'C  C  |' , bonus:2, gives: {'porkchop':0.1, 'egg':0.1}                                                                    },
+      stone_shovel :    {display:'Stone Shovel',    recipe: 'C  |  |' , bonus:2, gives: {'dirt':0.8,'flint':0.01,'gravel':0.1, 'sand':0.2}                                             },
+      stone_pickaxe :   {display:'Stone Pickaxe',   recipe: 'CCC |  |', bonus:2, gives: {'cobble':0.8, 'coal':0.1, 'iron_ore':0.05}                                                    },
+      stone_axe :       {display:'Stone Axe',       recipe: 'CC C|  |', bonus:2, gives: {'wood':0.7, 'sapling':0.1}                                                                    },
+      iron_sword :      {display:'Iron Sword',      recipe: 'i  i  |' , bonus:3, gives: {'leather':0.1, 'porkchop':0.1, 'egg':0.1, 'feather':0.1}                                      },
+      iron_shovel :     {display:'Iron Shovel',     recipe: 'i  |  |' , bonus:3, gives: {'dirt':0.8,'flint':0.01,'gravel':0.1, 'sand':0.2}                                             },
+      iron_picaxe :     {display:'Iron Pickaxe',    recipe: 'iii |  |', bonus:3, gives: {'cobble':0.8, 'coal':0.1, 'iron_ore':0.1, 'gold_ore':0.01}                                    },
+      iron_axe :        {display:'Iron Axe',        recipe: 'ii i|  |', bonus:3, gives: {'wood':0.8, 'sapling':0.1, 'apple':0.05}                                                      },
+      gold_sword :      {display:'Golden Sword',    recipe: 'g  g  |' , bonus:4, gives: {'leather':0.1, 'porkchop':0.1, 'egg':0.1, 'feather':0.1, 'wool':0.1}                          },
+      gold_shovel :     {display:'Golden Shovel',   recipe: 'g  |  |' , bonus:4, gives: {'dirt':0.8,'flint':0.01,'gravel':0.1, 'sand':0.2, 'clay':0.1}                                 },
+      gold_pickaxe :    {display:'Golden Pickaxe',  recipe: 'ggg |  |', bonus:4, gives: {'cobble':0.8, 'coal':0.1, 'iron_ore':0.1, 'gold_ore':0.02, 'diamond': 0.01}                   },
+      gold_axe :        {display:'Golden Axe',      recipe: 'gg g|  |', bonus:4, gives: {'wood':0.8, 'sapling':0.1, 'apple':0.2}                                                       },
+      diamond_sword :   {display:'Diamond Sword',   recipe: 'd  d  |' , bonus:5, gives: {'leather':0.1, 'porkchop':0.1, 'egg':0.1, 'feather':0.1, 'wool':0.1}                          },
+      diamond_shovel :  {display:'Diamond Shovel',  recipe: 'd  |  |' , bonus:5, gives: {'dirt':0.8,'flint':0.05,'gravel':0.1, 'sand':0.2, 'clay':0.1}                                 },
+      diamond_pickaxe : {display:'Diamond Pickaxe', recipe: 'ddd |  |', bonus:5, gives: {'cobble':0.8, 'coal':0.1, 'iron_ore':0.2, 'gold_ore':0.05, 'diamond': 0.02, 'redstone': 0.05} },
+      diamond_axe :     {display:'Diamond Axe',     recipe: 'dd d|  |', bonus:5, gives: {'wood':0.8, 'sapling':0.1, 'apple':0.05}                                                      },
+      wooden_hoe :      {display:'Wooden Hoe',      recipe: 'PP  |  |', bonus:1, gives: {'seeds': 0.1}                                                                                 },
+      stone_hoe :       {display:'Stone Hoe',       recipe: 'CC  |  |', bonus:2, gives: {'seeds': 0.2, 'cactus':0.05}                                                                  },
+      iron_hoe :        {display:'Iron Hoe',        recipe: 'ii  |  |', bonus:3, gives: {'seeds': 0.2, 'cactus':0.1, 'mushroom':0.1}                                                   },
+      gold_hoe :        {display:'Gold Hoe',        recipe: 'gg  |  |', bonus:4, gives: {'seeds': 0.2, 'cactus':0.1, 'mushroom':0.1, 'cane':0.1}                                       },
+      diamond_hoe :     {display:'Diamond Hoe',     recipe: 'dd  |  |', bonus:5, gives: {'seeds': 0.2, 'cactus':0.1, 'mushroom':0.1, 'cane':0.1}                                       },
+      fishing_rod :     {display:'Fishing Rod',     recipe: '| |@| @' , bonus:1, gives: {'fish':0.1}                                                                                   },
+      bow :             {display:'Bow',             recipe: '|@| @ |@', bonus:1, gives: {'gunpowder':0.1}                                                                              }
     },
 
     armour : {
@@ -124,10 +124,11 @@ var inventory = {
     }
   },
 
-  addObject : function(slug){
+  addObject : function(slug,quantity){
+    if(typeof(quantity)==='undefined') quantity = 1;
     for(var group in this.objects){
       if(slug in this.objects[group]){
-        this.objects[group][slug].quantity++;
+        this.objects[group][slug].quantity += quantity;
         this.objects[group][slug].hasOwned = true;
       }
     }
@@ -137,6 +138,17 @@ var inventory = {
     for(var group in this.objects){
       if(slug in this.objects[group]){
         return this.objects[group][slug];
+      }
+    }
+  },
+
+  doTools : function(){
+    for(var tool in this.objects.tools){
+      if(this.objects.tools[tool].quantity < 1) continue;
+      for(var slug in this.objects.tools[tool].gives){
+        if(Math.random() < this.objects.tools[tool].gives[slug]){
+          this.addObject(slug,this.objects.tools[tool].bonus * this.objects.tools[tool].quantity);
+        }
       }
     }
   },
