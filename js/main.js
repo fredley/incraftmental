@@ -33,3 +33,7 @@ addAlert : function(text){
 };
 
 window.onload = main.onload.bind(main);
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
+}

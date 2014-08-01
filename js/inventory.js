@@ -144,13 +144,18 @@ var inventory = {
   updateDisplay : function(){
     var inventoryText = "";
     for(var group in this.objects){
-      inventoryText += "<h3>" + group + "</h3>";
+      var showGroup = false;
+      var groupText = "<h3>" + group.capitalize() + "</h3>";
       for(var object in this.objects[group]){
         if(this.objects[group][object].hasOwned){
-          inventoryText += '<div class="inventory-item';
-          inventoryText += (this.selected == object) ? " selected" : "";
-          inventoryText += '" data-object="' + object + '">' + this.objects[group][object].display + " - " + this.objects[group][object].quantity + '</div>';
+          showGroup = true;
+          groupText += '<div class="inventory-item';
+          groupText += (this.selected == object) ? " selected" : "";
+          groupText += '" data-object="' + object + '">' + this.objects[group][object].display + " - " + this.objects[group][object].quantity + '</div>';
         }
+      }
+      if(showGroup){
+        inventoryText += groupText;
       }
     }
     $('#inventory').html(inventoryText);

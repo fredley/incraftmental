@@ -90,17 +90,25 @@ button:disabled:hover{
     position: absolute;
     right: 30px;
     top: 30px;
+    h3{
+        margin:0;
+    }
+    .inventory-item{
+        padding:2px 5px;
+        font-size: 12px;
+        width: 150px;
+        float: left;
+        box-sizing:border-box;
+        cursor:pointer;
+        &.selected{
+            background: #555;
+        }
+    }
 }
 #make-planks,
 #make-crafting,
 #alerts{
     display:none;
-}
-.inventory-item{
-    padding:2px 5px;
-    &.selected{
-        background: #555;
-    }
 }
 #crafting{
     border-top:1px solid $light;
