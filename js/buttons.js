@@ -132,12 +132,12 @@ init : function(){
     }
   });
   $('#smelt').on('click',function(){
-	var fuel, input, output;
-	fuel=$("#smelt_1").attr('data-object');
-	input=$("#smelt_0").attr('data-object');
-	if(inventory.objects.blocks.furnace.fuelLevel<=0){
-	  inventory.objects.blocks.furnace.fuelLevel=10;
-	}
+  	var fuel, input, output;
+  	fuel = $("#smelt_fuel").attr('data-object');
+  	input = $("#smelt_input").attr('data-object');
+  	if(inventory.objects.blocks.furnace.fuelLevel <= 0){
+  	  inventory.objects.blocks.furnace.fuelLevel = 10;
+  	}
   });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){
