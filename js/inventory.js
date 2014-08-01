@@ -142,6 +142,49 @@ var inventory = {
     }
   },
 
+  getIngredients : function(slug){
+    var object = this.getObject(slug);
+    var needed = {};
+    for(var i=0; i < object.recipe.length; i++){
+      if(object.recipe[i] == ' ') continue;
+      for(var group in this.objects){
+        for(var ingredient in this.objects[group]){
+          if(this.objects[group][ingredient].symbol == object.recipe[i]){
+            if(ingredient in needed){
+              needed[ingredient]++;
+            }else{
+              needed[ingredient] = 1;
+            }
+          }
+        }
+      }
+    }
+    return needed;
+  },
+
+  canCraft : function(slug){
+    var object = this.getObject(slug);
+    if(!object.recipe) return false;
+    var needed = this.getIngredients(slug);
+    for(var ingredient in needed){
+      if (this.getObject(ingredient).quantity < 10 * needed[ingredient]){
+        return false;
+      }
+    }
+    return true;
+  },
+
+  craft : function(slug){
+    var object = this.getObject(slug);
+    if(!object.recipe) return false;
+    var needed = this.getIngredients(slug);
+    for(var ingredient in needed){
+      this.addObject(ingredient,-10 * needed[ingredient]);
+    }
+    this.addObject(slug,object.yield);
+    this.updateDisplay();
+  },
+
   in : function(category,object){
     return (object in this.objects[category]);
   },
