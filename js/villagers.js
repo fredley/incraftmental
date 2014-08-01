@@ -4,7 +4,22 @@ var villagers = {
 
   professions : {
     smith : function(level){
-      // find a smeltable and smelt
+      smeltables = [];
+      for(var group in inventory.objects){
+        for(var object in inventory.objects[group]){
+          var o = inventory.objects[group][object];
+          if(o.smelts_to && o.quantity > 0){
+            smeltables.push(object);
+          }
+        }
+      }
+      if(smeltables.length > 0){
+        var slug = randomChoice(smeltables);
+        var object = inventory.getObject(slug);
+        var quantity = Math.min(level,object.quantity);
+        inventory.addObject(slug,quantity);
+        inventory.addObject(object.smelts_to,quantity);
+      }
     },
     builder : function(level){
       craftables = [];

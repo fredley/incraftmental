@@ -25,7 +25,7 @@ var inventory = {
       crafting_table: {display:'Crafting Table'     , symbol: 'T', recipe:'PP PP'          , fuel_source: 2           },
       furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      , fuel_source: 0           },
       cactus:         {display:'Cactus'             , symbol: '!'                                                     },
-      clay:           {display:'Clay'               , symbol: '.'                          , smelts_to: 'brick'      },
+      clay:           {display:'Clay'               , symbol: '.'                          , smelts_to: 'brick'       },
       cake:           {display:'Cake'               , symbol: '*', recipe: 'MMM,o,;;;'                                }
     },
 
@@ -47,7 +47,7 @@ var inventory = {
       wheat :           {display:'Wheat',           symbol: ';', recipe: ':::'                                            },
       bread :           {display:'Bread',           symbol: 'b'                                                           },
       flint :           {display:'Flint',           symbol: 'Y'                                                           },
-      porkchop :        {display:'Raw Porkchop',    symbol: 'q'                           , smelts_to: 'cooked_porkchop' },
+      porkchop :        {display:'Raw Porkchop',    symbol: 'q'                           , smelts_to: 'cooked_porkchop'  },
       cooked_porkchop : {display:'Cooked Porkchop', symbol: 'Q'                                                           },
       redstone :        {display:'Redstone',        symbol: 'r'                                                           },
       boat :            {display:'Boat',            symbol: '+', recipe: 'P PPPP'                                         },
@@ -59,7 +59,7 @@ var inventory = {
       book :            {display:'Book',            symbol: 'p', recipe: '___l'                                           },
       egg :             {display:'Egg',             symbol: 'o'                                                           },
       compass :         {display:'Compass',         symbol: '>'                                                           },
-      fish :            {display:'Raw Fish',        symbol: 'z'                           , smelts_to: 'cooked_fish'     },
+      fish :            {display:'Raw Fish',        symbol: 'z'                           , smelts_to: 'cooked_fish'      },
       cooked_fish :     {display:'Cooked Fish',     symbol: 'Z'                                                           },
       sugar :           {display:'Sugar',           symbol: ',', recipe: '/'                                              },
       sapling:          {display:'Sapling',         symbol: 's'                           , fuel_source: 1                }
