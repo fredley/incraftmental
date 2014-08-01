@@ -7,7 +7,7 @@ var villagers = {
     while(!(name in this.population)){
       name = generateName(); // nobody's ever going to have enough villagers for this to be a problem, right?
     }
-    population.push({
+    this.population.push({
       'name' : name,
       'profession' : null
     });
