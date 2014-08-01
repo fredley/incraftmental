@@ -90,7 +90,7 @@ init : function(){
           var aa = '';
           var ss = '';
           if(inventory.objects[group][object].yield){
-            aa = inventory.objects[group][object].yield;
+            aa = inventory.objects[group][object].yield + ' ';
             ss = 's';
           }else{
             aa = (['A','E','I','O','U'].indexOf(inventory.objects[group][object].display[0]) > -1) ? 'an ' : 'a ';
