@@ -80,7 +80,11 @@ button:disabled:hover {
   right: 30px;
   top: 30px; }
   #inventory h3 {
-    margin: 0; }
+    margin: 0;
+    clear: both;
+    float: left;
+    display: block;
+    width: 100%; }
   #inventory .inventory-item {
     padding: 2px 5px;
     font-size: 12px;
@@ -114,7 +118,8 @@ button:disabled:hover {
     text-align: center;
     padding-top: 40px;
     font-size: 20px;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    cursor: pointer; }
 
 #alerts {
   position: absolute;

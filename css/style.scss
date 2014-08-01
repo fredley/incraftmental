@@ -92,6 +92,10 @@ button:disabled:hover{
     top: 30px;
     h3{
         margin:0;
+        clear:both;
+        float:left;
+        display: block;
+        width:100%;
     }
     .inventory-item{
         padding:2px 5px;
@@ -129,6 +133,7 @@ button:disabled:hover{
         padding-top:40px;
         font-size:20px;
         box-sizing: border-box;
+        cursor:pointer;
     }
 }
 #alerts{
