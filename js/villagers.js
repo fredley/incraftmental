@@ -66,7 +66,9 @@ var villagers = {
 
   doVillagers : function(){
     for(var i=0; i<this.population.length; i++){
-      this.professions[this.population[i].profession](this.population[i].level);
+      if(this.population[i].profession){
+        this.professions[this.population[i].profession](this.population[i].level);
+      }
     }
     this.updateDisplay();
   },
@@ -74,13 +76,14 @@ var villagers = {
   updateDisplay : function(){
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
-      villagerText += '<div class="villager">' + this.population[villager].name.capitalize();
+      villagerText += '<div class="villager" data-name="' + this.population[villager].name + '">' + this.population[villager].name.capitalize();
       if(this.population[villager].level > 0){
         villagerText += ' the ' + this.levels[this.population[villager].level] + ' ' + this.population[villager].profession.capitalize();
       }
       villagerText += '</div>';
     }
     $('#villagers').html(villagerText);
+    buttons.hook_villagers();
     localStorage["villagers"] = JSON.stringify(this.population);
   }
 
