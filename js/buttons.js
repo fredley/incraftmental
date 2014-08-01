@@ -30,7 +30,7 @@ init : function(){
       main.addAlert('Made a Crafting Table!');
     }
   });
-  $('.craft-square').on('click',function(){
+  $('.craft-square').on('click',function(e){
     if($(this).attr('data-object')){
       $(this).html("");
       inventory.getObject($(this).attr('data-object')).quantity += 10;
@@ -39,7 +39,8 @@ init : function(){
       return;
     }
     var object = inventory.selected;
-    if(object === undefined){
+    if(!object){
+      main.addMouseAlert('Select an item to craft!',e);
       return;
     }
     if(inventory.getObject(object).quantity >= 10){
@@ -47,6 +48,8 @@ init : function(){
       $(this).html(inventory.getObject(object).symbol);
       $(this).attr('data-object',object);
       inventory.updateDisplay();
+    }else{
+      main.addMouseAlert('Not enough to craft (10 required)!',e);
     }
   });
   $('#craft').on('click',function(){

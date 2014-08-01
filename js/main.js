@@ -29,6 +29,23 @@ addAlert : function(text){
       }
     });
   },3000);
+},
+
+addMouseAlert : function(text,e){
+  var alert = $('<div class="mouse-alert"></div>');
+  alert.html(text);
+  alert.css({
+    'left':e.pageX + 20,
+    'top':e.pageY,
+    'opacity':1
+  });
+  alert.animate({
+    'top':e.pageY - 50,
+    'opacity':0
+  },1000,function(){
+    alert.remove();
+  });
+  $('body').append(alert);
 }
 
 };

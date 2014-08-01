@@ -147,6 +147,13 @@ button:disabled:hover{
         border-bottom: 1px dashed #444;
     }
 }
+.mouse-alert{
+    position: absolute;
+    z-index:99;
+    background: $dark;
+    border:1px solid $light;
+    padding:2px 5px;
+}
 #footer{
     position: fixed;
     bottom: 5px;
