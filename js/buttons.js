@@ -27,6 +27,7 @@ init : function(){
       inventory.updateDisplay();
       $('#crafting').show();
       $('#make-planks').html('Make Planks (4 wood)');
+      main.addAlert('Made a Crafting Table!');
     }
   });
   $('.craft-square').on('click',function(){
@@ -65,6 +66,7 @@ init : function(){
           inventory.updateDisplay();
           $('.craft-square').removeAttr('data-object');
           $('.craft-square').html("");
+          main.addAlert('Crafted a ' + inventory.objects[group][object].display);
         }
       }
     }

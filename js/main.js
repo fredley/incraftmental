@@ -14,6 +14,20 @@ onload : function(){
 
 tick : function(){
   inventory.updateDisplay();
+},
+
+addAlert : function(text){
+  $('#alerts').show();
+  var alert = $("<div class='alert'>" + text + "</div>");
+  $('#alerts').append(alert);
+  setTimeout(function(){
+    alert.fadeOut('slow',function(){
+      $(this).remove();
+      if($('#alerts .alert').length == 0){
+        $('#alerts').hide();
+      }
+    });
+  },3000);
 }
 
 };

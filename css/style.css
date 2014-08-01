@@ -81,7 +81,8 @@ button:disabled:hover {
   top: 30px; }
 
 #make-planks,
-#make-crafting {
+#make-crafting,
+#alerts {
   display: none; }
 
 .inventory-item {
@@ -108,6 +109,16 @@ button:disabled:hover {
     padding-top: 40px;
     font-size: 20px;
     box-sizing: border-box; }
+
+#alerts {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  border: 1px solid #dddddd;
+  padding: 5px;
+  width: 300px; }
+  #alerts .alert {
+    border-bottom: 1px dashed #444; }
 
 #footer {
   position: fixed;
