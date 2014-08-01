@@ -109,6 +109,22 @@ button:disabled:hover{
         }
     }
 }
+#villagers{
+    border:1px solid $light;
+    width: 300px;
+    padding: 20px;
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    .villager{
+        width:150px;
+        float:left;
+        box-sizing:border-box;
+        cursor:pointer;
+        padding:2px 5px;
+        font-size: 12px;
+    }
+}
 #make-planks,
 #make-crafting,
 #alerts{
