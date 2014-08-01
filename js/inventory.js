@@ -172,6 +172,7 @@ var inventory = {
     }
     $('#inventory').html(inventoryText);
     buttons.hook_inventory();
+    localStorage["objects"] = JSON.stringify(this.objects);
   },
 
 };

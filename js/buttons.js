@@ -101,6 +101,17 @@ init : function(){
       }
     }
   });
+  // init button states
+  if(inventory.objects.blocks.wood.hasOwned){
+    $('#make-planks').show();
+    $('#inventory').show();
+  }
+  if(inventory.objects.blocks.planks.hasOwned){
+    $('#make-crafting').show();
+  }
+  if(inventory.objects.blocks.crafting_table.hasOwned){
+    $('#crafting').show();
+  }
   this.hook_inventory();
 },
 

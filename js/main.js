@@ -1,15 +1,12 @@
 var main = {
 
 onload : function(){
-
-  buttons.init();
   inventory.init();
-
+  if('objects' in localStorage){
+    inventory.objects = JSON.parse(localStorage['objects']);
+  }
+  buttons.init();
   window.setInterval(function(){main.tick()}, 1000);
-
-  // $(window).bind('beforeunload', function(){
-  //     return "Are you sure you want to leave?"
-  // });
 },
 
 tick : function(){
