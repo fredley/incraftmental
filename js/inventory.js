@@ -5,28 +5,28 @@ var inventory = {
   objects: {
 
     blocks : {
-      stone:          {display:'Stone'              , symbol: 's'                                                     },
-      grass:          {display:'Grass'              , symbol: '-'                                                     },
-      dirt:           {display:'Dirt'               , symbol: '%'                                                     },
-      cobble:         {display:'Cobblestone'        , symbol: 'C'                          ,  smelts_to: 'stone'      },
-      planks:         {display:'Planks'             , symbol: 'P', recipe:'='              , fuelSource: 2            },
-      sand:           {display:'Sand'               , symbol: 'S'                          ,  smelts_to: 'glass'      },
-      gravel:         {display:'Gravel'             , symbol: '$'                                                     },
-      gold_ore:       {display:'Gold Ore'           , symbol: 'G'                          ,  smelts_to: 'gold_ingot' },
-      iron_ore:       {display:'Iron Ore'           , symbol: 'I'                          ,  smelts_to: 'iron_ingot' },
-      wood:           {display:'Wood'               , symbol: '='                          , fuelSource: 2            },
-      glass:          {display:'Glass'              , symbol: '~'                                                     },
-      bed:            {display:'Bed'                , symbol: 'B', recipe:'WWPPP',                                    },
-      wool:           {display:'Wool'               , symbol: 'W'                                                     },
-      tnt:            {display:'TNT'                , symbol: 'X', recipe:'xSxSxSxSx'                                 },
-      obsidian:       {display:'Obsidian'           , symbol: 'O'                                                     },
-      torch:          {display:'Torch'              , symbol: 'L', recipe:'c  |', yield:4                             },
-      chest:          {display:'Chest'              , symbol: '&', recipe:'PPPP PPPP'      , fuelSource: 2            },
-      crafting_table: {display:'Crafting Table'     , symbol: 'T', recipe:'PP PP'          , fuelSource: 2            },
-      furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      ,  fuelLevel: 0            },
-      cactus:         {display:'Cactus'             , symbol: '!'                                                     },
-      clay:           {display:'Clay'               , symbol: '.'                          ,  smelts_to: 'brick'      },
-      cake:           {display:'Cake'               , symbol: '*', recipe: 'MMM,o,;;;'                                }
+      stone:          {display:'Stone'              , symbol: 's'                                                        },
+      grass:          {display:'Grass'              , symbol: '-'                                                        },
+      dirt:           {display:'Dirt'               , symbol: '%'                                                        },
+      cobble:         {display:'Cobblestone'        , symbol: 'C'                          ,  smelts_to: 'stone'         },
+      planks:         {display:'Planks'             , symbol: 'P', recipe:'='              , fuelSource: 2               },
+      sand:           {display:'Sand'               , symbol: 'S'                          ,  smelts_to: 'glass'         },
+      gravel:         {display:'Gravel'             , symbol: '$'                                                        },
+      gold_ore:       {display:'Gold Ore'           , symbol: 'G'                          ,  smelts_to: 'gold_ingot'    },
+      iron_ore:       {display:'Iron Ore'           , symbol: 'I'                          ,  smelts_to: 'iron_ingot'    },
+      wood:           {display:'Wood'               , symbol: '='                          , fuelSource: 2               },
+      glass:          {display:'Glass'              , symbol: '~'                                                        },
+      bed:            {display:'Bed'                , symbol: 'B', recipe:'WWPPP',                                       },
+      wool:           {display:'Wool'               , symbol: 'W'                                                        },
+      tnt:            {display:'TNT'                , symbol: 'X', recipe:'xSxSxSxSx'                                    },
+      obsidian:       {display:'Obsidian'           , symbol: 'O'                                                        },
+      torch:          {display:'Torch'              , symbol: 'L', recipe:'c  |', yield:4                                },
+      chest:          {display:'Chest'              , symbol: '&', recipe:'PPPP PPPP'      , fuelSource: 2               },
+      crafting_table: {display:'Crafting Table'     , symbol: 'T', recipe:'PP PP'          , fuelSource: 2               },
+      furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      ,  fuelLevel: {cur: 0,max: 0} },
+      cactus:         {display:'Cactus'             , symbol: '!'                                                        },
+      clay:           {display:'Clay'               , symbol: '.'                          ,  smelts_to: 'brick'         },
+      cake:           {display:'Cake'               , symbol: '*', recipe: 'MMM,o,;;;'                                   }
     },
 
     items: {
@@ -220,6 +220,6 @@ var inventory = {
     $('#inventory').html(inventoryText);
     buttons.hook_inventory();
     localStorage["objects"] = JSON.stringify(this.objects);
-  },
+  }
 
 };

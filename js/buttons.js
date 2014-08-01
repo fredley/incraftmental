@@ -132,12 +132,27 @@ init : function(){
     }
   });
   $('#smelt').on('click',function(){
-	var fuel, input, output;
-	fuel=$("#smelt_1").attr('data-object');
+	var fuel, input, output, timer;
+	fuel =$("#smelt_1").attr('data-object');
 	input=$("#smelt_0").attr('data-object');
-	if(inventory.objects.blocks.furnace.fuelLevel<=0){
-	  inventory.objects.blocks.furnace.fuelLevel=10;
+	output=inventory.getObject(input).smelts_to;
+	
+	if(inventory.objects.blocks.furnace.fuelLevel.cur<=0){
+	  if(inventory.getObject(fuel).fuelSource==undefined)
+		return false;
+	  inventory.objects.blocks.furnace.fuelLevel.max = inventory.getObject(fuel).fuelSource;
+	  inventory.objects.blocks.furnace.fuelLevel.cur = inventory.objects.blocks.furnace.fuelLevel.max;
 	}
+	inventory.objects.blocks.furnace.fuelLevel.cur--;
+	timer=10;
+	
+	if(output==undefined)
+	  return false;
+	
+	setTimeout( function(){
+		inventory.addObject(output,1);
+		main.addAlert('Smelting Completed');
+	},10000);
   });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){
