@@ -54,9 +54,15 @@ init : function(){
   });
   $('#craft').on('click',function(){
     var code = '';
+    var needed = {};
     $('.craft-square').each(function(){
       if($(this).attr('data-object')){
         code += inventory.getObject($(this).attr('data-object')).symbol;
+        if($(this).attr('data-object') in needed){
+          needed[$(this).attr('data-object')]++;
+        }else{
+          needed[$(this).attr('data-object')] = 1;
+        }
       }else{
         code += ' ';
       }
@@ -66,9 +72,21 @@ init : function(){
       for(var object in inventory.objects[group]){
         if(inventory.objects[group][object].recipe == code){
           inventory.addObject(object,inventory.objects[group][object].yield);
-          inventory.updateDisplay();
-          $('.craft-square').removeAttr('data-object');
-          $('.craft-square').html("");
+          // Try to 'pull in' more ingredients
+          var replace = true;
+          for(material in needed){
+            if(inventory.getObject(material).quantity < 10 * needed[material]){
+              replace = false;
+            }
+          }
+          if(replace){
+            for(material in needed){
+              inventory.addObject(material,-10 * needed[material]);
+            }
+          }else{
+            $('.craft-square').removeAttr('data-object');
+            $('.craft-square').html('');
+          }
           var aa = '';
           var ss = '';
           if(inventory.objects[group][object].yield){
@@ -78,6 +96,7 @@ init : function(){
             aa = (['A','E','I','O','U'].indexOf(inventory.objects[group][object].display[0]) > -1) ? 'an ' : 'a ';
           }
           main.addAlert('Crafted ' + aa + inventory.objects[group][object].display + ss);
+          inventory.updateDisplay();
         }
       }
     }
