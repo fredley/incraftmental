@@ -69,7 +69,15 @@ init : function(){
           inventory.updateDisplay();
           $('.craft-square').removeAttr('data-object');
           $('.craft-square').html("");
-          main.addAlert('Crafted a ' + inventory.objects[group][object].display);
+          var aa = '';
+          var ss = '';
+          if(inventory.objects[group][object].yield){
+            aa = inventory.objects[group][object].yield;
+            ss = 's';
+          }else{
+            aa = (['A','E','I','O','U'].indexOf(inventory.objects[group][object].display[0]) > -1) ? 'an ' : 'a ';
+          }
+          main.addAlert('Crafted ' + aa + inventory.objects[group][object].display + ss);
         }
       }
     }
