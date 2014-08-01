@@ -137,6 +137,11 @@ hook_villagers : function(){
       main.addMouseAlert('Select a tool to assign a villager.',e);
     }
   });
+  $('.pause').on('click',function(e){
+    e.stopPropagation();
+    villagers.population[$(this).attr('data-id')].enabled = !villagers.population[$(this).attr('data-id')].enabled;
+    villagers.updateDisplay();
+  });
 }
 
 };
