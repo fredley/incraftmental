@@ -149,10 +149,10 @@ init : function(){
 	if(output==undefined)
 	  return false;
 	
-	setTimeout( function(){
-		inventory.addObject(output,1);
-		main.addAlert('Smelting Completed');
-	},10000);
+	//setTimeout( function(){
+	//	inventory.addObject(output,1);
+	//	main.addAlert('Smelting Completed');
+	//},10000);
   });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){
