@@ -96,22 +96,22 @@ var inventory = {
     },
 
     armour : {
-      leather_helmet : {display:'Leather Cap',        },
-      leather_chest : {display:'Leather Tunic',       },
-      leather_pants : {display:'Leather Pants',       },
-      leather_boots : {display:'Leather Boots',       },
-      iron_helmet : {display:'Iron Helmet',           },
-      iron_chest : {display:'Iron Chestplate',        },
-      iron_leggings : {display:'Iron Leggings',       },
-      iron_boots : {display:'Iron Boots',             },
-      diamond_helmet : {display:'Diamond Helmet',     },
-      diamond_chest : {display:'Diamond Chestplate',  },
-      diamond_leggings : {display:'Diamond Leggings', },
-      diamond_boots : {display:'Diamond Boots',       },
-      gold_helmet : {display:'Golden Helmet',         },
-      gold_chest : {display:'Golden Chestplate',      },
-      gold_leggings : {display:'Golden Leggings',     },
-      gold_boots : {display:'Golden Boots',           }
+      leather_helmet : {display:'Leather Cap',        recipe:'llll l'   },
+      leather_chest : {display:'Leather Tunic',       recipe:'l lllllll'},
+      leather_pants : {display:'Leather Pants',       recipe:'llll ll l'},
+      leather_boots : {display:'Leather Boots',       recipe:'l ll l'   },
+      iron_helmet : {display:'Iron Helmet',           recipe:'iiii i'   },
+      iron_chest : {display:'Iron Chestplate',        recipe:'i iiiiiii'},
+      iron_leggings : {display:'Iron Leggings',       recipe:'iiii ii i'},
+      iron_boots : {display:'Iron Boots',             recipe:'i ii i'   },
+      diamond_helmet : {display:'Diamond Helmet',     recipe:'dddd d'   },
+      diamond_chest : {display:'Diamond Chestplate',  recipe:'d ddddddd'},
+      diamond_leggings : {display:'Diamond Leggings', recipe:'dddd dd d'},
+      diamond_boots : {display:'Diamond Boots',       recipe:'d dd d'   },
+      gold_helmet : {display:'Golden Helmet',         recipe:'gggg g'   },
+      gold_chest : {display:'Golden Chestplate',      recipe:'g ggggggg'},
+      gold_leggings : {display:'Golden Leggings',     recipe:'gggg gg g'},
+      gold_boots : {display:'Golden Boots',           recipe:'g gg g'   }
     }
   },
 
