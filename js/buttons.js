@@ -113,6 +113,7 @@ init : function(){
     $('#crafting').show();
   }
   this.hook_inventory();
+  this.hook_villagers();
 },
 
 hook_inventory : function(){
@@ -120,6 +121,21 @@ hook_inventory : function(){
     $('.inventory-item').removeClass('selected');
     $(this).addClass('selected');
     inventory.selected = $(this).attr('data-object');
+  });
+},
+
+hook_villagers : function(){
+  $('.villager').on('click',function(e){
+    if(inventory.selected && inventory.in('tools',inventory.selected)){
+      if(inventory.get(inventory.selected).quantity >= 10){
+        inventory.addObject(inventory.selected,-10);
+        villagers.assignVillager($(this).attr('data-name'),inventory.get(inventory.selected).profession,inventory.get(inventory.selected).bonus)
+      }else{
+        main.addMouseAlert('You must have 10 of a tool to assign.',e);
+      }
+    }else{
+      main.addMouseAlert('Select a tool to assign a villager.',e);
+    }
   });
 }
 

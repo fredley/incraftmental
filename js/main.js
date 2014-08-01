@@ -11,6 +11,7 @@ onload : function(){
 
 tick : function(){
   inventory.doTools();
+  villagers.doVillagers();
   inventory.updateDisplay();
 },
 
