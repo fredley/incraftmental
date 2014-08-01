@@ -4,7 +4,22 @@ var villagers = {
 
   professions : {
     smith : function(level){
-      // find a smeltable and smelt
+      smeltables = [];
+      for(var group in inventory.objects){
+        for(var object in inventory.objects[group]){
+          var o = inventory.objects[group][object];
+          if(o.smelts_to && o.quantity > 0){
+            smeltables.push(object);
+          }
+        }
+      }
+      if(smeltables.length > 0){
+        var slug = randomChoice(smeltables);
+        var object = inventory.getObject(slug);
+        var quantity = Math.min(level,object.quantity);
+        inventory.addObject(slug,quantity);
+        inventory.addObject(object.smelts_to,quantity);
+      }
     },
     builder : function(level){
       craftables = [];
@@ -58,7 +73,8 @@ var villagers = {
     this.population.push({
       'name' : name,
       'profession' : null,
-      'level' : 0
+      'level' : 0,
+      'enabled': true
     });
     this.updateDisplay();
   },
@@ -82,7 +98,7 @@ var villagers = {
 
   doVillagers : function(){
     for(var i=0; i<this.population.length; i++){
-      if(this.population[i].profession){
+      if(this.population[i].profession && this.population[i].enabled){
         this.professions[this.population[i].profession](this.population[i].level);
       }
     }
@@ -92,13 +108,17 @@ var villagers = {
   updateDisplay : function(){
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
-      villagerText += '<div class="villager" data-id="' + villager + '">' + this.population[villager].name.capitalize();
+      villagerText += '<div class="villager" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">*</span> ' + this.population[villager].name.capitalize();
       if(this.population[villager].level > 0){
         villagerText += ' the ' + this.levels[this.population[villager].level] + ' ' + this.population[villager].profession.capitalize();
       }
+      villagerText += (this.population[villager].enabled) ? '' : ' (paused)';
       villagerText += '</div>';
     }
     $('#villagers').html(villagerText);
+    if(this.population.length > 0){
+      $('#villagers').show();
+    }
     buttons.hook_villagers();
     localStorage["villagers"] = JSON.stringify(this.population);
   }

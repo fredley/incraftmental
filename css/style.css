@@ -135,7 +135,7 @@ button:disabled:hover {
     font-size: 20px;
     box-sizing: border-box;
     cursor: pointer; }
-	
+
 #smelting {
   width: 300px;
   height: 300px;
@@ -143,9 +143,9 @@ button:disabled:hover {
   margin-left: 15px;
   display: none; }
   #smelting .smelt_row {
-	position: relative;
+    position: relative;
     width: 300px;
-	height: 100px; }
+    height: 100px; }
   #smelting .smelt-square {
     width: 100px;
     height: 100px;
@@ -157,22 +157,27 @@ button:disabled:hover {
     box-sizing: border-box;
     cursor: pointer; }
   #smelting .smelt_progress {
-	position: absolute;
+    position: absolute;
     border: 1px solid #dddddd;
-	left: 95px;
-	top: 45px;
-	width: 100px;
-	height: 10px; }
+    left: 95px;
+    top: 45px;
+    width: 100px;
+    height: 10px; }
   #smelting .fuel_line {
-	position: absolute;
+    position: absolute;
     border: 1px solid #dddddd;
-	left: 45px;
-	top: 5px;
+    left: 45px;
+    top: 5px;
     width: 10px;
-	height: 90px; }
+    height: 90px; }
   #smelting #smelt_1 {
-	position: absolute;
-	right: 1px; }
+    position: absolute;
+    right: 1px; }
+
+#links span {
+  cursor: pointer;
+  text-decoration: underline;
+  display: none; }
 
 #alerts {
   position: absolute;
@@ -218,8 +223,3 @@ button:disabled:hover {
 
 .clearfix {
   *zoom: 1; }
-
-#links span{
-  cursor: pointer;
-  text-decoration: underline;
-  display: none; }
