@@ -132,7 +132,6 @@ init : function(){
     }
   });
   $('#smelt').on('click',function(){
-<<<<<<< HEAD
 	var fuel, input, output, timer;
 	fuel =$("#smelt_1").attr('data-object');
 	input=$("#smelt_0").attr('data-object');
@@ -154,14 +153,6 @@ init : function(){
 	//	inventory.addObject(output,1);
 	//	main.addAlert('Smelting Completed');
 	//},10000);
-=======
-  	var fuel, input, output;
-  	fuel = $("#smelt_fuel").attr('data-object');
-  	input = $("#smelt_input").attr('data-object');
-  	if(inventory.objects.blocks.furnace.fuel_level <= 0){
-  	  inventory.objects.blocks.furnace.fuel_level = 10;
-  	}
->>>>>>> upstream/master
   });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){
