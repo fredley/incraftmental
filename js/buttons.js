@@ -11,8 +11,8 @@ init : function(){
   });
   $('#make-planks').on('click',function(){
     var amount = inventory.objects.blocks.crafting_table.hasOwned ? 4 : 1;
-    if(inventory.objects.blocks.wood.quantity >= value){
-      inventory.objects.blocks.wood.quantity -= value;
+    if(inventory.objects.blocks.wood.quantity >= 10){
+      inventory.objects.blocks.wood.quantity -= 10;
       inventory.addObject('planks',amount);
       inventory.updateDisplay();
       if(inventory.objects.blocks.planks.quantity >= 4){
