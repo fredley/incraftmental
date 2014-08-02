@@ -28,7 +28,10 @@ var villagers = {
         for(var object in inventory.objects[group]){
           var o = inventory.objects[group][object];
           if(o.recipe && o.hasOwned && inventory.canCraft(object)){ // only build things that have been built before
-            craftables.push(object);
+            // don't spam furnaces
+            if(object !== 'furnace'){
+              craftables.push(object);
+            }
           }
         }
       }
