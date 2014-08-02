@@ -102,7 +102,7 @@ var villagers = {
         villagerText += ' the ' + this.levels[v.level] + ' ' + v.profession.capitalize();
       }
       if(v.profession){
-        villagerText += (v.assigned) ? ' (' + v.assigned.capitalize() + ')' : ' (unassigned)';
+        villagerText += (v.assigned) ? ' (' + inventory.getObject(v.assigned).display + ')' : ' (unassigned)';
       }
       villagerText += '</div>';
     }
