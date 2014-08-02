@@ -187,9 +187,13 @@ button:disabled:hover{
         box-sizing: border-box;
         cursor:pointer;
     }
-    #craft{
+    #craft {
+        margin-top: 30px;
+    }
+    .craft{
         float:left;
-        margin: 30px 15px;
+        margin: 0 15px;
+        margin-top: 15px;
     }
 }
 #smelting {
