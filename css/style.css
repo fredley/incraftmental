@@ -1,4 +1,8 @@
-html, button, input, select, textarea {
+html,
+button,
+input,
+select,
+textarea {
   color: #222; }
 
 body {
@@ -39,10 +43,10 @@ textarea {
   padding: 0.2em 0; }
 
 body {
-  background: #222;
+  background: #222222;
   font-family: monospace;
   font-size: 14px;
-  color: #ddd; }
+  color: #dddddd; }
 
 a {
   color: #0b0; }
@@ -56,7 +60,7 @@ button {
   margin: 5px 0 0 5px; }
 
 button:hover {
-  color: #ddd;
+  color: #dddddd;
   background: #666; }
 
 button:disabled {
@@ -69,7 +73,7 @@ button:disabled:hover {
 
 #inventory {
   display: none;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   width: 300px;
   padding: 20px;
   position: absolute;
@@ -92,7 +96,7 @@ button:disabled:hover {
       background: #555; }
 
 #villagers {
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   width: 300px;
   padding: 20px;
   position: absolute;
@@ -108,8 +112,17 @@ button:disabled:hover {
     font-size: 11px;
     border-bottom: 1px dashed #444; }
 
-#get-villager, #make-planks, #make-crafting, #alerts {
+#get-villager,
+#make-planks,
+#make-crafting,
+#alerts {
   display: none; }
+
+#options-menu {
+  display: none;
+  position: absolute;
+  z-index: 9001;
+  border: 1px solid #dddddd; }
 
 #tabs {
   position: absolute;
@@ -119,9 +132,9 @@ button:disabled:hover {
 
 .work-tab {
   float: left;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 5px 15px;
@@ -129,12 +142,12 @@ button:disabled:hover {
   cursor: pointer;
   display: none; }
   .work-tab.active {
-    border-bottom: 1px solid #222; }
+    border-bottom: 1px solid #222222; }
 
 #work-area {
   float: left;
   clear: both;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   padding: 10px;
   width: 450px;
   margin-top: 40px;
@@ -144,8 +157,8 @@ button:disabled:hover {
 #crafting {
   display: none; }
   #crafting #crafting-square {
-    border-top: 1px solid #ddd;
-    border-left: 1px solid #ddd;
+    border-top: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
     width: 300px;
     height: 300px;
     margin: 30px 15px;
@@ -154,8 +167,8 @@ button:disabled:hover {
     width: 100px;
     height: 100px;
     float: left;
-    border-bottom: 1px solid #ddd;
-    border-right: 1px solid #ddd;
+    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
     background: #333;
     text-align: center;
     padding-top: 40px;
@@ -185,11 +198,11 @@ button:disabled:hover {
     box-sizing: border-box; }
     #smelting .smelt-square.input {
       padding-top: 40px;
-      border: 1px solid #ddd;
+      border: 1px solid #dddddd;
       background: #333;
       cursor: pointer; }
   #smelting #smelt-progress {
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     margin-top: 45px;
     margin-left: 5px;
     width: 90px;
@@ -197,14 +210,14 @@ button:disabled:hover {
     position: relative;
     overflow: hidden; }
     #smelting #smelt-progress .bar {
-      background: #ddd;
+      background: #dddddd;
       position: absolute;
       height: 10px;
       width: 90px;
       left: -90px;
       top: 0; }
   #smelting #fuel-line {
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     margin-left: 45px;
     margin-top: 5px;
     width: 10px;
@@ -217,7 +230,7 @@ button:disabled:hover {
   position: absolute;
   bottom: 15px;
   left: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   padding: 5px;
   width: 300px; }
   #alerts .alert {
@@ -226,8 +239,8 @@ button:disabled:hover {
 .mouse-alert {
   position: absolute;
   z-index: 99;
-  background: #222;
-  border: 1px solid #ddd;
+  background: #222222;
+  border: 1px solid #dddddd;
   padding: 2px 5px; }
 
 #footer {
@@ -240,12 +253,13 @@ button:disabled:hover {
   /* Safari */ }
 
 #footer:hover {
-  opacity: 1;
+  opacity: 1.0;
   transition: opacity 0.3s;
   -webkit-transition: opacity 0.3s;
   /* Safari */ }
 
-.clearfix:before, .clearfix:after {
+.clearfix:before,
+.clearfix:after {
   content: " ";
   /* 1 */
   display: table;
@@ -256,4 +270,3 @@ button:disabled:hover {
 
 .clearfix {
   *zoom: 1; }
-

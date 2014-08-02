@@ -1,3 +1,4 @@
+var currentTick = 0;
 var main = {
 
 onload : function(){
@@ -12,7 +13,11 @@ tick : function(){
   villagers.doVillagers();
   inventory.updateDisplay();
   buttons.updateDisplay();
-  this.save();
+  currentTick++;
+  if (parseInt($('#autosave')[0].value) > 0 && currentTick >= parseInt($('#autosave')[0].value)) {
+	this.save();
+	currentTick = 0;
+  }
 },
 
 save : function(){

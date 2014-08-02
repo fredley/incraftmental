@@ -180,6 +180,20 @@ init : function(){
   $('#craft_100').on('click',function() {
     buttons.craftCount(100);
   });
+  $('#options').on('click', function(){
+	$('#options-menu').toggle();
+  });
+  $('#load').on('click', function(){
+	main.save();
+	$('#save-text')[0].value = localStorage['save'];
+  });
+  $('#save').on('click', function(){
+	localStorage['save'] = $('#save-text')[0].value;
+	main.load();
+  });
+  this.hook_inventory();
+  this.hook_villagers();
+  this.updateDisplay();
 },
 
 hook_inventory : function(){
