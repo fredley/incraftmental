@@ -149,6 +149,16 @@ var inventory = {
     }
   },
 
+  getObjectFromRecipe : function(code) {
+    for(var group in inventory.objects){
+      for(var object in inventory.objects[group]){
+        if(inventory.objects[group][object].recipe == code){
+          return inventory.objects[group][object];
+        }
+      }
+    }
+  },
+
   getIngredients : function(slug){
     var object = this.getObject(slug);
     var needed = {};

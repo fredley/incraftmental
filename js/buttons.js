@@ -1,7 +1,8 @@
-function getRecipeFromCraftingGrid() {
+var buttons = {
+
+getRecipeFromCraftingGrid : function() {
   var code = '';
   var needed = {};
-
   $('.craft-square').each(function(){
     if($(this).attr('data-object')){
       code += inventory.getObject($(this).attr('data-object')).symbol;
@@ -14,36 +15,12 @@ function getRecipeFromCraftingGrid() {
       code += ' ';
     }
   });
-
   code = code.trim();
+  return [code, needed];
+},
 
-  return [ code, needed ]
-}
-function getMatchingItem( code ) {
-  for(var group in inventory.objects){
-    for(var object in inventory.objects[group]){
-      if(inventory.objects[group][object].recipe == code){
-        return inventory.objects[group][object];
-      }
-    }
-  }
-}
-function formatAnMultiple( baseStr, pluralCount ) {
-  var prefix = '';
-  var postfix = '';
-  if ( pluralCount > 1 ){
-    prefix = pluralCount + ' ';
-    postfix = 's';
-  } else {
-    prefix = (['A','E','I','O','U'].indexOf(baseStr[0]) > -1) ? 'an ' : 'a ';
-  }
-
-  return prefix  + baseStr + postfix;
-}
-function handleCraft( needed, item) {
-  console.log( 'handleCraft', item, item.slug, item.yield );
+handleCraft : function(needed, item) {
   inventory.addObject(item.slug,item.yield);
-  // Try to 'pull in' more ingredients
   var replace = true;
   for(material in needed){
     if(inventory.getObject(material).quantity < 10 * needed[material]){
@@ -62,36 +39,27 @@ function handleCraft( needed, item) {
   inventory.updateDisplay();
 
   return replace;
-}
-function craftCount( n ) {
-  var codeNeeded = getRecipeFromCraftingGrid();
-  var item = getMatchingItem( codeNeeded[ 0 ] );
+},
 
-  console.log( codeNeeded, item );
-
-  if ( item ) {
-    var craftCount;
-
-    for ( craftCount = 0; craftCount < n; craftCount++ ) {
-      if ( handleCraft( codeNeeded[ 1 ], item ) ) {
+craftCount : function(n) {
+  var codeNeeded = this.getRecipeFromCraftingGrid();
+  var item = inventory.getObjectFromRecipe(codeNeeded[0]);
+  if(item){
+    for (var count = 0; count < n; count++){
+      if(this.handleCraft(codeNeeded[1], item)){
       }
     }
-
-    if ( item.yield ) {
-      craftCount *= item.yield;
+    if (item.yield){
+      count *= item.yield;
     }
-
-    console.log(item,craftCount);
     var name = item.display;
-    name = formatAnMultiple( name, craftCount );
-
-    main.addAlert( 'Crafted ' + name );
+    name = name.formatAnMultiple(count);
+    main.addAlert('Crafted ' + name);
   } else {
-    main.addAlert( 'Unable to find item to craft' );
+    main.addAlert('Unable to find item to craft');
   }
-}
+},
 
-var buttons = {
 init : function(){
   $('#get-wood').on('click',function(){
     inventory.addObject('wood');
@@ -201,18 +169,19 @@ init : function(){
       inventory.addObject(output,1);
       main.addAlert('Smelting Completed');
     });
+    this.hook_inventory();
+    this.hook_villagers();
+    this.updateDisplay();
+  });
   $('#craft').on('click',function() {
-    craftCount( 1 );
+    buttons.craftCount(1);
   });
   $('#craft_10').on('click',function() {
-    craftCount(10);
+    buttons.craftCount(10);
   });
   $('#craft_100').on('click',function() {
-    craftCount(100);
+    buttons.craftCount(100);
   });
-  this.hook_inventory();
-  this.hook_villagers();
-  this.updateDisplay();
 },
 
 hook_inventory : function(){
