@@ -4,7 +4,7 @@ var villagers = {
   cost : 1,
 
   professions : {
-    smith : function(level){
+    smith : function(level,name){
       smeltables = [];
       for(var group in inventory.objects){
         for(var object in inventory.objects[group]){
@@ -14,7 +14,6 @@ var villagers = {
           }
         }
       }
-      console.log(smeltables);
       if(smeltables.length > 0){
         var slug = randomChoice(smeltables);
         var object = inventory.getObject(slug);
@@ -23,7 +22,7 @@ var villagers = {
         inventory.addObject(object.smelts_to,quantity);
       }
     },
-    builder : function(level){
+    builder : function(level,name){
       craftables = [];
       for(var group in inventory.objects){
         for(var object in inventory.objects[group]){
@@ -38,23 +37,24 @@ var villagers = {
           var craftable = randomChoice(craftables);
           if(inventory.canCraft(craftable)){
             inventory.craft(craftable);
+            main.addAlert(name + ' crafted a ' + craftable);
           }
         }
       }
     },
-    farmer : function(level){
+    farmer : function(level,name){
       // find a growable and grow
     },
-    adventurer : function(level){
+    adventurer : function(level,name){
       // find a droppable and drop
     },
-    digger : function(level){
+    digger : function(level,name){
       // not sure yet...
     },
-    fisher : function(level){
+    fisher : function(level,name){
       // fish fish
     },
-    archer : function(level){
+    archer : function(level,name){
       //not sure yet...
     }
   },
@@ -101,7 +101,7 @@ var villagers = {
   doVillagers : function(){
     for(var i=0; i<this.population.length; i++){
       if(this.population[i].profession && this.population[i].enabled){
-        this.professions[this.population[i].profession](this.population[i].level);
+        this.professions[this.population[i].profession](this.population[i].level,this.population[i].name);
       }
     }
     this.updateDisplay();
