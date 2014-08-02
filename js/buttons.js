@@ -19,7 +19,34 @@ getRecipeFromCraftingGrid : function() {
   return [code, needed];
 },
 
+<<<<<<< HEAD
 handleCraft : function(needed, item) {
+=======
+  return [ code, needed ]
+}
+function getMatchingItem( code ) {
+  for(var group in inventory.objects){
+    for(var object in inventory.objects[group]){
+      if(inventory.objects[group][object].recipe == code){
+        return inventory.objects[group][object];
+      }
+    }
+  }
+}
+function formatAnMultiple( baseStr, pluralCount ) {
+  var prefix = '';
+  var postfix = '';
+  if ( pluralCount > 1 ){
+    prefix = pluralCount + ' ';
+    postfix = 's';
+  } else {
+    prefix = (['A','E','I','O','U'].indexOf(baseStr[0]) > -1) ? 'an ' : 'a ';
+  }
+
+  return prefix  + baseStr + postfix;
+}
+function handleCraft( needed, item) {
+>>>>>>> 7dbb6b9... Fixed craft buttons not working, styled them a bit.
   inventory.addObject(item.slug,item.yield);
   var replace = true;
   for(material in needed){
@@ -39,7 +66,17 @@ handleCraft : function(needed, item) {
   inventory.updateDisplay();
 
   return replace;
+<<<<<<< HEAD
 },
+=======
+}
+function craftCount( n ) {
+  var codeNeeded = getRecipeFromCraftingGrid();
+  var item = getMatchingItem( codeNeeded[ 0 ] );
+
+  if ( item ) {
+    var craftCount;
+>>>>>>> 7dbb6b9... Fixed craft buttons not working, styled them a bit.
 
 craftCount : function(n) {
   var codeNeeded = this.getRecipeFromCraftingGrid();
@@ -52,6 +89,10 @@ craftCount : function(n) {
     if (item.yield){
       count *= item.yield;
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7dbb6b9... Fixed craft buttons not working, styled them a bit.
     var name = item.display;
     name = name.formatAnMultiple(count);
     main.addAlert('Crafted ' + name);
@@ -169,6 +210,7 @@ init : function(){
       inventory.addObject(output,1);
       main.addAlert('Smelting Completed');
     });
+
     this.hook_inventory();
     this.hook_villagers();
     this.updateDisplay();
