@@ -9,7 +9,7 @@ var inventory = {
       grass:          {display:'Grass'              , symbol: '-'                                                     },
       dirt:           {display:'Dirt'               , symbol: '%'                                                     },
       cobble:         {display:'Cobblestone'        , symbol: 'C'                          , smelts_to: 'stone'       },
-      planks:         {display:'Planks'             , symbol: 'P', recipe:'='              , fuel_source: 2           },
+      planks:         {display:'Planks'             , symbol: 'P', recipe:'=' , yield:4    , fuel_source: 2           },
       sand:           {display:'Sand'               , symbol: 'S'                          , smelts_to: 'glass'       },
       gravel:         {display:'Gravel'             , symbol: '$'                                                     },
       gold_ore:       {display:'Gold Ore'           , symbol: 'G'                          , smelts_to: 'gold_ingot'  },
