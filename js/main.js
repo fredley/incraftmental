@@ -43,9 +43,6 @@ load : function(){
     }
   }
   villagers.population = data["villagers"];
-  $('#inventory').show();
-  $('#make-planks').show();
-  $('#make-crafting').show();
 },
 
 addAlert : function(text){
@@ -77,11 +74,6 @@ addMouseAlert : function(text,e){
     alert.remove();
   });
   $('body').append(alert);
-},
-
-hideTables : function(){
-	$("#crafting").hide();
-	$("#smelting").hide();
 }
 
 };

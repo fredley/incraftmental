@@ -101,7 +101,8 @@ button:disabled:hover {
   padding: 20px;
   position: absolute;
   right: 30px;
-  bottom: 30px; }
+  bottom: 30px;
+  display: none; }
   #villagers .villager {
     width: 150px;
     float: left;
@@ -115,14 +116,44 @@ button:disabled:hover {
 #alerts {
   display: none; }
 
-#crafting {
+#tabs {
+  position: absolute;
+  height: 30px;
+  top: -31px;
+  left: 15px; }
+
+.work-tab {
+  float: left;
   border-top: 1px solid #dddddd;
   border-left: 1px solid #dddddd;
-  width: 300px;
-  height: 300px;
-  margin-top: 30px;
-  margin-left: 15px;
+  border-right: 1px solid #dddddd;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 5px 15px;
+  margin-right: 10px;
+  cursor: pointer;
   display: none; }
+  .work-tab.active {
+    border-bottom: 1px solid #222222; }
+
+#work-area {
+  float: left;
+  clear: both;
+  border: 1px solid #dddddd;
+  padding: 10px;
+  width: 600px;
+  margin-top: 40px;
+  position: relative; }
+
+#crafting {
+  display: none; }
+  #crafting #crafting-square {
+    border-top: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    width: 300px;
+    height: 300px;
+    margin: 30px 15px;
+    float: left; }
   #crafting .craft-square {
     width: 100px;
     height: 100px;
@@ -135,49 +166,43 @@ button:disabled:hover {
     font-size: 20px;
     box-sizing: border-box;
     cursor: pointer; }
+  #crafting #craft {
+    float: left;
+    margin: 30px 15px; }
 
 #smelting {
-  width: 300px;
-  height: 300px;
-  margin-top: 30px;
-  margin-left: 15px;
   display: none; }
-  #smelting .smelt_row {
-    position: relative;
+  #smelting #smelting-square {
     width: 300px;
-    height: 100px; }
+    height: 300px;
+    margin: 30px 15px;
+    float: left; }
   #smelting .smelt-square {
     width: 100px;
     height: 100px;
-    border: 1px solid #dddddd;
-    background: #333;
+    float: left;
     text-align: center;
-    padding-top: 40px;
     font-size: 20px;
-    box-sizing: border-box;
-    cursor: pointer; }
-  #smelting .smelt_progress {
-    position: absolute;
+    box-sizing: border-box; }
+    #smelting .smelt-square.input {
+      padding-top: 40px;
+      border: 1px solid #dddddd;
+      background: #333;
+      cursor: pointer; }
+  #smelting #smelt-progress {
     border: 1px solid #dddddd;
-    left: 95px;
-    top: 45px;
+    margin-top: 45px;
     width: 100px;
     height: 10px; }
-  #smelting .fuel_line {
-    position: absolute;
+  #smelting #fuel-line {
     border: 1px solid #dddddd;
-    left: 45px;
-    top: 5px;
+    margin-left: 45px;
+    margin-top: 5px;
     width: 10px;
     height: 90px; }
-  #smelting #smelt_1 {
-    position: absolute;
-    right: 1px; }
-
-#links span {
-  cursor: pointer;
-  text-decoration: underline;
-  display: none; }
+  #smelting #smelt {
+    float: left;
+    margin: 30px 15px; }
 
 #alerts {
   position: absolute;

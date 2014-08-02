@@ -74,13 +74,11 @@ init : function(){
       main.addMouseAlert('Not enough to smelt (10 required)!',e);
     }
   });
-  $("#lnkCrafting").on('click',function(){
-	main.hideTables();
-	$("#crafting").show();
-  });
-  $("#lnkSmelting").on('click',function(){
-	main.hideTables();
-	$("#smelting").show();
+  $(".work-tab").on('click',function(){
+    $('.page').hide();
+  	$("#" + $(this).attr('data-for')).show();
+    $('.work-tab').removeClass('active');
+    $(this).addClass('active');
   });
   $('#craft').on('click',function(){
     var code = '';
@@ -132,27 +130,25 @@ init : function(){
     }
   });
   $('#smelt').on('click',function(){
-	var fuel, input, output, timer;
-	fuel =$("#smelt_1").attr('data-object');
-	input=$("#smelt_0").attr('data-object');
-	output=inventory.getObject(input).smelts_to;
-	
-	if(inventory.objects.blocks.furnace.fuel_level.cur<=0){
-	  if(inventory.getObject(fuel).fuel_source==undefined)
-		return false;
-	  inventory.objects.blocks.furnace.fuel_level.max = inventory.getObject(fuel).fuel_source;
-	  inventory.objects.blocks.furnace.fuel_level.cur = inventory.objects.blocks.furnace.fuel_level.max;
-	}
-	inventory.objects.blocks.furnace.fuel_level.cur--;
-	timer=10;
-	
-	if(output==undefined)
-	  return false;
-	
-	//setTimeout( function(){
-	//	inventory.addObject(output,1);
-	//	main.addAlert('Smelting Completed');
-	//},10000);
+  	var fuel, input, output, timer;
+  	fuel   = $("#smelt-fuel").attr('data-object');
+  	input  = $("#smelt-input").attr('data-object');
+  	output = inventory.getObject(input).smelts_to;
+
+  	if(inventory.objects.blocks.furnace.fuel_level.cur <= 0){
+  	  if(inventory.getObject(fuel).fuel_source == undefined) return false;
+  	  inventory.objects.blocks.furnace.fuel_level.max = inventory.getObject(fuel).fuel_source;
+  	  inventory.objects.blocks.furnace.fuel_level.cur = inventory.objects.blocks.furnace.fuel_level.max;
+  	}
+  	inventory.objects.blocks.furnace.fuel_level.cur--;
+  	timer=10;
+
+  	if(output == undefined) return false;
+
+  	//setTimeout( function(){
+  	//	inventory.addObject(output,1);
+  	//	main.addAlert('Smelting Completed');
+  	//},10000);
   });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){
@@ -163,11 +159,13 @@ init : function(){
     $('#make-crafting').show();
   }
   if(inventory.objects.blocks.crafting_table.hasOwned){
+    $('#work-area').show();
     $('#crafting').show();
-    $('#lnkCrafting').show();
   }
-  if(inventory.objects.blocks.crafting_table.hasOwned){
-    $('#lnkSmelting').show();
+  if(inventory.objects.blocks.furnace.hasOwned){
+    $('#tab-crafting').show();
+    $('#tab-smelting').show();
+    $('#tab-crafting').addClass('active');
   }
   this.hook_inventory();
   this.hook_villagers();

@@ -31,36 +31,41 @@
           Make Crafting Table (4 planks)
       </button>
     </div>
-	<div id="links">
-	  <span id="lnkCrafting">Crafting Table</span>
-	  <span id="lnkSmelting">Furnace</span>
-	</div>
-    <div id='crafting'>
-      <div id='craft_0' class='craft-square'></div>
-      <div id='craft_1' class='craft-square'></div>
-      <div id='craft_2' class='craft-square'></div>
-      <div id='craft_3' class='craft-square'></div>
-      <div id='craft_4' class='craft-square'></div>
-      <div id='craft_5' class='craft-square'></div>
-      <div id='craft_6' class='craft-square'></div>
-      <div id='craft_7' class='craft-square'></div>
-      <div id='craft_8' class='craft-square'></div>
-      <button id='craft'>CRAFT</button>
-    </div>
-	<div id='smelting'>
-      <div class="smelt_row">
-		<div id='smelt_input' class='smelt-square'></div>
-	  </div>
-	  <div class="smelt_row">
-		<div id='smelt_3' class='fuel_line'></div>
-		<div id='smelt_4' class='smelt_progress'></div>
-		<div id='smelt_product' class='smelt-square'></div>
-	  </div>
-	  <div id="smelt_row">
-		<div id='smelt_fuel' class='smelt-square'></div>
-	  </div>
-
-      <button id='smelt'>SMELT</button>
+    <div id='work-area'>
+      <div id="tabs">
+        <div id="tab-crafting" class='work-tab' data-for='crafting'>Crafting Table</div>
+        <div id="tab-smelting" class='work-tab' data-for='smelting'>Furnace</div>
+      </div>
+      <div id='crafting' class='page'>
+        <div id='crafting-square'>
+          <div id='craft_0' class='craft-square'></div>
+          <div id='craft_1' class='craft-square'></div>
+          <div id='craft_2' class='craft-square'></div>
+          <div id='craft_3' class='craft-square'></div>
+          <div id='craft_4' class='craft-square'></div>
+          <div id='craft_5' class='craft-square'></div>
+          <div id='craft_6' class='craft-square'></div>
+          <div id='craft_7' class='craft-square'></div>
+          <div id='craft_8' class='craft-square'></div>
+        </div>
+        <button id='craft'>CRAFT</button>
+      </div>
+    	<div id='smelting' class='page'>
+        <div id='smelting-square'>
+      		<div id='smelt-input' class='smelt-square input'></div>
+          <div class='smelt-square'></div>
+          <div class='smelt-square'></div>
+      		<div class='smelt-square'>
+            <div id='fuel-line'></div>
+          </div>
+      		<div class='smelt-square'>
+            <div id='smelt-progress'></div>
+          </div>
+      		<div id='smelt-product' class='smelt-square input'></div>
+      		<div id='smelt-fuel' class='smelt-square input'></div>
+        </div>
+        <button id='smelt'>SMELT</button>
+      </div>
     </div>
     <div id='inventory'></div>
     <div id='villagers'></div>
