@@ -25,9 +25,20 @@ init : function(){
       inventory.objects.blocks.planks.quantity -= 4;
       inventory.addObject('crafting_table');
       inventory.updateDisplay();
-      $('#crafting').show();
-      $('#make-planks').html('Make Planks (4 wood)');
+      this.updateDisplay();
       main.addAlert('Made a Crafting Table!');
+    }
+  });
+  $('#get-villager').on('click',function(e){
+    if(inventory.objects.items.apple.quantity > villagers.cost){
+      inventory.objects.items.apple.quantity -= villagers.cost;
+      villagers.addVillager();
+      villagers.cost *= 2;
+      buttons.updateDisplay();
+      inventory.updateDisplay();
+      villagers.updateDisplay();
+    }else{
+      main.addMouseAlert('Not enough Apples! :(',e);
     }
   });
   $('.craft-square').on('click',function(e){
@@ -150,25 +161,9 @@ init : function(){
       main.addAlert('Smelting Completed');
     });
   });
-  // init button states
-  if(inventory.objects.blocks.wood.hasOwned){
-    $('#make-planks').show();
-    $('#inventory').show();
-  }
-  if(inventory.objects.blocks.planks.hasOwned){
-    $('#make-crafting').show();
-  }
-  if(inventory.objects.blocks.crafting_table.hasOwned){
-    $('#work-area').show();
-    $('#crafting').show();
-  }
-  if(inventory.objects.blocks.furnace.hasOwned){
-    $('#tab-crafting').show();
-    $('#tab-smelting').show();
-    $('#tab-crafting').addClass('active');
-  }
   this.hook_inventory();
   this.hook_villagers();
+  this.updateDisplay();
 },
 
 hook_inventory : function(){
@@ -182,9 +177,9 @@ hook_inventory : function(){
 hook_villagers : function(){
   $('.villager').on('click',function(e){
     if(inventory.selected && inventory.in('tools',inventory.selected)){
-      if(inventory.get(inventory.selected).quantity >= 10){
+      if(inventory.getObject(inventory.selected).quantity >= 10){
         inventory.addObject(inventory.selected,-10);
-        villagers.assignVillager($(this).attr('data-name'),inventory.get(inventory.selected).profession,inventory.get(inventory.selected).bonus)
+        villagers.assignVillager($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus)
       }else{
         main.addMouseAlert('You must have 10 of a tool to assign.',e);
       }
@@ -197,6 +192,32 @@ hook_villagers : function(){
     villagers.population[$(this).attr('data-id')].enabled = !villagers.population[$(this).attr('data-id')].enabled;
     villagers.updateDisplay();
   });
+},
+
+updateDisplay : function(){
+  if(inventory.objects.blocks.wood.hasOwned){
+    $('#make-planks').show();
+    $('#inventory').show();
+  }
+  if(inventory.objects.blocks.planks.hasOwned){
+    $('#make-crafting').show();
+  }
+  if(inventory.objects.blocks.crafting_table.hasOwned){
+    $('#work-area').show();
+    $('#crafting').show();
+    $('#make-planks').html('Make Planks (4 wood)');
+  }
+  if(inventory.objects.blocks.furnace.hasOwned){
+    $('#tab-crafting').show();
+    $('#tab-smelting').show();
+    if($('.work-tab.active').length !== 1){
+      $('#tab-crafting').addClass('active');
+    }
+  }
+  if(inventory.objects.items.apple.hasOwned){
+    $('#get-villager').show();
+    $('#get-villager').html('Get a villager (' + villagers.cost + ' apple' + ((villagers.cost > 1) ? 's' : '') + ')');
+  }
 }
 
 };

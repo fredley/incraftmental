@@ -1,6 +1,7 @@
 var villagers = {
 
   population : [],
+  cost : 1,
 
   professions : {
     smith : function(level){

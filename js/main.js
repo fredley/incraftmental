@@ -11,6 +11,7 @@ tick : function(){
   inventory.doTools();
   villagers.doVillagers();
   inventory.updateDisplay();
+  buttons.updateDisplay();
   this.save();
 },
 
@@ -25,6 +26,7 @@ save : function(){
     }
   }
   data["villagers"] = villagers.population;
+  data["villager_cost"] = villagers.cost;
   localStorage["save"] = JSON.stringify(data);
 },
 
@@ -43,6 +45,7 @@ load : function(){
     }
   }
   villagers.population = data["villagers"];
+  villagers.cost = (data["villager_cost"]) ? data["villager_cost"] : 1;
 },
 
 addAlert : function(text){

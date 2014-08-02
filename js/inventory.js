@@ -23,11 +23,7 @@ var inventory = {
       torch:          {display:'Torch'              , symbol: 'L', recipe:'c  |', yield:4                             },
       chest:          {display:'Chest'              , symbol: '&', recipe:'PPPP PPPP'      , fuel_source: 2           },
       crafting_table: {display:'Crafting Table'     , symbol: 'T', recipe:'PP PP'          , fuel_source: 2           },
-      furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      , fuel_level:{cur:0,max:0} , on_craft : function(){
-        $('#tab-crafting').show();
-        $('#tab-smelting').show();
-        $('#tab-crafting').addClass('active');
-      }},
+      furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      , fuel_level:{cur:0,max:0} },
       cactus:         {display:'Cactus'             , symbol: '!'                                                     },
       clay:           {display:'Clay'               , symbol: '.'                          , smelts_to: 'brick'       },
       cake:           {display:'Cake'               , symbol: '*', recipe: 'MMM,o,;;;'                                }
@@ -73,11 +69,11 @@ var inventory = {
       wooden_sword :    {display:'Wooden Sword',    profession: 'adventurer', recipe: 'P  P  |' , bonus:1, gives: {'porkchop':0.05}                                                                              },
       wooden_shovel :   {display:'Wooden Shovel',   profession: 'digger',     recipe: 'P  |  |' , bonus:1, gives: {'dirt':0.5}                                                                                   },
       wooden_pickaxe :  {display:'Wooden Pickaxe',  profession: 'smith',      recipe: 'PPP |  |', bonus:1, gives: {'cobble':0.5, 'coal':0.05}                                                                    },
-      wooden_axe :      {display:'Wooden Axe',      profession: 'builder',    recipe: 'PP P|  |', bonus:1, gives: {'wood':0.5}                                                                                   },
+      wooden_axe :      {display:'Wooden Axe',      profession: 'builder',    recipe: 'PP P|  |', bonus:1, gives: {'wood':0.5, 'apple':0.001}                                                                                   },
       stone_sword :     {display:'Stone Sword',     profession: 'adventurer', recipe: 'C  C  |' , bonus:2, gives: {'porkchop':0.1, 'egg':0.1}                                                                    },
       stone_shovel :    {display:'Stone Shovel',    profession: 'digger',     recipe: 'C  |  |' , bonus:2, gives: {'dirt':0.8,'flint':0.01,'gravel':0.1, 'sand':0.2}                                             },
       stone_pickaxe :   {display:'Stone Pickaxe',   profession: 'smith',      recipe: 'CCC |  |', bonus:2, gives: {'cobble':0.8, 'coal':0.1, 'iron_ore':0.05}                                                    },
-      stone_axe :       {display:'Stone Axe',       profession: 'builder',    recipe: 'CC C|  |', bonus:2, gives: {'wood':0.7, 'sapling':0.1}                                                                    },
+      stone_axe :       {display:'Stone Axe',       profession: 'builder',    recipe: 'CC C|  |', bonus:2, gives: {'wood':0.7, 'sapling':0.1, 'apple':0.01}                                                                    },
       iron_sword :      {display:'Iron Sword',      profession: 'adventurer', recipe: 'i  i  |' , bonus:3, gives: {'leather':0.1, 'porkchop':0.1, 'egg':0.1, 'feather':0.1}                                      },
       iron_shovel :     {display:'Iron Shovel',     profession: 'digger',     recipe: 'i  |  |' , bonus:3, gives: {'dirt':0.8,'flint':0.01,'gravel':0.1, 'sand':0.2}                                             },
       iron_picaxe :     {display:'Iron Pickaxe',    profession: 'smith',      recipe: 'iii |  |', bonus:3, gives: {'cobble':0.8, 'coal':0.1, 'iron_ore':0.1, 'gold_ore':0.01}                                    },
@@ -190,6 +186,7 @@ var inventory = {
       this.getObject(slug).on_craft();
     }
     this.updateDisplay();
+    buttons.updateDisplay();
   },
 
   in : function(category,object){
