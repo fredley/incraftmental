@@ -113,11 +113,12 @@ var villagers = {
   updateDisplay : function(){
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
-      villagerText += '<div class="villager" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">*</span> ' + this.population[villager].name.capitalize();
+      villagerText += '<div class="villager" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">';
+      villagerText += (this.population[villager].enabled) ? '*' : '>';
+      villagerText += '</span> ' + this.population[villager].name.capitalize();
       if(this.population[villager].level > 0){
         villagerText += ' the ' + this.levels[this.population[villager].level] + ' ' + this.population[villager].profession.capitalize();
       }
-      villagerText += (this.population[villager].enabled) ? '' : ' (paused)';
       villagerText += '</div>';
     }
     $('#villagers').html(villagerText);
