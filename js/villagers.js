@@ -13,6 +13,7 @@ var villagers = {
           }
         }
       }
+      console.log(smeltables);
       if(smeltables.length > 0){
         var slug = randomChoice(smeltables);
         var object = inventory.getObject(slug);
@@ -120,7 +121,6 @@ var villagers = {
       $('#villagers').show();
     }
     buttons.hook_villagers();
-    localStorage["villagers"] = JSON.stringify(this.population);
   }
 
 };

@@ -2,12 +2,7 @@ var main = {
 
 onload : function(){
   inventory.init();
-  if('objects' in localStorage){
-    inventory.objects = JSON.parse(localStorage['objects']);
-  }
-  if('villagers' in localStorage){
-    villagers.population = JSON.parse(localStorage["villagers"]);
-  }
+  this.load();
   buttons.init();
   window.setInterval(function(){main.tick()}, 1000);
 },
@@ -16,6 +11,41 @@ tick : function(){
   inventory.doTools();
   villagers.doVillagers();
   inventory.updateDisplay();
+  this.save();
+},
+
+save : function(){
+  var data = {'inventory':{},'villagers':[]};
+  for(var group in inventory.objects){
+    for(var object in inventory.objects[group]){
+      data['inventory'][object] = {
+        quantity : inventory.objects[group][object].quantity,
+        hasOwned : inventory.objects[group][object].hasOwned
+      }
+    }
+  }
+  data["villagers"] = villagers.population;
+  localStorage["save"] = JSON.stringify(data);
+},
+
+load : function(){
+  if('save' in localStorage){
+    var data = JSON.parse(localStorage['save']);
+  }else{
+    return;
+  }
+  for(var group in inventory.objects){
+    for(var object in inventory.objects[group]){
+      if(object in data['inventory']){
+        inventory.objects[group][object].quantity = data.inventory[object].quantity;
+        inventory.objects[group][object].hasOwned = data.inventory[object].hasOwned;
+      }
+    }
+  }
+  villagers.population = data["villagers"];
+  $('#inventory').show();
+  $('#make-planks').show();
+  $('#make-crafting').show();
 },
 
 addAlert : function(text){
