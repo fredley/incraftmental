@@ -4,60 +4,36 @@ var villagers = {
   cost : 1,
 
   professions : {
-    smith : function(level,name){
-      smeltables = [];
-      for(var group in inventory.objects){
-        for(var object in inventory.objects[group]){
-          var o = inventory.objects[group][object];
-          if(o.smelts_to && o.quantity > 0){
-            smeltables.push(object);
-          }
-        }
-      }
-      if(smeltables.length > 0){
-        var slug = randomChoice(smeltables);
-        var object = inventory.getObject(slug);
-        var quantity = Math.min(level,object.quantity);
-        inventory.addObject(slug,quantity);
-        inventory.addObject(object.smelts_to,quantity);
-      }
+    smith : function(villager){
+      if(!villager.assigned) return;
+      var object = inventory.getObject(villager.assigned);
+      var quantity = Math.min(level,object.quantity);
+      inventory.addObject(villager.assigned,quantity);
+      inventory.addObject(object.smelts_to,quantity);
+      main.addAlert(name + ' smelted some ' + villager.assigned.capitalize());
     },
-    builder : function(level,name){
-      craftables = [];
-      for(var group in inventory.objects){
-        for(var object in inventory.objects[group]){
-          var o = inventory.objects[group][object];
-          if(o.recipe && o.hasOwned && inventory.canCraft(object)){ // only build things that have been built before
-            // don't spam furnaces
-            if(object !== 'furnace'){
-              craftables.push(object);
-            }
-          }
-        }
-      }
-      if(craftables.length > 0){
-        for(var i=0; i < level; i++){
-          var craftable = randomChoice(craftables);
-          if(inventory.canCraft(craftable)){
-            inventory.craft(craftable);
-            main.addAlert(name + ' crafted a ' + craftable);
-          }
+    builder : function(villager){
+      if(!villager.assigned) return;
+      for(var i=0; i < level; i++){
+        if(inventory.canCraft(villager.assigned)){
+          inventory.craft(villager.assigned);
+          main.addAlert(name + ' crafted a ' + villager.assigned.capitalize());
         }
       }
     },
-    farmer : function(level,name){
+    farmer : function(villager){
       // find a growable and grow
     },
-    adventurer : function(level,name){
+    adventurer : function(villager){
       // find a droppable and drop
     },
-    digger : function(level,name){
+    digger : function(villager){
       // not sure yet...
     },
-    fisher : function(level,name){
+    fisher : function(villager){
       // fish fish
     },
-    archer : function(level,name){
+    archer : function(villager){
       //not sure yet...
     }
   },
