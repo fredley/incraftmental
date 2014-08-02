@@ -176,6 +176,7 @@ hook_inventory : function(){
 
 hook_villagers : function(){
   $('.villager').on('click',function(e){
+    if(!inventory.selected) return;
     if(inventory.selected && inventory.in('tools',inventory.selected)){
       if(inventory.getObject(inventory.selected).quantity >= 10){
         inventory.addObject(inventory.selected,-10);
@@ -186,7 +187,13 @@ hook_villagers : function(){
     }else{
       var v = villagers.population[$(this).attr('data-id')];
       if(v.profession){
-        // work out what to do with this object
+        var o = inventory.getObject(inventory.selected);
+        if(v.profession == 'smith'   && o.smelts_to ||
+           v.profession == 'builder' && o.recipe    ){
+          villagers.assignObject($(this).attr('data-id'),inventory.selected);
+        }else{
+          main.addMouseAlert('This villager can\'t work with that :(',e);
+        }
       }else{
         main.addMouseAlert('Select a tool to assign a villager.',e);
       }
