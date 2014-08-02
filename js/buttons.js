@@ -35,9 +35,7 @@ handleCraft : function(needed, item) {
     $('.craft-square').removeAttr('data-object');
     $('.craft-square').html('');
   }
-
   inventory.updateDisplay();
-
   return replace;
 },
 
