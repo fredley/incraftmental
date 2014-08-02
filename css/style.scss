@@ -133,6 +133,11 @@ button:disabled:hover{
 #alerts{
     display:none;
 }
+#options-menu{
+	display:none;
+	position:absolute;z-index:9001;
+	border:1px solid $light;
+}
 #tabs{
     position: absolute;
     height:30px;
