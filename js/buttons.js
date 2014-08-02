@@ -1,5 +1,97 @@
-var buttons = {
+function getRecipeFromCraftingGrid() {
+  var code = '';
+  var needed = {};
 
+  $('.craft-square').each(function(){
+    if($(this).attr('data-object')){
+      code += inventory.getObject($(this).attr('data-object')).symbol;
+      if($(this).attr('data-object') in needed){
+        needed[$(this).attr('data-object')]++;
+      }else{
+        needed[$(this).attr('data-object')] = 1;
+      }
+    }else{
+      code += ' ';
+    }
+  });
+
+  code = code.trim();
+
+  return [ code, needed ]
+}
+function getMatchingItem( code ) {
+  for(var group in inventory.objects){
+    for(var object in inventory.objects[group]){
+      if(inventory.objects[group][object].recipe == code){
+        return inventory.objects[group][object];
+      }
+    }
+  }
+}
+function formatAnMultiple( baseStr, pluralCount ) {
+  var prefix = '';
+  var postfix = '';
+  if ( pluralCount > 1 ){
+    prefix = pluralCount + ' ';
+    postfix = 's';
+  } else {
+    prefix = (['A','E','I','O','U'].indexOf(baseStr[0]) > -1) ? 'an ' : 'a ';
+  }
+
+  return prefix  + baseStr + postfix;
+}
+function handleCraft( needed, item) {
+  console.log( 'handleCraft', item, item.slug, item.yield );
+  inventory.addObject(item.slug,item.yield);
+  // Try to 'pull in' more ingredients
+  var replace = true;
+  for(material in needed){
+    if(inventory.getObject(material).quantity < 10 * needed[material]){
+      replace = false;
+    }
+  }
+  if(replace){
+    for(material in needed){
+      inventory.addObject(material,-10 * needed[material]);
+    }
+  }else{
+    $('.craft-square').removeAttr('data-object');
+    $('.craft-square').html('');
+  }
+
+  inventory.updateDisplay();
+
+  return replace;
+}
+function craftCount( n ) {
+  var codeNeeded = getRecipeFromCraftingGrid();
+  var item = getMatchingItem( codeNeeded[ 0 ] );
+
+  console.log( codeNeeded, item );
+
+  if ( item ) {
+    var craftCount;
+
+    for ( craftCount = 0; craftCount < n; craftCount++ ) {
+      if ( handleCraft( codeNeeded[ 1 ], item ) ) {
+      }
+    }
+
+    if ( item.yield ) {
+      craftCount *= item.yield;
+    }
+
+    console.log(item,craftCount);
+    var name = item.display;
+    name = formatAnMultiple( name, craftCount );
+
+    main.addAlert( 'Crafted ' + name );
+  } else {
+    main.addAlert( 'Unable to find item to craft' );
+  }
+}
+
+var buttons = {
 init : function(){
   $('#get-wood').on('click',function(){
     inventory.addObject('wood');
@@ -91,57 +183,6 @@ init : function(){
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
   });
-  $('#craft').on('click',function(e){
-    var code = '';
-    var needed = {};
-    $('.craft-square').each(function(){
-      if($(this).attr('data-object')){
-        code += inventory.getObject($(this).attr('data-object')).symbol;
-        if($(this).attr('data-object') in needed){
-          needed[$(this).attr('data-object')]++;
-        }else{
-          needed[$(this).attr('data-object')] = 1;
-        }
-      }else{
-        code += ' ';
-      }
-    });
-    code = code.trim();
-    for(var group in inventory.objects){
-      for(var object in inventory.objects[group]){
-        if(inventory.objects[group][object].recipe == code){
-          inventory.addObject(object,inventory.objects[group][object].yield);
-          // Try to 'pull in' more ingredients
-          var replace = true;
-          for(material in needed){
-            if(inventory.getObject(material).quantity < 10 * needed[material]){
-              replace = false;
-            }
-          }
-          if(replace){
-            for(material in needed){
-              inventory.addObject(material,-10 * needed[material]);
-            }
-          }else{
-            $('.craft-square').removeAttr('data-object');
-            $('.craft-square').html('');
-          }
-          var aa = '';
-          var ss = '';
-          if(inventory.objects[group][object].yield){
-            aa = inventory.objects[group][object].yield + ' ';
-            ss = 's';
-          }else{
-            aa = (['A','E','I','O','U'].indexOf(inventory.objects[group][object].display[0]) > -1) ? 'an ' : 'a ';
-          }
-          main.addAlert('Crafted ' + aa + inventory.objects[group][object].display + ss);
-          inventory.updateDisplay();
-          return;
-        }
-      }
-    }
-    main.addMouseAlert('Not a valid crafting recipe :(',e);
-  });
   $('#smelt').on('click',function(){
   	var fuel, input, output, timer;
   	fuel   = $("#smelt-fuel").attr('data-object');
@@ -160,6 +201,14 @@ init : function(){
       inventory.addObject(output,1);
       main.addAlert('Smelting Completed');
     });
+  $('#craft').on('click',function() {
+    craftCount( 1 );
+  });
+  $('#craft_10').on('click',function() {
+    craftCount(10);
+  });
+  $('#craft_100').on('click',function() {
+    craftCount(100);
   });
   this.hook_inventory();
   this.hook_villagers();
