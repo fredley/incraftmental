@@ -204,7 +204,9 @@ updateDisplay : function(){
   }
   if(inventory.objects.blocks.crafting_table.hasOwned){
     $('#work-area').show();
-    $('#crafting').show();
+    if($('.work-tab.active').length === 0){
+      $('#crafting').show();
+    }
     $('#work-area').show();
   }
   if(inventory.objects.blocks.furnace.hasOwned){
