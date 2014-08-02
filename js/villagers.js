@@ -7,17 +7,15 @@ var villagers = {
     smith : function(villager){
       if(!villager.assigned) return;
       var object = inventory.getObject(villager.assigned);
-      var quantity = Math.min(level,object.quantity);
+      var quantity = Math.min(villager.level,object.quantity);
       inventory.addObject(villager.assigned,quantity);
       inventory.addObject(object.smelts_to,quantity);
-      main.addAlert(name + ' smelted some ' + villager.assigned.capitalize());
     },
     builder : function(villager){
       if(!villager.assigned) return;
-      for(var i=0; i < level; i++){
+      for(var i=0; i < villager.level; i++){
         if(inventory.canCraft(villager.assigned)){
           inventory.craft(villager.assigned);
-          main.addAlert(name + ' crafted a ' + villager.assigned.capitalize());
         }
       }
     },
@@ -85,8 +83,9 @@ var villagers = {
 
   doVillagers : function(){
     for(var i=0; i<this.population.length; i++){
-      if(this.population[i].profession && this.population[i].enabled){
-        this.professions[this.population[i].profession](this.population[i].level,this.population[i].name);
+      var v = this.population[i];
+      if(v.profession && v.enabled && v.assigned){
+        this.professions[v.profession](v);
       }
     }
     this.updateDisplay();
