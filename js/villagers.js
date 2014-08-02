@@ -79,7 +79,8 @@ var villagers = {
       'name' : name,
       'profession' : null,
       'level' : 0,
-      'enabled': true
+      'enabled': true,
+      'assigned': null
     });
     this.updateDisplay();
   },
@@ -95,9 +96,14 @@ var villagers = {
     return name.capitalize();
   },
 
-  assignVillager : function(id, profession, level){
+  assignProfession : function(id, profession, level){
     this.population[id].profession = profession;
     this.population[id].level = level;
+    this.updateDisplay();
+  },
+
+  assignObject : function(id,block){
+    this.population[id].assigned = block;
     this.updateDisplay();
   },
 
@@ -113,11 +119,15 @@ var villagers = {
   updateDisplay : function(){
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
+      var v = this.population[villager];
       villagerText += '<div class="villager" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">';
-      villagerText += (this.population[villager].enabled) ? '*' : '>';
-      villagerText += '</span> ' + this.population[villager].name.capitalize();
-      if(this.population[villager].level > 0){
-        villagerText += ' the ' + this.levels[this.population[villager].level] + ' ' + this.population[villager].profession.capitalize();
+      villagerText += (v.enabled) ? '*' : '>';
+      villagerText += '</span> ' + v.name.capitalize();
+      if(v.level > 0){
+        villagerText += ' the ' + this.levels[v.level] + ' ' + v.profession.capitalize();
+      }
+      if(v.profession){
+        villagerText += (v.assigned) ? ' (' + v.assigned.capitalize() + ')' : ' (unassigned)';
       }
       villagerText += '</div>';
     }

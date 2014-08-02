@@ -179,12 +179,17 @@ hook_villagers : function(){
     if(inventory.selected && inventory.in('tools',inventory.selected)){
       if(inventory.getObject(inventory.selected).quantity >= 10){
         inventory.addObject(inventory.selected,-10);
-        villagers.assignVillager($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus)
+        villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus)
       }else{
         main.addMouseAlert('You must have 10 of a tool to assign.',e);
       }
     }else{
-      main.addMouseAlert('Select a tool to assign a villager.',e);
+      var v = villagers.population[$(this).attr('data-id')];
+      if(v.profession){
+        // work out what to do with this object
+      }else{
+        main.addMouseAlert('Select a tool to assign a villager.',e);
+      }
     }
   });
   $('.pause').on('click',function(e){
