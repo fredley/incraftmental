@@ -8,7 +8,6 @@ var villagers = {
       if(!villager.assigned) return;
       var object = inventory.getObject(villager.assigned);
       var quantity = Math.min(villager.level,object.quantity);
-      inventory.addObject(villager.assigned,quantity);
       inventory.addObject(object.smelts_to,quantity);
     },
     builder : function(villager){
