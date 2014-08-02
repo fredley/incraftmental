@@ -214,8 +214,19 @@ button:disabled:hover{
     #smelt-progress {
         border: 1px solid $light;
         margin-top: 45px;
-        width: 100px;
+        margin-left:5px;
+        width: 90px;
         height: 10px;
+        position: relative;
+        overflow: hidden;
+        .bar{
+            background: $light;
+            position: absolute;
+            height:10px;
+            width:90px;
+            left:-90px;
+            top:0;
+        }
     }
     #fuel-line {
         border: 1px solid $light;

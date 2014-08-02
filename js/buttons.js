@@ -52,7 +52,7 @@ init : function(){
       main.addMouseAlert('Not enough to craft (10 required)!',e);
     }
   });
-  $('.smelt-square').on('click',function(e){
+  $('.smelt-square.input').on('click',function(e){
     if($(this).attr('data-object')){
       $(this).html("");
       inventory.getObject($(this).attr('data-object')).quantity += 10;
@@ -80,7 +80,7 @@ init : function(){
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
   });
-  $('#craft').on('click',function(){
+  $('#craft').on('click',function(e){
     var code = '';
     var needed = {};
     $('.craft-square').each(function(){
@@ -125,9 +125,11 @@ init : function(){
           }
           main.addAlert('Crafted ' + aa + inventory.objects[group][object].display + ss);
           inventory.updateDisplay();
+          return;
         }
       }
     }
+    main.addMouseAlert('Not a valid crafting recipe :(',e);
   });
   $('#smelt').on('click',function(){
   	var fuel, input, output, timer;
@@ -141,14 +143,12 @@ init : function(){
   	  inventory.objects.blocks.furnace.fuel_level.cur = inventory.objects.blocks.furnace.fuel_level.max;
   	}
   	inventory.objects.blocks.furnace.fuel_level.cur--;
-  	timer=10;
-
   	if(output == undefined) return false;
-
-  	//setTimeout( function(){
-  	//	inventory.addObject(output,1);
-  	//	main.addAlert('Smelting Completed');
-  	//},10000);
+    $('#smelt-progress .bar').animate({'left': 0},10000,function(){
+      $(this).css('left','-90px');
+      inventory.addObject(output,1);
+      main.addAlert('Smelting Completed');
+    });
   });
   // init button states
   if(inventory.objects.blocks.wood.hasOwned){

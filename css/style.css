@@ -192,8 +192,18 @@ button:disabled:hover {
   #smelting #smelt-progress {
     border: 1px solid #dddddd;
     margin-top: 45px;
-    width: 100px;
-    height: 10px; }
+    margin-left: 5px;
+    width: 90px;
+    height: 10px;
+    position: relative;
+    overflow: hidden; }
+    #smelting #smelt-progress .bar {
+      background: #dddddd;
+      position: absolute;
+      height: 10px;
+      width: 90px;
+      left: -90px;
+      top: 0; }
   #smelting #fuel-line {
     border: 1px solid #dddddd;
     margin-left: 45px;
