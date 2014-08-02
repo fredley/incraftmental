@@ -23,7 +23,7 @@ var inventory = {
       torch:          {display:'Torch'              , symbol: 'L', recipe:'c  |', yield:4                             },
       chest:          {display:'Chest'              , symbol: '&', recipe:'PPPP PPPP'      , fuel_source: 2           },
       crafting_table: {display:'Crafting Table'     , symbol: 'T', recipe:'PP PP'          , fuel_source: 2           },
-      furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      ,  fuel_level:{cur:0,max:0}},
+      furnace:        {display:'Furnace'            , symbol: 'F', recipe:'CCCC CCCC'      , fuel_level:{cur:0,max:0} },
       cactus:         {display:'Cactus'             , symbol: '!'                                                     },
       clay:           {display:'Clay'               , symbol: '.'                          , smelts_to: 'brick'       },
       cake:           {display:'Cake'               , symbol: '*', recipe: 'MMM,o,;;;'                                }
