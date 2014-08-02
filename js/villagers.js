@@ -53,7 +53,7 @@ var villagers = {
       'name' : name,
       'profession' : null,
       'level' : 0,
-      'enabled': true,
+      'enabled': false,
       'assigned': null
     });
     this.updateDisplay();
@@ -73,6 +73,7 @@ var villagers = {
   assignProfession : function(id, profession, level){
     this.population[id].profession = profession;
     this.population[id].level = level;
+    this.population[id].enabled = true;
     this.updateDisplay();
   },
 

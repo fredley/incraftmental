@@ -177,15 +177,15 @@ hook_inventory : function(){
 hook_villagers : function(){
   $('.villager').on('click',function(e){
     if(!inventory.selected) return;
-    if(inventory.selected && inventory.in('tools',inventory.selected)){
+    var v = villagers.population[$(this).attr('data-id')];
+    if(inventory.selected && !v.enabled && inventory.in('tools',inventory.selected)){
       if(inventory.getObject(inventory.selected).quantity >= 10){
         inventory.addObject(inventory.selected,-10);
-        villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus)
+        villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus);
       }else{
         main.addMouseAlert('You must have 10 of a tool to assign.',e);
       }
     }else{
-      var v = villagers.population[$(this).attr('data-id')];
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
         if(v.profession == 'smith'   && o.smelts_to ||
@@ -201,7 +201,12 @@ hook_villagers : function(){
   });
   $('.pause').on('click',function(e){
     e.stopPropagation();
-    villagers.population[$(this).attr('data-id')].enabled = !villagers.population[$(this).attr('data-id')].enabled;
+    var v = villagers.population[$(this).attr('data-id')];
+    if(!v.profession){
+      main.addMouseAlert('You must give a villager a tool to enable it',e);
+      return;
+    }
+    v.enabled = !v.enabled;
     villagers.updateDisplay();
   });
 },
