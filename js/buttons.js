@@ -43,7 +43,7 @@ craftCount : function(n,e) {
   var recipe = this.getRecipeFromCraftingGrid();
   var item = inventory.getObjectFromRecipe(recipe.code);
   if(item){
-    for (var count = 1; count <= n; count++){
+    for (var count = 0; count < n; count++){
       if(!this.handleCraft(recipe.needed, item)){
         break;
       }
