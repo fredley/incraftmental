@@ -71,45 +71,37 @@ button:disabled:hover {
   color: #888;
   background: #444; }
 
-#inventory {
+.pane {
   display: none;
   border: 1px solid #dddddd;
   width: 300px;
   padding: 20px;
   position: absolute;
-  right: 30px;
-  top: 30px; }
-  #inventory h3 {
+  top: 40px; }
+  .pane .item {
+    font-size: 11px;
+    float: left;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 2px 5px; }
+  .pane h3 {
     margin: 0;
     clear: both;
     float: left;
     display: block;
     width: 100%; }
+
+#inventory {
+  right: 30px; }
   #inventory .inventory-item {
-    padding: 2px 5px;
-    font-size: 11px;
-    width: 150px;
-    float: left;
-    box-sizing: border-box;
-    cursor: pointer; }
+    width: 150px; }
     #inventory .inventory-item.selected {
       background: #555; }
 
 #villagers {
-  border: 1px solid #dddddd;
-  width: 300px;
-  padding: 20px;
-  position: absolute;
-  right: 390px;
-  top: 30px;
-  display: none; }
+  right: 390px; }
   #villagers .villager {
     width: 300px;
-    float: left;
-    box-sizing: border-box;
-    cursor: pointer;
-    padding: 2px 5px;
-    font-size: 11px;
     border-bottom: 1px dashed #444; }
 
 #get-villager,

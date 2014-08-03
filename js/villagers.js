@@ -95,7 +95,7 @@ var villagers = {
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
       var v = this.population[villager];
-      villagerText += '<div class="villager" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">';
+      villagerText += '<div class="item villager" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">';
       villagerText += (v.enabled) ? '*' : '>';
       villagerText += '</span> ' + v.name.capitalize();
       if(v.level > 0){
