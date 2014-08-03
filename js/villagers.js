@@ -8,7 +8,7 @@ var villagers = {
       var object = inventory.getObject(villager.assigned);
       if(object.quantity >= 10){
         inventory.addObject(villager.assigned,-10);
-        inventory.addObject(object.smelts_to,1);
+        inventory.addObject(object.smelts_to,2);
       }
     },
     builder : function(villager){
@@ -17,13 +17,13 @@ var villagers = {
       }
     },
     chef : function(villager){
-      // cook better foods
+      // cook better(?) foods
       var food = inventory.getObject(villager.assigned);
       if(food.cooked_from){
         var from = inventory.getObject(food.cooked_from);
         if(from.quantity >= 1){
           inventory.addObject(villager.assigned,1);
-          inventory.addObject(object.cooked_from,-1);
+          inventory.addObject(food.cooked_from,-1);
         }
       }else{
         if(inventory.canCraft(villager.assigned)){
