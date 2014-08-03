@@ -1,6 +1,7 @@
 var inventory = {
 
   selected : null,
+  smelting : false,
 
   objects: {
 

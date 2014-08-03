@@ -123,10 +123,19 @@ init : function(){
     }
   });
   $('.smelt-square.input').on('click',function(e){
+    if($(this).attr('id') === 'smelt-product'){
+      if($(this).attr('data-object')){
+        inventory.addObject($(this).attr('data-object'),1);
+        $(this).attr('data-object','');
+        $(this).html('');
+      }else{
+        main.addMouseAlert('You can\'t put an item there!',e);
+      }
+      return;
+    }
     if($(this).attr('data-object')){
       $(this).html("");
-      var quantity = $(this).atrr('id') === 'smelt-product' ? 1 : 10;
-      inventory.addObject($(this).attr('data-object'),quantity);
+      inventory.addObject($(this).attr('data-object'),10);
       $(this).removeAttr('data-object');
       inventory.updateDisplay();
       return;
@@ -152,6 +161,10 @@ init : function(){
     $(this).addClass('active');
   });
   $('#smelt').on('click',function(e){
+    if(inventory.smelting){
+      main.addMouseAlert("Smelting already in progress!",e);
+      return;
+    }
   	var fuel, input, output, timer;
     var fuel_level = inventory.objects.blocks.furnace.fuel_level;
   	fuel   = $("#smelt-fuel").attr('data-object');
@@ -187,9 +200,11 @@ init : function(){
   	fuel_level.cur--;
     $("#smelt-input").removeAttr('data-object');
     $("#smelt-input").html('');
+    inventory.smelting = true;
     $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},10000);
     $('#smelt-progress .bar').animate({'left': 0},10000,function(){
       $(this).css('left','-90px');
+      inventory.smelting = false;
       $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
       $("#smelt-product").html(inventory.getObject(output).symbol);
       main.addAlert('Smelting Completed');
