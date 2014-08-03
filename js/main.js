@@ -1,4 +1,3 @@
-var currentTick = 0;
 var main = {
 
 onload : function(){
@@ -8,16 +7,18 @@ onload : function(){
   window.setInterval(function(){main.tick()}, 1000);
 },
 
+ticks : 0,
+
 tick : function(){
   inventory.doTools();
   villagers.doVillagers();
   inventory.updateDisplay();
   buttons.updateDisplay();
-  currentTick++;
-  if (parseInt($('#autosave')[0].value) > 0 && currentTick >= parseInt($('#autosave')[0].value)) {
-	this.save();
-	currentTick = 0;
+  var saveEvery = parseInt($('#autosave').val());
+  if (saveEvery !== 0 && this.ticks % saveEvery == 0) {
+  	this.save();
   }
+  this.ticks++;
 },
 
 save : function(){
