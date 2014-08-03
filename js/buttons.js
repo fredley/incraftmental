@@ -206,11 +206,11 @@ init : function(){
   $('#options').on('click', function(){
 	$('#options-menu').toggle();
   });
-  $('#load').on('click', function(){
+  $('#export').on('click', function(){
 	main.save();
 	$('#save-text')[0].value = localStorage['save'];
   });
-  $('#save').on('click', function(){
+  $('#import').on('click', function(){
 	localStorage['save'] = $('#save-text')[0].value;
 	main.load();
   });
