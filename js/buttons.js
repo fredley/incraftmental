@@ -231,6 +231,11 @@ init : function(){
   $('#craft_100').on('click',function(e) {
     buttons.craftCount(100,e);
   });
+  $('.explore_move').on('click',function(){
+    var x = $(this).attr('data-x');
+    var y = $(this).attr('data-y');
+    world.move(x,y);
+  });
   $('#options').on('click', function(){
   	$('#options-menu').toggle();
   });

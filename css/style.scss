@@ -259,6 +259,36 @@ button:disabled:hover{
     }
     .controls {
         float: right;
+        width:80px;
+        height:80px;
+        margin-right:10px;
+        position: relative;
+        button{
+            position: absolute;
+            width:30px;
+            height:30px;
+            line-height: 20px;
+            text-align: center;
+            box-sizing:border-box;
+            padding:0;
+            margin:0;
+            &.up{
+                left:35px;
+                top:0;
+            }
+            &.right{
+                left:70px;
+                top:35px;
+            }
+            &.left{
+                left:0;
+                top:35px;
+            }
+            &.down{
+                top:70px;
+                left:35px;
+            }
+        }
     }
     .inner {
         margin-top: 0;

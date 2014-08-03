@@ -234,7 +234,32 @@ button:disabled:hover {
     margin: 10px;
     margin-bottom: 0px; }
   #exploration .controls {
-    float: right; }
+    float: right;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    position: relative; }
+    #exploration .controls button {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      line-height: 20px;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0; }
+      #exploration .controls button.up {
+        left: 35px;
+        top: 0; }
+      #exploration .controls button.right {
+        left: 70px;
+        top: 35px; }
+      #exploration .controls button.left {
+        left: 0;
+        top: 35px; }
+      #exploration .controls button.down {
+        top: 70px;
+        left: 35px; }
   #exploration .inner {
     margin-top: 0;
     padding: 15px; }

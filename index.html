@@ -83,25 +83,12 @@
       <div id='exploration' class='window page'>
         <div class="inner">
           <canvas width='640' height='480' id='world-div'></canvas>
-          <span class='controls'>
-            <table>
-              <tr>
-                <td>&nbsp;</td>
-                <td><button onclick="world.move(0,1)">^</button></td>
-                <td>&nbsp;</td>
-              </tr>
-              <tr>
-                <td><button onclick="world.move(1,0)">&lt;</button></td>
-                <td>&nbsp;</td>
-                <td><button onclick="world.move(-1,0)">&gt;</button></td>
-              </tr>
-              <tr>
-                <td>&nbsp;</td>
-                <td><button onclick="world.move(0,-1)">V</button></td>
-                <td>&nbsp;</td>
-              </tr>
-            </table>
-          </span>
+          <div class='controls'>
+              <button class='explore_move up' data-x=0 data-y=1>^</button>
+              <button class='explore_move left' data-x=1 data-y=0>&lt;</button>
+              <button class='explore_move right' data-x=-1 data-y=0>&gt;</button>
+              <button class='explore_move down' data-x=0 data-y=-1>V</button>
+          </div>
         </div>
       </div>
     </div>
