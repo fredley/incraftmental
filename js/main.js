@@ -4,6 +4,7 @@ onload : function(){
   inventory.init();
   this.load();
   buttons.init();
+  world.init();
   window.setInterval(function(){main.tick()}, 1000);
 },
 
