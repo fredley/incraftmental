@@ -14,6 +14,7 @@
     <script src="js/inventory.js"></script>
     <script src="js/villagers.js"></script>
     <script src="js/buttons.js"></script>
+    <script src="js/world.js"></script>
     <script src="js/main.js"></script>
   </head>
   <body>
@@ -55,7 +56,7 @@
         <button class='craft' id='craft_10'>CRAFT 10</button>
         <button class='craft' id='craft_100'>CRAFT 100</button>
       </div>
-    	<div id='smelting' class='page'>
+      <div id='smelting' class='page'>
         <div id='smelting-square'>
       		<div id='smelt-input' class='smelt-square input'></div>
           <div class='smelt-square'></div>
@@ -77,5 +78,33 @@
     <div id='inventory'></div>
     <div id='villagers'></div>
     <div id='alerts'></div>
+    <div id='exploration' class='window'>
+        <div class="inner">
+            <h3>Explore</h3>
+
+            <canvas width='640' height='480' id='world-div'>
+            </canvas>
+
+            <span class='controls'>
+                <table>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><button onclick="world.move(0,1)">^</button></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td><button onclick="world.move(1,0)">&lt;</button></td>
+                        <td>&nbsp;</td>
+                        <td><button onclick="world.move(-1,0)">&gt;</button></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td><button onclick="world.move(0,-1)">V</button></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </span>
+        </div>
+    </div>
   </body>
 </html>

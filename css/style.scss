@@ -1,5 +1,6 @@
 $light:#ddd;
 $dark:#222;
+
 html,
 button,
 input,
@@ -278,6 +279,42 @@ button:disabled:hover{
     opacity: 1.0;
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s; /* Safari */
+}
+
+#exploration {
+    z-index: 1000;
+    position: absolute;
+    top: 50px;
+    width: 99%;
+    margin: 0;
+
+    canvas {
+        background: #000;
+        margin: 10px;
+        margin-bottom: 0px;
+    }
+
+    .controls {
+        float: right;
+    }
+}
+.window {
+    .inner {
+        border:1px solid $light;
+        background: #222;
+        margin: 10px;
+        margin-top: 0;
+        padding: 15px;
+        padding-bottom: 5px;
+    }
+
+    h3 {
+        margin:0;
+        clear:both;
+        float:left;
+        display: block;
+        width:100%;
+    }
 }
 
 .clearfix:before,
