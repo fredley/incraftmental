@@ -41,7 +41,6 @@ handleCraft : function(needed, item) {
 
 craftCount : function(n) {
   var recipe = this.getRecipeFromCraftingGrid();
-  console.log(recipe);
   var item = inventory.getObjectFromRecipe(recipe.code);
   if(item){
     for (var count = 1; count <= n; count++){
