@@ -149,27 +149,50 @@ init : function(){
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
   });
-  $('#smelt').on('click',function(){
+  $('#smelt').on('click',function(e){
   	var fuel, input, output, timer;
+    var fuel_level = inventory.objects.blocks.furnace.fuel_level;
   	fuel   = $("#smelt-fuel").attr('data-object');
   	input  = $("#smelt-input").attr('data-object');
+    if(!input){
+      main.addMouseAlert("You must put items into the furnace!",e);
+      return;
+    }
+    if(!fuel && fuel_level.cur <= 0){
+      main.addMouseAlert("You must fuel the furnace!",e);
+      return;
+    }
   	output = inventory.getObject(input).smelts_to;
-
-  	if(inventory.objects.blocks.furnace.fuel_level.cur <= 0){
-  	  if(inventory.getObject(fuel).fuel_source == undefined) return false;
-  	  inventory.objects.blocks.furnace.fuel_level.max = inventory.getObject(fuel).fuel_source;
-  	  inventory.objects.blocks.furnace.fuel_level.cur = inventory.objects.blocks.furnace.fuel_level.max;
+    if(fuel_level.cur <= 0 && inventory.getObject(fuel).fuel_source == undefined){
+      main.addMouseAlert("That's not a valid fuel :(",e);
+      return;
+    }
+    if(output == undefined){
+      main.addMouseAlert("That can't be smelted :(",e);
+      return;
+    }
+    if($("#smelt-product").attr('data-object')){
+      main.addMouseAlert("Furnace is full!",e);
+      return;
+    }
+  	if(fuel_level.cur <= 0){
+  	  fuel_level.max = inventory.getObject(fuel).fuel_source;
+  	  fuel_level.cur = fuel_level.max;
+      $('#fuel-line .bar').css('top',0);
+      $("#smelt-fuel").removeAttr('data-object');
+      $("#smelt-fuel").html('');
   	}
-  	inventory.objects.blocks.furnace.fuel_level.cur--;
-  	if(output == undefined) return false;
+  	fuel_level.cur--;
+    $("#smelt-input").removeAttr('data-object');
+    $("#smelt-input").html('');
+    $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},10000);
     $('#smelt-progress .bar').animate({'left': 0},10000,function(){
       $(this).css('left','-90px');
-      inventory.addObject(output,1);
+      $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
+      $("#smelt-product").html(inventory.getObject(input).symbol);
       main.addAlert('Smelting Completed');
     });
-    this.hook_inventory();
-    this.hook_villagers();
-    this.updateDisplay();
+    inventory.updateDisplay();
   });
   $('#craft').on('click',function() {
     buttons.craftCount(1);
