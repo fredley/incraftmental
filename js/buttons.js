@@ -39,7 +39,7 @@ handleCraft : function(needed, item) {
   return replace;
 },
 
-craftCount : function(n) {
+craftCount : function(n,e) {
   var recipe = this.getRecipeFromCraftingGrid();
   var item = inventory.getObjectFromRecipe(recipe.code);
   if(item){
@@ -55,7 +55,7 @@ craftCount : function(n) {
     name = name.formatAnMultiple(count);
     main.addAlert('Crafted ' + name);
   } else {
-    main.addAlert('That\'s not a valid recipe :(');
+    main.addMouseAlert('That\'s not a valid recipe :(',e);
   }
 },
 
@@ -196,25 +196,25 @@ init : function(){
     });
     inventory.updateDisplay();
   });
-  $('#craft').on('click',function() {
-    buttons.craftCount(1);
+  $('#craft').on('click',function(e) {
+    buttons.craftCount(1,e);
   });
-  $('#craft_10').on('click',function() {
-    buttons.craftCount(10);
+  $('#craft_10').on('click',function(e) {
+    buttons.craftCount(10,e);
   });
-  $('#craft_100').on('click',function() {
-    buttons.craftCount(100);
+  $('#craft_100').on('click',function(e) {
+    buttons.craftCount(100,e);
   });
   $('#options').on('click', function(){
-	$('#options-menu').toggle();
+  	$('#options-menu').toggle();
   });
   $('#load').on('click', function(){
-	main.save();
-	$('#save-text')[0].value = localStorage['save'];
+  	main.save();
+  	$('#save-text').val(localStorage['save']);
   });
   $('#save').on('click', function(){
-	localStorage['save'] = $('#save-text')[0].value;
-	main.load();
+  	localStorage['save'] = $('#save-text').val();
+  	main.load();
   });
   this.hook_inventory();
   this.hook_villagers();
