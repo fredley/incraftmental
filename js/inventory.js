@@ -229,7 +229,7 @@ var inventory = {
       for(var object in this.objects[group]){
         if(this.objects[group][object].hasOwned){
           showGroup = true;
-          groupText += '<div class="inventory-item';
+          groupText += '<div class="item inventory-item';
           groupText += (this.selected == object) ? " selected" : "";
           groupText += '" data-object="' + object + '">' + this.objects[group][object].display + " - " + this.objects[group][object].quantity + '</div>';
         }
