@@ -16,7 +16,7 @@ getRecipeFromCraftingGrid : function() {
     }
   });
   code = code.trim();
-  return [code, needed];
+  return {code:code,needed:needed};
 },
 
 handleCraft : function(needed, item) {
@@ -40,11 +40,13 @@ handleCraft : function(needed, item) {
 },
 
 craftCount : function(n) {
-  var codeNeeded = this.getRecipeFromCraftingGrid();
-  var item = inventory.getObjectFromRecipe(codeNeeded[0]);
+  var recipe = this.getRecipeFromCraftingGrid();
+  console.log(recipe);
+  var item = inventory.getObjectFromRecipe(recipe.code);
   if(item){
-    for (var count = 0; count < n; count++){
-      if(this.handleCraft(codeNeeded[1], item)){
+    for (var count = 1; count <= n; count++){
+      if(!this.handleCraft(recipe.needed, item)){
+        break;
       }
     }
     if (item.yield){
