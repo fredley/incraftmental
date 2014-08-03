@@ -54,7 +54,7 @@ craftCount : function(n) {
     name = name.formatAnMultiple(count);
     main.addAlert('Crafted ' + name);
   } else {
-    main.addAlert('Unable to find item to craft');
+    main.addAlert('That\'s not a valid recipe :(');
   }
 },
 
