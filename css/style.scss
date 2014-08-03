@@ -221,17 +221,21 @@ button:disabled:hover{
             cursor: pointer;
         }
     }
-    #smelt-progress {
+    .line{
         border: 1px solid $light;
+        position: relative;
+        overflow: hidden;
+    }
+    .bar{
+        background: $light;
+        position: absolute;
+    }
+    #smelt-progress {
         margin-top: 45px;
         margin-left:5px;
         width: 90px;
         height: 10px;
-        position: relative;
-        overflow: hidden;
         .bar{
-            background: $light;
-            position: absolute;
             height:10px;
             width:90px;
             left:-90px;
@@ -239,11 +243,16 @@ button:disabled:hover{
         }
     }
     #fuel-line {
-        border: 1px solid $light;
         margin-left: 45px;
         margin-top: 5px;
         width: 10px;
         height: 90px;
+        .bar{
+            height:90px;
+            width:10px;
+            left:0;
+            top:90px;
+        }
     }
     #smelt{
         float:left;

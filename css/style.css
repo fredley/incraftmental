@@ -197,27 +197,33 @@ button:disabled:hover {
       border: 1px solid #dddddd;
       background: #333;
       cursor: pointer; }
-  #smelting #smelt-progress {
+  #smelting .line {
     border: 1px solid #dddddd;
+    position: relative;
+    overflow: hidden; }
+  #smelting .bar {
+    background: #dddddd;
+    position: absolute; }
+  #smelting #smelt-progress {
     margin-top: 45px;
     margin-left: 5px;
     width: 90px;
-    height: 10px;
-    position: relative;
-    overflow: hidden; }
+    height: 10px; }
     #smelting #smelt-progress .bar {
-      background: #dddddd;
-      position: absolute;
       height: 10px;
       width: 90px;
       left: -90px;
       top: 0; }
   #smelting #fuel-line {
-    border: 1px solid #dddddd;
     margin-left: 45px;
     margin-top: 5px;
     width: 10px;
     height: 90px; }
+    #smelting #fuel-line .bar {
+      height: 90px;
+      width: 10px;
+      left: 0;
+      top: 90px; }
   #smelting #smelt {
     float: left;
     margin: 30px 15px; }
