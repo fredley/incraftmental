@@ -32,7 +32,7 @@ var villagers = {
       }
     },
     adventurer : function(villager){
-      // gets certain mob items faster... (TODO - assign items)
+      // gets certain mob items faster
       inventory.addObject(villager.assigned,randomInt(1,4));
     },
     labourer : function(villager){

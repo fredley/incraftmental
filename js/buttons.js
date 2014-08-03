@@ -258,10 +258,11 @@ hook_villagers : function(){
     }else{
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
-        if(v.profession == 'smith'   && o.smelts_to && !o.food ||
-           v.profession == 'builder' && o.recipe    && !o.food ||
-           v.profession == 'labourer'&& o.gives && !(o.contains('sword') || o.contains('bow')) ||
-           v.profession == 'chef'    && (o.cooked_from || o.food && o.recipe) ){
+        if(v.profession == 'smith'      && o.smelts_to && !o.food ||
+           v.profession == 'builder'    && o.recipe    && !o.food ||
+           v.profession == 'labourer'   && o.gives && !(o.contains('sword') || o.contains('bow')) ||
+           v.profession == 'chef'       && (o.cooked_from || o.food && o.recipe) ||
+           v.profession == 'adventurer' && o.mob_drop ){
           villagers.assignObject($(this).attr('data-id'),inventory.selected);
         }else{
           main.addMouseAlert('This villager can\'t work with that :(',e);
