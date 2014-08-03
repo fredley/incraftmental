@@ -83,7 +83,7 @@ init : function(){
       inventory.objects.blocks.planks.quantity -= 4;
       inventory.addObject('crafting_table');
       inventory.updateDisplay();
-      this.updateDisplay();
+      buttons.updateDisplay();
       main.addAlert('Made a Crafting Table!');
     }
   });
