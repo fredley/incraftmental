@@ -201,8 +201,8 @@ init : function(){
     $("#smelt-input").removeAttr('data-object');
     $("#smelt-input").html('');
     inventory.smelting = true;
-    $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},10000);
-    $('#smelt-progress .bar').animate({'left': 0},10000,function(){
+    $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},10000,'linear');
+    $('#smelt-progress .bar').animate({'left': 0},10000,'linear',function(){
       $(this).css('left','-90px');
       inventory.smelting = false;
       $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
