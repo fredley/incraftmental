@@ -189,7 +189,7 @@ init : function(){
     $('#smelt-progress .bar').animate({'left': 0},10000,function(){
       $(this).css('left','-90px');
       $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
-      $("#smelt-product").html(inventory.getObject(input).symbol);
+      $("#smelt-product").html(inventory.getObject(output).symbol);
       main.addAlert('Smelting Completed');
     });
     inventory.updateDisplay();
