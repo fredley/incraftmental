@@ -102,7 +102,7 @@ String.prototype.formatAnMultiple = function(pluralCount) {
     prefix = (['A','E','I','O','U'].indexOf(this[0]) > -1) ? 'an ' : 'a ';
   }
   return prefix + this + postfix;
-},
+}
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
