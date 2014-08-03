@@ -135,8 +135,13 @@ button:disabled:hover{
 }
 #options-menu{
 	display:none;
-	position:absolute;z-index:9001;
+	position:absolute;
+    z-index:9001;
 	border:1px solid $light;
+    left:15px;
+    top:15px;
+    background: $dark;
+    padding:10px;
 }
 #tabs{
     position: absolute;
