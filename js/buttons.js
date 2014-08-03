@@ -159,6 +159,17 @@ init : function(){
   	$("#" + $(this).attr('data-for')).show();
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
+    if($(this).attr('data-for') == 'exploration'){
+      $('#inventory').hide();
+      $('#villagers').hide();
+      main.sidebars_visible = false;
+      $('#work-area').css('width',800);
+    }else{
+      $('#inventory').show();
+      $('#villagers').show();
+      main.sidebars_visible = true;
+      $('#work-area').css('width',450);
+    }
   });
   $('#smelt').on('click',function(e){
     if(inventory.smelting){
@@ -287,7 +298,7 @@ hook_villagers : function(){
 updateDisplay : function(){
   if(inventory.objects.blocks.wood.hasOwned){
     $('#make-planks').show();
-    $('#inventory').show();
+    if(main.sidebars_visible) $('#inventory').show();
   }
   if(inventory.objects.blocks.planks.hasOwned){
     $('#make-crafting').show();
@@ -302,6 +313,7 @@ updateDisplay : function(){
   if(inventory.objects.blocks.furnace.hasOwned){
     $('#tab-crafting').show();
     $('#tab-smelting').show();
+    $('#tab-exploration').show();
     if($('.work-tab.active').length !== 1){
       $('#tab-crafting').addClass('active');
     }

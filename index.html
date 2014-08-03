@@ -42,6 +42,7 @@
       <div id="tabs">
         <div id="tab-crafting" class='work-tab' data-for='crafting'>Crafting Table</div>
         <div id="tab-smelting" class='work-tab' data-for='smelting'>Furnace</div>
+        <div id="tab-exploration" class='work-tab' data-for='exploration'>Exploration</div>
       </div>
       <div id='crafting' class='page'>
         <div id='crafting-square'>
@@ -79,6 +80,30 @@
         </div>
         <button id='smelt'>SMELT</button>
       </div>
+      <div id='exploration' class='window page'>
+        <div class="inner">
+          <canvas width='640' height='480' id='world-div'></canvas>
+          <span class='controls'>
+            <table>
+              <tr>
+                <td>&nbsp;</td>
+                <td><button onclick="world.move(0,1)">^</button></td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr>
+                <td><button onclick="world.move(1,0)">&lt;</button></td>
+                <td>&nbsp;</td>
+                <td><button onclick="world.move(-1,0)">&gt;</button></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><button onclick="world.move(0,-1)">V</button></td>
+                <td>&nbsp;</td>
+              </tr>
+            </table>
+          </span>
+        </div>
+      </div>
     </div>
     <div id='inventory' class='pane'></div>
     <div id='villagers' class='pane'></div>
@@ -89,33 +114,5 @@
 		<button id='save'>Save</button><br>
 		Save every <input type='number' id='autosave' value=1> seconds. (0 to disable saving)
 	</div>
-    <div id='exploration' class='window'>
-        <div class="inner">
-            <h3>Explore</h3>
-
-            <canvas width='640' height='480' id='world-div'>
-            </canvas>
-
-            <span class='controls'>
-                <table>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td><button onclick="world.move(0,1)">^</button></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td><button onclick="world.move(1,0)">&lt;</button></td>
-                        <td>&nbsp;</td>
-                        <td><button onclick="world.move(-1,0)">&gt;</button></td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td><button onclick="world.move(0,-1)">V</button></td>
-                        <td>&nbsp;</td>
-                    </tr>
-                </table>
-            </span>
-        </div>
-    </div>
   </body>
 </html>

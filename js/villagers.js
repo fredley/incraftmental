@@ -111,6 +111,7 @@ var villagers = {
   },
 
   updateDisplay : function(){
+    if(!main.sidebars_visible) return;
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
       var v = this.population[villager];

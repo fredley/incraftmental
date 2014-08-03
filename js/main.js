@@ -1,5 +1,8 @@
 var main = {
 
+ticks : 0,
+sidebars_visible: true,
+
 onload : function(){
   inventory.init();
   this.load();
@@ -7,8 +10,6 @@ onload : function(){
   world.init();
   window.setInterval(function(){main.tick()}, 1000);
 },
-
-ticks : 0,
 
 tick : function(){
   inventory.doTools();
