@@ -239,13 +239,19 @@ init : function(){
   $('#options').on('click', function(){
   	$('#options-menu').toggle();
   });
-  $('#load').on('click', function(){
+  $('#export').on('click', function(){
   	main.save();
   	$('#save-text').val(localStorage['save']);
   });
-  $('#save').on('click', function(){
+  $('#import').on('click', function(){
   	localStorage['save'] = $('#save-text').val();
   	main.load();
+  });
+  $('#clear-data').on('click', function(){
+    if (confirm('Clear game progress?')) {
+      delete localStorage['save'];
+	  location.reload();
+	}
   });
   this.hook_inventory();
   this.hook_villagers();
