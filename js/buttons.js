@@ -124,7 +124,8 @@ init : function(){
   $('.smelt-square.input').on('click',function(e){
     if($(this).attr('data-object')){
       $(this).html("");
-      inventory.addObject($(this).attr('data-object'),1);
+      var quantity = $(this).atrr('id') === 'smelt-product' ? 1 : 10;
+      inventory.addObject($(this).attr('data-object'),quantity);
       $(this).removeAttr('data-object');
       inventory.updateDisplay();
       return;
