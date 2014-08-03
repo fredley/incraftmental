@@ -5,32 +5,50 @@ var villagers = {
 
   professions : {
     smith : function(villager){
-      if(!villager.assigned) return;
       var object = inventory.getObject(villager.assigned);
-      var quantity = Math.min(villager.level,object.quantity);
-      inventory.addObject(object.smelts_to,quantity);
+      if(object.quantity >= 10){
+        inventory.addObject(villager.assigned,-10);
+        inventory.addObject(object.smelts_to,1);
+      }
     },
     builder : function(villager){
-      if(!villager.assigned) return;
-      for(var i=0; i < villager.level; i++){
+      if(inventory.canCraft(villager.assigned)){
+        inventory.craft(villager.assigned);
+      }
+    },
+    chef : function(villager){
+      // cook better foods
+      var food = inventory.getObject(villager.assigned);
+      if(food.cooked_from){
+        var from = inventory.getObject(food.cooked_from);
+        if(from.quantity >= 1){
+          inventory.addObject(villager.assigned,1);
+          inventory.addObject(object.cooked_from,-1);
+        }
+      }else{
         if(inventory.canCraft(villager.assigned)){
           inventory.craft(villager.assigned);
         }
       }
     },
-    farmer : function(villager){
-      // find a growable and grow
-    },
     adventurer : function(villager){
-      // find a droppable and drop
+      // gets certain mob items faster... (TODO - assign items)
+      inventory.addObject(villager.assigned,randomInt(1,4));
     },
-    digger : function(villager){
-      // not sure yet...
+    labourer : function(villager){
+      // assigned a tool, makes that tool much more powerful
+      var tool = inventory.getObject(villager.assigned);
+      for(var slug in tool.gives){
+        if(Math.random() / 5 < tool.gives[slug]){
+          inventory.addObject(slug,tool.bonus);
+        }
+      }
+
     },
     fisher : function(villager){
-      // fish fish
+      // fish better fish
     },
-    archer : function(villager){
+    hunter : function(villager){
       //not sure yet...
     }
   },
@@ -73,6 +91,7 @@ var villagers = {
     this.population[id].profession = profession;
     this.population[id].level = level;
     this.population[id].enabled = true;
+    this.population[id].assigned = null;
     this.updateDisplay();
   },
 
@@ -84,7 +103,7 @@ var villagers = {
   doVillagers : function(){
     for(var i=0; i<this.population.length; i++){
       var v = this.population[i];
-      if(v.profession && v.enabled && v.assigned){
+      if(v.profession && v.enabled && v.assigned && Math.random() < Math.pow(0.2 * v.level,2)){
         this.professions[v.profession](v);
       }
     }
