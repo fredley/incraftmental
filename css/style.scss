@@ -1,86 +1,43 @@
 $light:#ddd;
-$dark:#222;
-html,
-button,
-input,
-select,
-textarea {
-    color: #222;
-}
-
-body {
-    font-size: 1em;
-    line-height: 1.4;
-}
-
-::-moz-selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-::selection {
-    background: #b3d4fc;
-    text-shadow: none;
-}
-
-hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 0;
-}
-
-img {
-    vertical-align: middle;
-}
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-textarea {
-    resize: vertical;
-}
-
+$dark:#333;
+$darkest:#222;
+$highlight:#555;
 .chromeframe {
     margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
+    background: $light;
+    color: $darkest;
     padding: 0.2em 0;
 }
-
 body{
-    background: $dark;
+    background: $darkest;
     font-family: monospace;
-    font-size:14px;
     color:$light;
+    font-size: 14px;
+    line-height: 1.4;
 }
 a{
     color:#0b0;
 }
 button{
-    background: #444;
-    border:1px solid #888;
+    background: $highlight;
+    border:1px solid $light;
     border-radius: 0;
-    color:#ddd;
+    color:$light;
     cursor:pointer;
     margin: 5px 0 0 5px;
+    border-radius: 4px;
 }
 button:hover{
     color:$light;
-    background: #666;
+    background: mix($dark,$light,70%);
 }
 button:disabled{
-    color:#888;
+    color:$light;
     cursor:default;
 }
 button:disabled:hover{
-    color:#888;
-    background: #444;
+    color:$light;
+    background: $dark;
 }
 .pane{
     display: none;
@@ -109,7 +66,8 @@ button:disabled:hover{
     .inventory-item{
         width: 150px;
         &.selected{
-            background: #555;
+            background: $highlight;
+            border-radius: 4px;
         }
     }
 }
@@ -117,7 +75,7 @@ button:disabled:hover{
     right: 390px;
     .villager{
         width:300px;
-        border-bottom: 1px dashed #444;
+        border-bottom: 1px dashed $dark;
     }
 }
 #get-villager,
@@ -133,7 +91,7 @@ button:disabled:hover{
 	border:1px solid $light;
     left:15px;
     top:15px;
-    background: $dark;
+    background: $darkest;
     padding:10px;
 }
 #tabs{
@@ -154,7 +112,7 @@ button:disabled:hover{
     cursor:pointer;
     display: none;
     &.active{
-        border-bottom: 1px solid $dark;
+        border-bottom: 1px solid $darkest;
     }
 }
 #work-area{
@@ -183,7 +141,7 @@ button:disabled:hover{
         float:left;
         border-bottom:1px solid $light;
         border-right:1px solid $light;
-        background: #333;
+        background: $dark;
         text-align:center;
         padding-top:40px;
         font-size:20px;
@@ -217,7 +175,7 @@ button:disabled:hover{
         &.input{
             padding-top: 40px;
             border: 1px solid $light;
-            background: #333;
+            background: $dark;
             cursor: pointer;
         }
     }
@@ -261,6 +219,7 @@ button:disabled:hover{
 }
 
 #alerts{
+    background: $darkest;
     position: absolute;
     bottom: 15px;
     left: 15px;
@@ -268,13 +227,13 @@ button:disabled:hover{
     padding: 5px;
     width:300px;
     .alert{
-        border-bottom: 1px dashed #444;
+        border-bottom: 1px dashed $dark;
     }
 }
 .mouse-alert{
     position: absolute;
     z-index:99;
-    background: $dark;
+    background: $darkest;
     border:1px solid $light;
     padding:2px 5px;
 }
@@ -290,17 +249,4 @@ button:disabled:hover{
     opacity: 1.0;
     transition: opacity 0.3s;
     -webkit-transition: opacity 0.3s; /* Safari */
-}
-
-.clearfix:before,
-.clearfix:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
-}
-
-.clearfix:after {
-    clear: both;
-}
-.clearfix {
-    *zoom: 1;
 }

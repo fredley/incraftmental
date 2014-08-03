@@ -1,75 +1,39 @@
-html,
-button,
-input,
-select,
-textarea {
-  color: #222; }
-
-body {
-  font-size: 1em;
-  line-height: 1.4; }
-
-::-moz-selection {
-  background: #b3d4fc;
-  text-shadow: none; }
-
-::selection {
-  background: #b3d4fc;
-  text-shadow: none; }
-
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  margin: 1em 0;
-  padding: 0; }
-
-img {
-  vertical-align: middle; }
-
-fieldset {
-  border: 0;
-  margin: 0;
-  padding: 0; }
-
-textarea {
-  resize: vertical; }
-
 .chromeframe {
   margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
+  background: #dddddd;
+  color: #222222;
   padding: 0.2em 0; }
 
 body {
   background: #222222;
   font-family: monospace;
+  color: #dddddd;
   font-size: 14px;
-  color: #dddddd; }
+  line-height: 1.4; }
 
 a {
   color: #0b0; }
 
 button {
-  background: #444;
-  border: 1px solid #888;
+  background: #555555;
+  border: 1px solid #dddddd;
   border-radius: 0;
-  color: #ddd;
+  color: #dddddd;
   cursor: pointer;
-  margin: 5px 0 0 5px; }
+  margin: 5px 0 0 5px;
+  border-radius: 4px; }
 
 button:hover {
   color: #dddddd;
-  background: #666; }
+  background: #666666; }
 
 button:disabled {
-  color: #888;
+  color: #dddddd;
   cursor: default; }
 
 button:disabled:hover {
-  color: #888;
-  background: #444; }
+  color: #dddddd;
+  background: #333333; }
 
 .pane {
   display: none;
@@ -96,13 +60,14 @@ button:disabled:hover {
   #inventory .inventory-item {
     width: 150px; }
     #inventory .inventory-item.selected {
-      background: #555; }
+      background: #555555;
+      border-radius: 4px; }
 
 #villagers {
   right: 390px; }
   #villagers .villager {
     width: 300px;
-    border-bottom: 1px dashed #444; }
+    border-bottom: 1px dashed #333333; }
 
 #get-villager,
 #make-planks,
@@ -165,7 +130,7 @@ button:disabled:hover {
     float: left;
     border-bottom: 1px solid #dddddd;
     border-right: 1px solid #dddddd;
-    background: #333;
+    background: #333333;
     text-align: center;
     padding-top: 40px;
     font-size: 20px;
@@ -195,7 +160,7 @@ button:disabled:hover {
     #smelting .smelt-square.input {
       padding-top: 40px;
       border: 1px solid #dddddd;
-      background: #333;
+      background: #333333;
       cursor: pointer; }
   #smelting .line {
     border: 1px solid #dddddd;
@@ -229,6 +194,7 @@ button:disabled:hover {
     margin: 30px 15px; }
 
 #alerts {
+  background: #222222;
   position: absolute;
   bottom: 15px;
   left: 15px;
@@ -236,7 +202,7 @@ button:disabled:hover {
   padding: 5px;
   width: 300px; }
   #alerts .alert {
-    border-bottom: 1px dashed #444; }
+    border-bottom: 1px dashed #333333; }
 
 .mouse-alert {
   position: absolute;
@@ -259,16 +225,3 @@ button:disabled:hover {
   transition: opacity 0.3s;
   -webkit-transition: opacity 0.3s;
   /* Safari */ }
-
-.clearfix:before,
-.clearfix:after {
-  content: " ";
-  /* 1 */
-  display: table;
-  /* 2 */ }
-
-.clearfix:after {
-  clear: both; }
-
-.clearfix {
-  *zoom: 1; }
