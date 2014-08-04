@@ -271,15 +271,14 @@ hook_villagers : function(){
     if(!inventory.selected) return;
     var v = villagers.population[$(this).attr('data-id')];
     if(inventory.selected && !v.enabled && inventory.in('tools',inventory.selected)){
-      if(inventory.getObject(inventory.selected).quantity >= 10){
-        inventory.addObject(inventory.selected,-10);
-        villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus);
-      }else{
-        main.addMouseAlert('You must have 10 of a tool to assign.',e);
-      }
+      villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus);
     }else{
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
+        if(o.quantity < 10){
+          main.addMouseAlert('You must have 10 of an object to assign it');
+          return;
+        }
         if(v.profession == 'smith'      && o.smelts_to && !o.food ||
            v.profession == 'builder'    && o.recipe    && !o.food ||
            v.profession == 'labourer'   && o.gives && !(o.contains('sword') || o.contains('bow')) ||
