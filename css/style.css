@@ -158,14 +158,16 @@ button:disabled:hover {
     width: 100px;
     height: 100px;
     float: left;
-    text-align: center;
+    //text-align: center;
     font-size: 20px;
     box-sizing: border-box; }
     #smelting .smelt-square.input {
-      padding-top: 40px;
+      //padding-top: 40px;
       border: 1px solid #dddddd;
       background: #333333;
       cursor: pointer; }
+	.smelt-square pre{
+		font: 4px/2px monospace; }
   #smelting .line {
     border: 1px solid #dddddd;
     position: relative;
