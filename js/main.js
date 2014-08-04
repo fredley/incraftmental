@@ -5,6 +5,7 @@ sidebars_visible: true,
 
 onload : function(){
   inventory.init();
+  villagers.init();
   this.load();
   buttons.init();
   world.init();
