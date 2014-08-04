@@ -60,6 +60,11 @@ var villagers = {
     4 : 'Master',
     5 : 'Supreme'
   },
+  
+  init : function(){
+	this.population = [];
+	this.cost = 1;
+  },
 
   addVillager : function(){
     var name = this.generateName();
