@@ -310,7 +310,7 @@ updateDisplay : function(){
     $('#make-planks').show();
     if(main.sidebars_visible) $('#inventory').show();
   }
-  if(inventory.objects.blocks.planks.hasOwned){
+  if(inventory.objects.blocks.plank.hasOwned){
     $('#make-crafting').show();
   }
   if(inventory.objects.blocks.crafting_table.hasOwned){
