@@ -281,7 +281,7 @@ hook_villagers : function(){
         }
         if(v.profession == 'smith'      && o.smelts_to && !o.food ||
            v.profession == 'builder'    && o.recipe    && !o.food ||
-           v.profession == 'labourer'   && o.gives && !(o.contains('sword') || o.contains('bow')) ||
+           v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
            v.profession == 'chef'       && (o.cooked_from || o.food && o.recipe) ||
            v.profession == 'adventurer' && o.mob_drop ){
           villagers.assignObject($(this).attr('data-id'),inventory.selected);
