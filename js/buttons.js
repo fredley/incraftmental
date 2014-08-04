@@ -72,16 +72,16 @@ init : function(){
     var amount = inventory.objects.blocks.crafting_table.hasOwned ? 0 : 1;
     if(inventory.objects.blocks.wood.quantity >= 10){
       inventory.objects.blocks.wood.quantity -= 10;
-      inventory.addObject('planks',amount);
+      inventory.addObject('plank',amount);
       inventory.updateDisplay();
-      if(inventory.objects.blocks.planks.quantity >= 4){
+      if(inventory.objects.blocks.plank.quantity >= 4){
         $('#make-crafting').show();
       }
     }
   });
   $('#make-crafting').on('click',function(){
-    if(inventory.objects.blocks.planks.quantity >= 4){
-      inventory.objects.blocks.planks.quantity -= 4;
+    if(inventory.objects.blocks.plank.quantity >= 4){
+      inventory.objects.blocks.plank.quantity -= 4;
       inventory.addObject('crafting_table');
       inventory.updateDisplay();
       buttons.updateDisplay();
