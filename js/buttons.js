@@ -69,7 +69,7 @@ init : function(){
     }
   });
   $('#make-planks').on('click',function(){
-    var amount = inventory.objects.blocks.crafting_table.hasOwned ? 4 : 1;
+    var amount = inventory.objects.blocks.crafting_table.hasOwned ? 0 : 1;
     if(inventory.objects.blocks.wood.quantity >= 10){
       inventory.objects.blocks.wood.quantity -= 10;
       inventory.addObject('planks',amount);
@@ -115,7 +115,7 @@ init : function(){
     }
     if(inventory.getObject(object).quantity >= 10){
       inventory.getObject(object).quantity -= 10;
-      $(this).html(inventory.getObject(object).symbol);
+      $(this).append($('#blocks .block.' + object).clone());
       $(this).attr('data-object',object);
       inventory.updateDisplay();
     }else{
@@ -147,7 +147,7 @@ init : function(){
     }
     if(inventory.getObject(object).quantity >= 10){
       inventory.getObject(object).quantity -= 10;
-      $(this).html(inventory.getObject(object).symbol);
+      $(this).append($('#blocks .block.' + object).clone());
       $(this).attr('data-object',object);
       inventory.updateDisplay();
     }else{
@@ -168,7 +168,7 @@ init : function(){
       $('#inventory').show();
       $('#villagers').show();
       main.sidebars_visible = true;
-      $('#work-area').css('width',450);
+      $('#work-area').css('width',500);
     }
   });
   $('#smelt').on('click',function(e){
@@ -217,7 +217,7 @@ init : function(){
       $(this).css('left','-90px');
       inventory.smelting = false;
       $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
-      $("#smelt-product").html(inventory.getObject(output).symbol);
+      $("#smelt-product").append($('#blocks .block.' + output).clone());
       main.addAlert('Smelting Completed');
     });
     inventory.updateDisplay();
