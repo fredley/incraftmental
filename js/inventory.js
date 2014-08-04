@@ -39,7 +39,7 @@ var inventory = {
       gold_ingot :      {display:'Gold Ingot',      symbol: 'g'                                                     },
       stick :           {display:'Stick',           symbol: '|', recipe: 'P  P', yield:4  , fuel_source: 1          },
       bowl :            {display:'Bowl',            symbol: 'U', recipe: 'P P P'                                    },
-      mushrooom :       {display:'Mushroom',        symbol: 'm', food: 1                                            },
+      mushroom :        {display:'Mushroom',        symbol: 'm', food: 1                                            },
       stew :            {display:'Mushroom Stew',   symbol: 'V', recipe: 'm  m  b'         , food: 12               },
       string :          {display:'String',          symbol: '@', mob_drop:1                                         },
       feather :         {display:'Feather',         symbol: 'f', mob_drop:1                                         },
