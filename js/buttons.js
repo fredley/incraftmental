@@ -89,7 +89,7 @@ init : function(){
     }
   });
   $('#get-villager').on('click',function(e){
-    if(inventory.objects.items.apple.quantity > villagers.cost){
+    if(inventory.objects.items.apple.quantity >= villagers.cost){
       inventory.objects.items.apple.quantity -= villagers.cost;
       villagers.addVillager();
       villagers.cost *= 2;
