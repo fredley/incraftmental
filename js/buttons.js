@@ -276,7 +276,7 @@ hook_villagers : function(){
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
         if(o.quantity < 10){
-          main.addMouseAlert('You must have 10 of an object to assign it');
+          main.addMouseAlert('You must have 10 of an object to assign it',e);
           return;
         }
         if(v.profession == 'smith'      && o.smelts_to && !o.food ||
