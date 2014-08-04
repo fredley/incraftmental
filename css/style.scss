@@ -126,6 +126,12 @@ button:disabled:hover{
     margin-top: 40px;
     position: relative;
     display: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 pre.block{
     font:3px/2px monospace;
