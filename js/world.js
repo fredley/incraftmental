@@ -27,33 +27,26 @@ var world = {
       for (var x = 0; x < this.size; x++){
         var noise_value = Math.abs(noise.simplex2(x/5,y/5));
         var danger = this.calculateDanger(x - this.size/2, y - this.size/2);
-        var isFilled = false;
         for (var slug in this.structures){
           var structure = this.structures[slug];
-          var dangerDiff = 0;
-          if (structure.danger) dangerDiff = Math.abs(danger - structure.danger);
+          var dangerDiff = (structure.danger) ? Math.abs(danger - structure.danger) : 0;
           var chance = structure.chance * Math.pow(1.3, dangerDiff);
           if (noise_value < chance){
             this.world_structures[x + '_' + y] = structure;
-            isFilled = true;
             break;
           }
         }
-        if (!isFilled){
-          if (noise_value < 0.2){
-            var clutter_list = [];
-            for(var symbol in this.clutter_symbols){
-              for(var style in this.clutter_colors){
-                clutter_list.push({ symbol: this.clutter_symbols[symbol], style: this.clutter_colors[style] });
-              }
-            }
-            var clutter = clutter_list[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * clutter_list.length)];
-            this.world_structures[x + '_' + y] = clutter;
-          }
+        if (x + '_' + y in this.world_structures) continue;
+        if (noise_value < 0.2){
+          var clutter = {
+            style:  this.clutter_colors[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * this.clutter_colors.length)],
+            symbol: this.clutter_symbols[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * this.clutter_symbols.length)]
+          };
+          console.log(clutter);
+          this.world_structures[x + '_' + y] = clutter;
         }
       }
     }
-
   },
 
   init: function(){
@@ -81,7 +74,6 @@ var world = {
     for (var _pos in this.world_structures){
       var pos = _pos.split('_');
       var struct = this.world_structures[_pos];
-      console.log(struct);
       if (struct.style)
         bl.fillStyle = struct.style;
       else
@@ -129,10 +121,5 @@ var world = {
       this.start = undefined;
       this.timeEnd = undefined;
     }
-  },
-
-  lerp : function(a,b,n){
-    return (a * (1 - n)) + (b * n);
-  },
-
+  }
 };
