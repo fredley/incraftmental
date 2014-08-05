@@ -2,6 +2,7 @@ var main = {
 
 ticks : 0,
 sidebars_visible: true,
+map_visible: false,
 
 onload : function(){
   inventory.init();

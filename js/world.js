@@ -1,16 +1,21 @@
 var world = {
   seed: 0,
-  worldStructures: {},
+  world_structures: {},
   sprites: {},
   camX: 0,
   camY: 0,
   destX: 0,
   destY: 0,
   size: 32,
+  color_dark: '#333',
+  color_light:'#ddd',
+  color_green:'#285',
+  clutter_colors:['#862','#531'],
+  clutter_symbols:['.', ',', '\'', '`'],
 
   structures: {
     pyramid:  {display:'Pyramid', symbol: '^', danger: 4, chance: 0.005},
-    cave:     {display:'Cave',  symbol: 'o', danger: 1, chance: 0.01},
+    cave:     {display:'Cave',    symbol: 'o', danger: 1, chance: 0.01},
   },
 
   calculateDanger: function(x, y){
@@ -36,8 +41,8 @@ var world = {
         if (!isFilled){
           if (this.batman(y*this.size + x) < 0.05){
             var clutter_list = [];
-            ['.', ',', '\'', '`'].forEach(function(symbol){
-              ['#862', '#531'].forEach(function(style){
+            for(var symbol in this.clutter_symbols){
+              for(var style in this.clutter_colors){
                 clutter_list.push({ symbol: symbol, style: style });
               });
             });
@@ -68,16 +73,16 @@ var world = {
   renderBg: function(){
     var bl = this.blitContext;
     bl.fontStyle = '16px monospace'
-    bl.fillStyle = '#000';
+    bl.fillStyle = this.color_dark;
     bl.fillRect(0, 0, this.blitCanvas.width, this.blitCanvas.height);
-    bl.fillStyle = '#fff';
-    for (var _pos in this.worldStructures){
+    bl.fillStyle = this.color_light;
+    for (var _pos in this.world_structures){
       var pos = _pos.split('_');
-      var struct = this.worldStructures[_pos];
+      var struct = this.world_structures[_pos];
       if (struct.style)
         bl.fillStyle = struct.style;
       else
-        bl.fillStyle = '#fff';
+        bl.fillStyle = this.color_light;
       if (struct.symbol)
         struct = struct.symbol;
       bl.fillText(struct, pos[0] * 16, pos[1] * 16);
@@ -86,10 +91,10 @@ var world = {
   },
 
   render: function(){
-    this.context.fillStyle = '#000';
+    this.context.fillStyle = this.color_dark;
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.drawImage(this.blitCanvas, this.camX * 16, this.camY * 16);
-    this.context.fillStyle = '#2B5';
+    this.context.fillStyle = this.color_green;
     this.context.fillText('@', 320, 240);
   },
 
