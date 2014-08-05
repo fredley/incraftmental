@@ -50,7 +50,7 @@ var world = {
 
   init: function(){
     if(this.seed===undefined || this.seed===0){
-  		this.seed=Math.ceil(Math.random());
+  		this.seed=Math.ceil(Math.random()*(9999999999-1000000000)+1000000000);
   	}
     noise.seed(this.seed);
     this.build();
