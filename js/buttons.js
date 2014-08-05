@@ -64,29 +64,17 @@ init : function(){
     inventory.addObject('wood');
     $('#inventory').show();
     inventory.updateDisplay();
-    if(inventory.objects.blocks.wood.quantity >= 10){
-      $('#make-planks').show();
-    }
   });
   $('#make-planks').on('click',function(){
-    var amount = inventory.objects.blocks.crafting_table.hasOwned ? 0 : 1;
-    if(inventory.objects.blocks.wood.quantity >= 10){
-      inventory.objects.blocks.wood.quantity -= 10;
-      inventory.addObject('plank',amount);
-      inventory.updateDisplay();
-      if(inventory.objects.blocks.planks.quantity >= 4){
-        $('#make-crafting').show();
-      }
-    }
+    if (inventory.canCraft('plank')) {
+	  inventory.craft('plank');
+	}
   });
   $('#make-crafting').on('click',function(){
-    if(inventory.objects.blocks.planks.quantity >= 4){
-      inventory.objects.blocks.planks.quantity -= 4;
-      inventory.addObject('crafting_table');
-      inventory.updateDisplay();
-      buttons.updateDisplay();
-      main.addAlert('Made a Crafting Table!');
-    }
+    if (inventory.canCraft('crafting_table')) {
+	  inventory.craft('crafting_table');
+	  main.addAlert('Made a Crafting Table!');
+	}
   });
   $('#get-villager').on('click',function(e){
     if(inventory.objects.items.apple.quantity >= villagers.cost){
