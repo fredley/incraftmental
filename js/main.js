@@ -37,7 +37,6 @@ save : function(){
   }
   data["villagers"] = villagers.population;
   data["villager_cost"] = villagers.cost;
-  
   data["world_seed"] = world.seed;
   localStorage["save"] = JSON.stringify(data);
 },
@@ -58,7 +57,6 @@ load : function(){
   }
   villagers.population = data["villagers"];
   villagers.cost = (data["villager_cost"]) ? data["villager_cost"] : 1;
-  
   world.seed = data["world_seed"];
 },
 

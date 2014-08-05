@@ -25,6 +25,7 @@ var world = {
   build: function(){
     for (var y = 0; y < this.size; y++){
       for (var x = 0; x < this.size; x++){
+        var noise_value = Math.abs(noise.simplex2(x/5,y/5));
         var danger = this.calculateDanger(x - this.size/2, y - this.size/2);
         var isFilled = false;
         for (var slug in this.structures){
@@ -32,22 +33,22 @@ var world = {
           var dangerDiff = 0;
           if (structure.danger) dangerDiff = Math.abs(danger - structure.danger);
           var chance = structure.chance * Math.pow(1.3, dangerDiff);
-          if (this.batman(y*this.size + x) < chance){
-            this.worldStructures[x + '_' + y] = structure;
+          if (noise_value < chance){
+            this.world_structures[x + '_' + y] = structure;
             isFilled = true;
             break;
           }
         }
         if (!isFilled){
-          if (this.batman(y*this.size + x) < 0.05){
+          if (noise_value < 0.05){
             var clutter_list = [];
             for(var symbol in this.clutter_symbols){
               for(var style in this.clutter_colors){
                 clutter_list.push({ symbol: symbol, style: style });
-              });
-            });
-            var clutter = clutter_list[Math.floor(this.batman(y*this.size + x) * clutter_list.length)];
-            this.worldStructures[x + '_' + y] = clutter;
+              }
+            }
+            var clutter = clutter_list[Math.floor(noise_value * clutter_list.length)];
+            this.world_structures[x + '_' + y] = clutter;
           }
         }
       }
@@ -56,9 +57,10 @@ var world = {
   },
 
   init: function(){
-    if(this.seed==undefined || this.seed==0){
-		this.seed=Math.Floor(Math.random()*(9999999999-1000000000)+1000000000)
-	}
+    if(this.seed===undefined || this.seed===0){
+  		this.seed=Math.ceil(Math.random());
+  	}
+    noise.seed(this.seed);
     this.build();
     this.canvas = $('#world-div')[0];
     this.context = this.canvas.getContext('2d');
@@ -131,9 +133,5 @@ var world = {
   lerp : function(a,b,n){
     return (a * (1 - n)) + (b * n);
   },
-  
-  batman: function(offset){
-	return Math.abs(Math.sin(this.seed + offset*9));
-  }
-};
 
+};
