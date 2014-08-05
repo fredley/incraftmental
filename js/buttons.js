@@ -72,16 +72,16 @@ init : function(){
     var amount = inventory.objects.blocks.crafting_table.hasOwned ? 0 : 1;
     if(inventory.objects.blocks.wood.quantity >= 10){
       inventory.objects.blocks.wood.quantity -= 10;
-      inventory.addObject('plank',amount);
+      inventory.addObject('planks',amount);
       inventory.updateDisplay();
-      if(inventory.objects.blocks.plank.quantity >= 4){
+      if(inventory.objects.blocks.planks.quantity >= 4){
         $('#make-crafting').show();
       }
     }
   });
   $('#make-crafting').on('click',function(){
-    if(inventory.objects.blocks.plank.quantity >= 4){
-      inventory.objects.blocks.plank.quantity -= 4;
+    if(inventory.objects.blocks.planks.quantity >= 4){
+      inventory.objects.blocks.planks.quantity -= 4;
       inventory.addObject('crafting_table');
       inventory.updateDisplay();
       buttons.updateDisplay();
@@ -281,7 +281,7 @@ hook_villagers : function(){
         }
         if(v.profession == 'smith'      && o.smelts_to && !o.food ||
            v.profession == 'builder'    && o.recipe    && !o.food ||
-           v.profession == 'labourer'   && o.gives && !(o.contains('sword') || o.contains('bow')) ||
+           v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
            v.profession == 'chef'       && (o.cooked_from || o.food && o.recipe) ||
            v.profession == 'adventurer' && o.mob_drop ){
           villagers.assignObject($(this).attr('data-id'),inventory.selected);
