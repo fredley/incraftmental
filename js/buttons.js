@@ -164,11 +164,29 @@ init : function(){
       $('#villagers').hide();
       main.sidebars_visible = false;
       $('#work-area').css('width',800);
+	  $(document).keydown(function(e){
+		switch(e.which) {
+		  case 37: 
+			world.move(1,0);
+			break;
+		  case 38: 
+			world.move(0,1);
+			break;
+		  case 39: 
+			world.move(-1,0);
+			break;
+		  case 40: 
+			world.move(0,-1);
+			break;
+		  default: return; 
+		}
+	  });
     }else{
       $('#inventory').show();
       $('#villagers').show();
       main.sidebars_visible = true;
       $('#work-area').css('width',500);
+	  $(document).off("keydown");
     }
   });
   $('#smelt').on('click',function(e){
