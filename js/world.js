@@ -2,11 +2,11 @@ var world = {
   seed: 0,
   world_structures: {},
   sprites: {},
-  camX: 0,
-  camY: 0,
+  camX: -16,
+  camY: -16,
   destX: 0,
   destY: 0,
-  size: 32,
+  size: 100,
   color_dark: '#333',
   color_light:'#ddd',
   color_green:'#285',
@@ -42,7 +42,6 @@ var world = {
             style:  this.clutter_colors[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * this.clutter_colors.length)],
             symbol: this.clutter_symbols[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * this.clutter_symbols.length)]
           };
-          console.log(clutter);
           this.world_structures[x + '_' + y] = clutter;
         }
       }
@@ -57,12 +56,12 @@ var world = {
     this.build();
     this.canvas = $('#world-div')[0];
     this.context = this.canvas.getContext('2d');
-    this.blitCanvas = $('<canvas width="512" height="512" style="position: absolute; left: -5000px;"></canvas>');
+    this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px;"></canvas>');
     $(document.body).append(this.blitCanvas);
     this.blitCanvas = this.blitCanvas[0];
     this.blitContext = this.blitCanvas.getContext('2d');
     this.renderBg();
-    this.render(0, 0);
+    this.render();
   },
 
   renderBg: function(){
@@ -90,7 +89,7 @@ var world = {
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.drawImage(this.blitCanvas, this.camX * 16, this.camY * 16);
     this.context.fillStyle = this.color_green;
-    this.context.fillText('@', 320, 240);
+    this.context.fillText('웃', 320, 240);
   },
 
   move: function(relX, relY){
