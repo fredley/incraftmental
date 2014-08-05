@@ -243,6 +243,10 @@ init : function(){
 	  location.reload();
 	}
   });
+  $('#new-seed').on('click', function(){
+    world.seed = 0;
+	world.init();
+  });
   $('body').on('keydown',function(e){
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
       // Because everyone loves stupid optimisation
@@ -270,6 +274,7 @@ hook_villagers : function(){
     var v = villagers.population[$(this).attr('data-id')];
     if(inventory.selected && !v.enabled && inventory.in('tools',inventory.selected)){
       villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus);
+	  
     }else{
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
