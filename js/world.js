@@ -40,14 +40,14 @@ var world = {
           }
         }
         if (!isFilled){
-          if (noise_value < 0.05){
+          if (noise_value < 0.2){
             var clutter_list = [];
             for(var symbol in this.clutter_symbols){
               for(var style in this.clutter_colors){
-                clutter_list.push({ symbol: symbol, style: style });
+                clutter_list.push({ symbol: this.clutter_symbols[symbol], style: this.clutter_colors[style] });
               }
             }
-            var clutter = clutter_list[Math.floor(noise_value * clutter_list.length)];
+            var clutter = clutter_list[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * clutter_list.length)];
             this.world_structures[x + '_' + y] = clutter;
           }
         }
@@ -81,6 +81,7 @@ var world = {
     for (var _pos in this.world_structures){
       var pos = _pos.split('_');
       var struct = this.world_structures[_pos];
+      console.log(struct);
       if (struct.style)
         bl.fillStyle = struct.style;
       else
