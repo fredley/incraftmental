@@ -49,8 +49,8 @@ var world = {
   },
 
   init: function(){
-    if(this.seed===undefined || this.seed===0){
-  		this.seed=Math.ceil(Math.random());
+    if(this.seed === undefined || this.seed === 0){
+  		this.seed = Math.random();
   	}
     noise.seed(this.seed);
     this.build();
