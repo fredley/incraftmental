@@ -1,0 +1,274 @@
+.chromeframe {
+  margin: 0.2em 0;
+  background: #dddddd;
+  color: #222222;
+  padding: 0.2em 0; }
+
+body {
+  background: #222222;
+  font-family: monospace;
+  color: #dddddd;
+  font-size: 14px;
+  line-height: 1.4; }
+
+a {
+  color: #0b0; }
+
+button {
+  background: #555555;
+  border: 1px solid #dddddd;
+  border-radius: 0;
+  color: #dddddd;
+  cursor: pointer;
+  margin: 5px 0 0 5px;
+  border-radius: 4px; }
+
+button:hover {
+  color: #dddddd;
+  background: #666666; }
+
+button:disabled {
+  color: #dddddd;
+  cursor: default; }
+
+button:disabled:hover {
+  color: #dddddd;
+  background: #333333; }
+
+.pane {
+  display: none;
+  border: 1px solid #dddddd;
+  width: 300px;
+  padding: 20px;
+  position: absolute;
+  top: 40px; }
+  .pane .item {
+    font-size: 11px;
+    float: left;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding: 2px 5px; }
+  .pane h3 {
+    margin: 0;
+    clear: both;
+    float: left;
+    display: block;
+    width: 100%; }
+
+#inventory {
+  right: 30px; }
+  #inventory .inventory-item {
+    width: 150px; }
+    #inventory .inventory-item.selected {
+      background: #555555;
+      border-radius: 4px; }
+
+#villagers {
+  right: 390px; }
+  #villagers .villager {
+    width: 300px;
+    border-bottom: 1px dashed #333333; }
+
+#get-villager,
+#make-planks,
+#make-crafting,
+#alerts,
+#blocks {
+  display: none; }
+
+#options-menu {
+  display: none;
+  position: absolute;
+  margin: 30px 0px;
+  z-index: 9001;
+  border: 1px solid #dddddd;
+  left: 15px;
+  top: 15px;
+  background: #222222;
+  padding: 10px; }
+
+#tabs {
+  position: absolute;
+  height: 30px;
+  top: -31px;
+  left: 15px; }
+
+.work-tab {
+  float: left;
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 5px 15px;
+  margin-right: 10px;
+  cursor: pointer;
+  display: none; }
+  .work-tab.active {
+    border-bottom: 1px solid #222222; }
+
+#work-area {
+  float: left;
+  clear: both;
+  border: 1px solid #dddddd;
+  padding: 10px;
+  width: 500px;
+  margin-top: 40px;
+  position: relative;
+  display: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+pre.block {
+  font: 3px/2px monospace;
+  cursor: pointer; }
+
+#crafting {
+  display: none; }
+  #crafting #crafting-square {
+    border-top: 1px solid #dddddd;
+    border-left: 1px solid #dddddd;
+    width: 345px;
+    height: 345px;
+    margin: 30px 15px;
+    float: left; }
+  #crafting .craft-square {
+    width: 115px;
+    height: 115px;
+    float: left;
+    border-bottom: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    background: #333333;
+    padding: 7px 8px;
+    box-sizing: border-box;
+    cursor: pointer; }
+  #crafting #craft {
+    margin-top: 30px; }
+  #crafting .craft {
+    float: left;
+    margin: 0 15px;
+    margin-top: 15px; }
+
+#smelting {
+  display: none; }
+  #smelting #smelting-square {
+    width: 345px;
+    height: 345px;
+    margin: 30px 15px;
+    float: left; }
+  #smelting .smelt-square {
+    width: 115px;
+    height: 115px;
+    float: left;
+    box-sizing: border-box; }
+    #smelting .smelt-square.input {
+      border: 1px solid #dddddd;
+      background: #333333;
+      cursor: pointer;
+      padding: 7px 8px; }
+  #smelting .line {
+    border: 1px solid #dddddd;
+    position: relative;
+    overflow: hidden; }
+  #smelting .bar {
+    background: #dddddd;
+    position: absolute; }
+  #smelting #smelt-progress {
+    margin-top: 45px;
+    margin-left: 5px;
+    width: 90px;
+    height: 10px; }
+    #smelting #smelt-progress .bar {
+      height: 10px;
+      width: 90px;
+      left: -90px;
+      top: 0; }
+  #smelting #fuel-line {
+    margin-left: 45px;
+    margin-top: 5px;
+    width: 10px;
+    height: 90px; }
+    #smelting #fuel-line .bar {
+      height: 90px;
+      width: 10px;
+      left: 0;
+      top: 90px; }
+  #smelting #smelt {
+    float: left;
+    margin: 30px 15px; }
+
+#alerts {
+  background: #222222;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  border: 1px solid #dddddd;
+  padding: 5px;
+  width: 300px; }
+  #alerts .alert {
+    border-bottom: 1px dashed #333333; }
+
+.mouse-alert {
+  position: absolute;
+  z-index: 99;
+  background: #222222;
+  border: 1px solid #dddddd;
+  padding: 2px 5px; }
+
+footer {
+  font-size: 10px;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  opacity: 0.3;
+  transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+  /* Safari */ }
+
+footer:hover {
+  opacity: 1.0;
+  transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+  /* Safari */ }
+
+#exploration {
+  display: none; }
+  #exploration canvas {
+    border: 1px solid #dddddd;
+    background: #555555;
+    margin: 10px;
+    margin-bottom: 0px; }
+  #exploration .controls {
+    float: right;
+    width: 80px;
+    height: 80px;
+    margin-right: 10px;
+    position: relative; }
+    #exploration .controls button {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      line-height: 20px;
+      text-align: center;
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0; }
+      #exploration .controls button.up {
+        left: 35px;
+        top: 0; }
+      #exploration .controls button.right {
+        left: 70px;
+        top: 35px; }
+      #exploration .controls button.left {
+        left: 0;
+        top: 35px; }
+      #exploration .controls button.down {
+        top: 70px;
+        left: 35px; }
+  #exploration .inner {
+    margin-top: 0;
+    padding: 15px; }
