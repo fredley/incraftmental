@@ -1,4 +1,5 @@
 var world = {
+  seed: 0,
   worldStructures: {},
   sprites: {},
   camX: 0,
@@ -26,21 +27,21 @@ var world = {
           var dangerDiff = 0;
           if (structure.danger) dangerDiff = Math.abs(danger - structure.danger);
           var chance = structure.chance * Math.pow(1.3, dangerDiff);
-          if (Math.random() < chance){
+          if (this.batman(y*this.size + x) < chance){
             this.worldStructures[x + '_' + y] = structure;
             isFilled = true;
             break;
           }
         }
         if (!isFilled){
-          if (Math.random() < 0.05){
+          if (this.batman(y*this.size + x) < 0.05){
             var clutter_list = [];
             ['.', ',', '\'', '`'].forEach(function(symbol){
               ['#862', '#531'].forEach(function(style){
                 clutter_list.push({ symbol: symbol, style: style });
               });
             });
-            var clutter = clutter_list[Math.floor(Math.random() * clutter_list.length)];
+            var clutter = clutter_list[Math.floor(this.batman(y*this.size + x) * clutter_list.length)];
             this.worldStructures[x + '_' + y] = clutter;
           }
         }
@@ -50,6 +51,9 @@ var world = {
   },
 
   init: function(){
+    if(this.seed==undefined || this.seed==0){
+		this.seed=Math.Floor(Math.random()*(9999999999-1000000000)+1000000000)
+	}
     this.build();
     this.canvas = $('#world-div')[0];
     this.context = this.canvas.getContext('2d');
@@ -121,6 +125,10 @@ var world = {
 
   lerp : function(a,b,n){
     return (a * (1 - n)) + (b * n);
+  },
+  
+  batman: function(offset){
+	return Math.abs(Math.sin(this.seed + offset*9));
   }
 };
 
