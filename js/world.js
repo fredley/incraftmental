@@ -86,8 +86,8 @@ var world = {
 
   },
 
-  render: function(canvas){
-    this.context.clearRect(0,0,canvas.width,canvas.height);
+  render: function(){
+    this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
 	this.context.fillStyle = this.color_dark;
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.drawImage(this.blitCanvas, this.camX * 16, this.camY * 16);
