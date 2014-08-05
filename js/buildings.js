@@ -21,6 +21,10 @@ var buildings = {
     return true;
   },
 
+  getBuildint : function(slug){
+    return this.objects[slug];
+  },
+
   build : function(slug){
     switch(slug){
       case 'house':
