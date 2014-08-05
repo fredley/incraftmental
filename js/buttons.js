@@ -72,7 +72,7 @@ init : function(){
     var amount = inventory.objects.blocks.crafting_table.hasOwned ? 0 : 1;
     if(inventory.objects.blocks.wood.quantity >= 10){
       inventory.objects.blocks.wood.quantity -= 10;
-      inventory.addObject('planks',amount);
+      inventory.addObject('plank',amount);
       inventory.updateDisplay();
       if(inventory.objects.blocks.planks.quantity >= 4){
         $('#make-crafting').show();
