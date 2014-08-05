@@ -164,29 +164,13 @@ init : function(){
       $('#villagers').hide();
       main.sidebars_visible = false;
       $('#work-area').css('width',800);
-	  $(document).keydown(function(e){
-		switch(e.which) {
-		  case 37: 
-			world.move(1,0);
-			break;
-		  case 38: 
-			world.move(0,1);
-			break;
-		  case 39: 
-			world.move(-1,0);
-			break;
-		  case 40: 
-			world.move(0,-1);
-			break;
-		  default: return; 
-		}
-	  });
+      main.map_visible = true;
     }else{
       $('#inventory').show();
       $('#villagers').show();
       main.sidebars_visible = true;
       $('#work-area').css('width',500);
-	  $(document).off("keydown");
+      main.map_visible = false;
     }
   });
   $('#smelt').on('click',function(e){
@@ -270,6 +254,14 @@ init : function(){
       delete localStorage['save'];
 	  location.reload();
 	}
+  });
+  $('body').on('keydown',function(e){
+    if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
+      // Because everyone loves stupid optimisation
+      var x =  (e.keyCode % 2)      * (e.keyCode - 38) * -1;
+      var y = ((e.keyCode % 2) - 1) * (e.keyCode - 39);
+      world.move(x,y);
+    }
   });
   this.hook_inventory();
   this.hook_villagers();
