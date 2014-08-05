@@ -33,7 +33,7 @@ var world = {
           if (structure.danger) dangerDiff = Math.abs(danger - structure.danger);
           var chance = structure.chance * Math.pow(1.3, dangerDiff);
           if (this.batman(y*this.size + x) < chance){
-            this.worldStructures[x + '_' + y] = structure;
+            this.world_structures[x + '_' + y] = structure;
             isFilled = true;
             break;
           }
@@ -44,10 +44,10 @@ var world = {
             for(var symbol in this.clutter_symbols){
               for(var style in this.clutter_colors){
                 clutter_list.push({ symbol: symbol, style: style });
-              });
-            });
+              }
+            }
             var clutter = clutter_list[Math.floor(this.batman(y*this.size + x) * clutter_list.length)];
-            this.worldStructures[x + '_' + y] = clutter;
+            this.world_structures[x + '_' + y] = clutter;
           }
         }
       }
