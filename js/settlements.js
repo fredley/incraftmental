@@ -4,6 +4,8 @@ var settlements = {
 
   generate : function(height,width){
     return {
+      x: x, // coordinates in the world
+      y: y,
       height: height,
       width: width,
       buildings: [] // e.g. { type: 'house', x: 0, y: 0 }
