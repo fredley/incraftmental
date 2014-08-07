@@ -99,7 +99,7 @@ button:disabled:hover{
 #tabs{
     position: absolute;
     height:30px;
-    top: -31px;
+    top: -26px;
     left: 15px;
 }
 .work-tab{
@@ -109,10 +109,12 @@ button:disabled:hover{
     border-right: 1px solid $light;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    padding: 5px 15px;
+    padding: 2px 10px;
     margin-right: 10px;
     cursor:pointer;
     display: none;
+    height: 20px;
+    line-height:20px;
     &.active{
         border-bottom: 1px solid $darkest;
     }

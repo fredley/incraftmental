@@ -147,7 +147,7 @@ init : function(){
   	$("#" + $(this).attr('data-for')).show();
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
-    if($(this).attr('data-for') == 'exploration'){
+    if(['exploration','settlements'].indexOf($(this).attr('data-for')) > -1){
       $('#inventory').hide();
       $('#villagers').hide();
       main.sidebars_visible = false;
@@ -243,10 +243,6 @@ init : function(){
 	  location.reload();
 	}
   });
-  $('#new-seed').on('click', function(){
-    world.seed = 0;
-	world.init();
-  });
   $('body').on('keydown',function(e){
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
       // Because everyone loves stupid optimisation
@@ -274,7 +270,6 @@ hook_villagers : function(){
     var v = villagers.population[$(this).attr('data-id')];
     if(inventory.selected && !v.enabled && inventory.in('tools',inventory.selected)){
       villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus);
-	  
     }else{
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
@@ -327,6 +322,7 @@ updateDisplay : function(){
     $('#tab-crafting').show();
     $('#tab-smelting').show();
     $('#tab-exploration').show();
+    $('#tab-settlements').show();
     if($('.work-tab.active').length !== 1){
       $('#tab-crafting').addClass('active');
     }

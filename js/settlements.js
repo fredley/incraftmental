@@ -12,6 +12,10 @@ var settlements = {
     };
   },
 
+  addBuilding : function(settlement,building){
+    this.occupied[settlement].buildings.push(building);
+  },
+
   building_intersects : function(x,y,a,settlement){
     a.right  = x + a.width;
     a.bottom = y + a.height;
