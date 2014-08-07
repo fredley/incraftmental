@@ -1,9 +1,15 @@
 var settlements = {
 
   occupied : [],
+  selected : null,
 
-  generate : function(height,width){
+  generate : function(x,y,height,width){
+    var name = this.generateName();
+    while(this.nameUsed()){
+      name = this.generateName(name);
+    }
     return {
+      name: name,
       x: x, // coordinates in the world
       y: y,
       height: height,
@@ -12,8 +18,21 @@ var settlements = {
     };
   },
 
-  addBuilding : function(settlement,building){
-    this.occupied[settlement].buildings.push(building);
+  generateName : function(){
+    var starts = ['furl','middl','whel','till','rus','shin','red','fletch','skaffer','caster','iron','wall','mine','notch','mole','tarn','strath','stan','pen','feather','rose','guild','gold','hero'];
+    var ends = ['shire','ton','ford','ington','bridge','berry','bost','combe','wood','cot','dean','firth','mouth','hurst','leigh','thorp','wick','worth','brine','town','head','stead','holm','ham'];
+    return (randomChoice(starts) + randomChoice(ends)).capitalize();
+  },
+
+  nameUsed : function(name){
+    for(var i = 0; i < this.occupied.length; i++){
+      if(this.occupied[i].name == name) return true;
+    }
+    return false;
+  },
+
+  addBuilding : function(settlement,building,x,y){
+    this.occupied[settlement].buildings.push({building:building,x:x,y:y});
   },
 
   building_intersects : function(x,y,a,settlement){
@@ -42,11 +61,24 @@ var settlements = {
     }
   },
 
+  updateDisplay : function(){
+    $('#settlement-list').html('');
+    for(var i = 0; i < this.occupied.length; i++){
+      var cls = (this.selected === i) ? 'selected' : '';
+      $('#settlement-list').append('<div class="settlement ' + cls + '" data-id=' + i + ' >' + this.occupied[i].name + '</div>');
+    }
+    if(this.selected !== null){
+      this.draw(this.selected);
+    }
+    buttons.hook_settlements();
+  },
+
   draw : function(id){
+    $('#grid').html('');
     var s = this.occupied[id];
-    for(var j = 0; j < s.y; j++){
-      for(var i = 0; i < s.x; i++){
-        var square = $('<div class="settlement-grid" data-x=' + i + ' data-y=' + j);
+    for(var j = 0; j < s.height; j++){
+      for(var i = 0; i < s.width; i++){
+        var square = $('<div class="settlement-grid" data-x=' + i + ' data-y=' + j + '>X</div>');
         if(i==0) square.addClass('new-row');
         square.html(this.draw_building(s,i,j));
         $('#grid').append(square);

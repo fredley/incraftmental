@@ -1,6 +1,6 @@
-$light:#ddd;
-$dark:#333;
-$darkest:#222;
+$light:#999;
+$dark:#555;
+$darkest:#444;
 $highlight:#555;
 .chromeframe {
     margin: 0.2em 0;
@@ -52,6 +52,10 @@ button:disabled:hover{
         box-sizing:border-box;
         cursor:pointer;
         padding:2px 5px;
+        &.selected{
+            background: $highlight;
+            border-radius: 4px;
+        }
     }
     h3{
         margin:0;
@@ -304,5 +308,42 @@ footer:hover{
     .inner {
         margin-top: 0;
         padding: 15px;
+    }
+}
+
+#settlements{
+    display: none;
+    #settlement-list{
+        border: 1px solid $light;
+        width: 200px;
+        padding: 5px 10px;
+        float: left;
+        .settlement{
+            font-size: 11px;
+            box-sizing:border-box;
+            cursor:pointer;
+            padding:2px 5px;
+            &.selected{
+                background: $highlight;
+                border-radius: 4px;
+            }
+        }
+    }
+    #grid{
+        float: left;
+        margin-left: 20px;
+    }
+    .settlement-grid{
+        width:20px;
+        height:20px;
+        float:left;
+        background:$highlight;
+        line-height: 20px;
+        text-align: center;
+        border-right: 1px solid $dark;
+        border-bottom: 1px solid $dark;
+        &.new-row{
+            clear: both;
+        }
     }
 }

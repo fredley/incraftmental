@@ -303,6 +303,13 @@ hook_villagers : function(){
   });
 },
 
+hook_settlements : function(){
+  $('.settlement').on('click',function(){
+    settlements.selected = parseInt($(this).attr('data-id'));
+    settlements.updateDisplay();
+  });
+},
+
 updateDisplay : function(){
   if(inventory.objects.blocks.wood.hasOwned){
     $('#make-planks').show();
