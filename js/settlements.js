@@ -25,6 +25,29 @@ var settlements = {
             b.y < a.bottom) return true;
     }
     return false;
+  },
+
+  draw_building : function(settlement,x,y){
+    for(var b in settlement.buildings){
+      var obj = buildings.getBuilding(b);
+      for(var i = 0; i < obj.width; i++){
+        for(var j = 0; j < obj.height; j++){
+          $('.settlement-grid[data-x=' + (i + settlement.buildings[b].x) + '][data-y=' + (j + settlement.buildings[b].y) + ']').html(obj.symbol);
+        }
+      }
+    }
+  },
+
+  draw : function(id){
+    var s = this.occupied[id];
+    for(var j = 0; j < s.y; j++){
+      for(var i = 0; i < s.x; i++){
+        var square = $('<div class="settlement-grid" data-x=' + i + ' data-y=' + j);
+        if(i==0) square.addClass('new-row');
+        square.html(this.draw_building(s,i,j));
+        $('#grid').append(square);
+      }
+    }
   }
 
 };
