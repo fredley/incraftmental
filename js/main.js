@@ -10,7 +10,6 @@ onload : function(){
   this.load();
   buttons.init();
   world.init();
-  settlements.init();
   window.setInterval(function(){main.tick()}, 1000);
 },
 
