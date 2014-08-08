@@ -19,8 +19,14 @@ var settlements = {
   },
 
   generateName : function(){
-    var starts = ['furl','middl','whel','till','rus','shin','red','fletch','skaffer','caster','iron','wall','mine','notch','mole','tarn','strath','stan','pen','feather','rose','guild','gold','hero'];
-    var ends = ['shire','ton','ford','ington','bridge','berry','bost','combe','wood','cot','dean','firth','mouth','hurst','leigh','thorp','wick','worth','brine','town','head','stead','holm','ham'];
+    var starts = ['furl','middl','whel','till','rus','shin','red','fletch',
+    'skaffer','caster','iron','wall','mine','notch','mole','tarn','strath',
+    'stan','pen','feather','rose','guild','gold','hero','stir','ren','fen',
+    'fir','low','pick','coal','creeper','jeb','yog','new','old','steve'];
+    var ends = ['shire','ton','ford','bridge','berry','bost','combe','ington',
+    'wood','cot','dean','firth','mouth','hurst','leigh','thorp','wick','worth',
+    'brine','town','head','stead','holm','ham','ingshire','ing','ingford','ly',
+    'rock','stone','turn','cross','mont','down','bury','tonbury','by','borough'];
     return (randomChoice(starts) + randomChoice(ends)).capitalize();
   },
 
