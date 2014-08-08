@@ -340,8 +340,8 @@ footer:hover{
         background:$highlight;
         line-height: 20px;
         text-align: center;
-        border-right: 1px solid $dark;
-        border-bottom: 1px solid $dark;
+        border-right: 1px solid $darkest;
+        border-bottom: 1px solid $darkest;
         &.new-row{
             clear: both;
         }

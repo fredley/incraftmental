@@ -1,13 +1,13 @@
 .chromeframe {
   margin: 0.2em 0;
-  background: #dddddd;
-  color: #222222;
+  background: #999999;
+  color: #444444;
   padding: 0.2em 0; }
 
 body {
-  background: #222222;
+  background: #444444;
   font-family: monospace;
-  color: #dddddd;
+  color: #999999;
   font-size: 14px;
   line-height: 1.4; }
 
@@ -16,28 +16,28 @@ a {
 
 button {
   background: #555555;
-  border: 1px solid #dddddd;
+  border: 1px solid #999999;
   border-radius: 0;
-  color: #dddddd;
+  color: #999999;
   cursor: pointer;
   margin: 5px 0 0 5px;
   border-radius: 4px; }
 
 button:hover {
-  color: #dddddd;
-  background: #666666; }
+  color: #999999;
+  background: dimgray; }
 
 button:disabled {
-  color: #dddddd;
+  color: #999999;
   cursor: default; }
 
 button:disabled:hover {
-  color: #dddddd;
-  background: #333333; }
+  color: #999999;
+  background: #555555; }
 
 .pane {
   display: none;
-  border: 1px solid #dddddd;
+  border: 1px solid #999999;
   width: 300px;
   padding: 20px;
   position: absolute;
@@ -48,6 +48,9 @@ button:disabled:hover {
     box-sizing: border-box;
     cursor: pointer;
     padding: 2px 5px; }
+    .pane .item.selected {
+      background: #555555;
+      border-radius: 4px; }
   .pane h3 {
     margin: 0;
     clear: both;
@@ -67,7 +70,7 @@ button:disabled:hover {
   right: 390px; }
   #villagers .villager {
     width: 300px;
-    border-bottom: 1px dashed #333333; }
+    border-bottom: 1px dashed #555555; }
 
 #get-villager,
 #make-planks,
@@ -81,10 +84,10 @@ button:disabled:hover {
   position: absolute;
   margin: 30px 0px;
   z-index: 9001;
-  border: 1px solid #dddddd;
+  border: 1px solid #999999;
   left: 15px;
   top: 15px;
-  background: #222222;
+  background: #444444;
   padding: 10px; }
 
 #tabs {
@@ -95,9 +98,9 @@ button:disabled:hover {
 
 .work-tab {
   float: left;
-  border-top: 1px solid #dddddd;
-  border-left: 1px solid #dddddd;
-  border-right: 1px solid #dddddd;
+  border-top: 1px solid #999999;
+  border-left: 1px solid #999999;
+  border-right: 1px solid #999999;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 2px 10px;
@@ -107,12 +110,12 @@ button:disabled:hover {
   height: 20px;
   line-height: 20px; }
   .work-tab.active {
-    border-bottom: 1px solid #222222; }
+    border-bottom: 1px solid #444444; }
 
 #work-area {
   float: left;
   clear: both;
-  border: 1px solid #dddddd;
+  border: 1px solid #999999;
   padding: 10px;
   width: 500px;
   margin-top: 40px;
@@ -132,8 +135,8 @@ pre.block {
 #crafting {
   display: none; }
   #crafting #crafting-square {
-    border-top: 1px solid #dddddd;
-    border-left: 1px solid #dddddd;
+    border-top: 1px solid #999999;
+    border-left: 1px solid #999999;
     width: 345px;
     height: 345px;
     margin: 30px 15px;
@@ -142,9 +145,9 @@ pre.block {
     width: 115px;
     height: 115px;
     float: left;
-    border-bottom: 1px solid #dddddd;
-    border-right: 1px solid #dddddd;
-    background: #333333;
+    border-bottom: 1px solid #999999;
+    border-right: 1px solid #999999;
+    background: #555555;
     padding: 7px 8px;
     box-sizing: border-box;
     cursor: pointer; }
@@ -168,16 +171,16 @@ pre.block {
     float: left;
     box-sizing: border-box; }
     #smelting .smelt-square.input {
-      border: 1px solid #dddddd;
-      background: #333333;
+      border: 1px solid #999999;
+      background: #555555;
       cursor: pointer;
       padding: 7px 8px; }
   #smelting .line {
-    border: 1px solid #dddddd;
+    border: 1px solid #999999;
     position: relative;
     overflow: hidden; }
   #smelting .bar {
-    background: #dddddd;
+    background: #999999;
     position: absolute; }
   #smelting #smelt-progress {
     margin-top: 45px;
@@ -204,21 +207,21 @@ pre.block {
     margin: 30px 15px; }
 
 #alerts {
-  background: #222222;
+  background: #444444;
   position: absolute;
   bottom: 15px;
   left: 15px;
-  border: 1px solid #dddddd;
+  border: 1px solid #999999;
   padding: 5px;
   width: 300px; }
   #alerts .alert {
-    border-bottom: 1px dashed #333333; }
+    border-bottom: 1px dashed #555555; }
 
 .mouse-alert {
   position: absolute;
   z-index: 99;
-  background: #222222;
-  border: 1px solid #dddddd;
+  background: #444444;
+  border: 1px solid #999999;
   padding: 2px 5px; }
 
 footer {
@@ -240,7 +243,7 @@ footer:hover {
 #exploration {
   display: none; }
   #exploration canvas {
-    border: 1px solid #dddddd;
+    border: 1px solid #999999;
     background: #555555;
     margin: 10px;
     margin-bottom: 0px; }
@@ -274,3 +277,33 @@ footer:hover {
   #exploration .inner {
     margin-top: 0;
     padding: 15px; }
+
+#settlements {
+  display: none; }
+  #settlements #settlement-list {
+    border: 1px solid #999999;
+    width: 200px;
+    padding: 5px 10px;
+    float: left; }
+    #settlements #settlement-list .settlement {
+      font-size: 11px;
+      box-sizing: border-box;
+      cursor: pointer;
+      padding: 2px 5px; }
+      #settlements #settlement-list .settlement.selected {
+        background: #555555;
+        border-radius: 4px; }
+  #settlements #grid {
+    float: left;
+    margin-left: 20px; }
+  #settlements .settlement-grid {
+    width: 20px;
+    height: 20px;
+    float: left;
+    background: #555555;
+    line-height: 20px;
+    text-align: center;
+    border-right: 1px solid #444444;
+    border-bottom: 1px solid #444444; }
+    #settlements .settlement-grid.new-row {
+      clear: both; }

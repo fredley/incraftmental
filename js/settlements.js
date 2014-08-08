@@ -50,9 +50,9 @@ var settlements = {
     return false;
   },
 
-  draw_building : function(settlement,x,y){
+  draw_buildings : function(settlement){
     for(var b in settlement.buildings){
-      var obj = buildings.getBuilding(b);
+      var obj = buildings.getBuilding(settlement.buildings[b].building);
       for(var i = 0; i < obj.width; i++){
         for(var j = 0; j < obj.height; j++){
           $('.settlement-grid[data-x=' + (i + settlement.buildings[b].x) + '][data-y=' + (j + settlement.buildings[b].y) + ']').html(obj.symbol);
@@ -78,12 +78,12 @@ var settlements = {
     var s = this.occupied[id];
     for(var j = 0; j < s.height; j++){
       for(var i = 0; i < s.width; i++){
-        var square = $('<div class="settlement-grid" data-x=' + i + ' data-y=' + j + '>X</div>');
+        var square = $('<div class="settlement-grid" data-x=' + i + ' data-y=' + j + '></div>');
         if(i==0) square.addClass('new-row');
-        square.html(this.draw_building(s,i,j));
         $('#grid').append(square);
       }
     }
+    this.draw_buildings(s);
   }
 
 };
