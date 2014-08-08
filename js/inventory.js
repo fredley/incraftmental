@@ -225,7 +225,7 @@ var inventory = {
   },
 
   updateDisplay : function(){
-    if(!main.sidebars_visible) return;
+    if(!main.inventory_visible) return;
     var inventoryText = "";
     for(var group in this.objects){
       var showGroup = false;
