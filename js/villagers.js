@@ -60,7 +60,7 @@ var villagers = {
     4 : 'Master',
     5 : 'Supreme'
   },
-  
+
   init : function(){
 	this.population = [];
 	this.cost = 1;
@@ -116,7 +116,7 @@ var villagers = {
   },
 
   updateDisplay : function(){
-    if(!main.sidebars_visible) return;
+    if(!main.villagers_visible) return;
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
       var v = this.population[villager];

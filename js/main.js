@@ -1,7 +1,8 @@
 var main = {
 
 ticks : 0,
-sidebars_visible: true,
+villagers_visible: true,
+inventory_visible: true,
 map_visible: false,
 
 onload : function(){

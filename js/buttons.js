@@ -147,19 +147,11 @@ init : function(){
   	$("#" + $(this).attr('data-for')).show();
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
-    if(['exploration','settlements'].indexOf($(this).attr('data-for')) > -1){
-      $('#inventory').hide();
-      $('#villagers').hide();
-      main.sidebars_visible = false;
-      $('#work-area').css('width',800);
-      main.map_visible = true;
-    }else{
-      $('#inventory').show();
-      $('#villagers').show();
-      main.sidebars_visible = true;
-      $('#work-area').css('width',500);
-      main.map_visible = false;
-    }
+    var craftSmelt = ['crafting','smelting'].indexOf($(this).attr('data-for')) > -1;
+    buttons.setSidebarVisiblity('villagers',craftSmelt);
+    buttons.setSidebarVisiblity('inventory',$(this).attr('data-for') !== 'exploration');
+    var width = craftSmelt ? 500 : 800;
+    $('#work-area').css('width',width);
   });
   $('#smelt').on('click',function(e){
     if(inventory.smelting){
@@ -344,7 +336,7 @@ hook_settlements : function(){
 updateDisplay : function(){
   if(inventory.objects.blocks.wood.hasOwned){
     $('#make-planks').show();
-    if(main.sidebars_visible) $('#inventory').show();
+    if(main.inventory_visible) $('#inventory').show();
   }
   if(inventory.objects.blocks.plank.hasOwned){
     $('#make-crafting').show();
@@ -368,6 +360,15 @@ updateDisplay : function(){
   if(inventory.objects.items.apple.hasOwned){
     $('#get-villager').show();
     $('#get-villager').html('Get a villager (' + villagers.cost + ' apple' + ((villagers.cost > 1) ? 's' : '') + ')');
+  }
+},
+
+setSidebarVisiblity : function(bar,visiblity){
+  main[bar + '_visible'] = visiblity;
+  if(visiblity){
+    $('#' + bar).show();
+  }else{
+    $('#' + bar).hide();
   }
 }
 
