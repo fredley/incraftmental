@@ -1,15 +1,18 @@
 var main = {
 
 ticks : 0,
-sidebars_visible: true,
+villagers_visible: true,
+inventory_visible: true,
 map_visible: false,
 
 onload : function(){
   inventory.init();
   villagers.init();
+  buildings.init();
   this.load();
-  buttons.init();
+  settlements.init();
   world.init();
+  buttons.init();
   window.setInterval(function(){main.tick()}, 1000);
 },
 
@@ -38,6 +41,7 @@ save : function(){
   data["villagers"] = villagers.population;
   data["villager_cost"] = villagers.cost;
   data["world_seed"] = world.seed;
+  data["settlements"] = settlements.occupied;
   localStorage["save"] = JSON.stringify(data);
 },
 
@@ -57,6 +61,9 @@ load : function(){
   }
   villagers.population = data["villagers"];
   villagers.cost = (data["villager_cost"]) ? data["villager_cost"] : 1;
+  settlements.occupied = data["settlements"];
+  if(settlements.occupied===undefined)
+    settlements.occupied=[];
   world.seed = data["world_seed"];
 },
 
@@ -97,6 +104,9 @@ window.onload = main.onload.bind(main);
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
+}
+String.prototype.contains = function(s) {
+    return this.indexOf(s) > -1;
 }
 String.prototype.formatAnMultiple = function(pluralCount) {
   var prefix = '';

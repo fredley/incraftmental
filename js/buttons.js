@@ -147,19 +147,17 @@ init : function(){
   	$("#" + $(this).attr('data-for')).show();
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
-    if($(this).attr('data-for') == 'exploration'){
-      $('#inventory').hide();
-      $('#villagers').hide();
-      main.sidebars_visible = false;
-      $('#work-area').css('width',800);
-      main.map_visible = true;
-    }else{
-      $('#inventory').show();
-      $('#villagers').show();
-      main.sidebars_visible = true;
-      $('#work-area').css('width',500);
-      main.map_visible = false;
-    }
+	
+	if($(this).attr('data-for')=="exploration")
+		main.map_visible=true;
+	else
+		main.map_visible=false;
+	
+    var craftSmelt = ['crafting','smelting'].indexOf($(this).attr('data-for')) > -1;
+    buttons.setSidebarVisiblity('villagers',craftSmelt);
+    buttons.setSidebarVisiblity('inventory',$(this).attr('data-for') !== 'exploration');
+    var width = craftSmelt ? 500 : 800;
+    $('#work-area').css('width',width);
   });
   $('#smelt').on('click',function(e){
     if(inventory.smelting){
@@ -226,6 +224,17 @@ init : function(){
     var y = $(this).attr('data-y');
     world.move(x,y);
   });
+  $('.building').on('click',function(){
+    $('.building').removeClass('selected');
+    $('.requirements').slideUp('fast');
+    if($(this).hasClass('selected')){
+      buildings.selected = null;
+      return;
+    }
+    $(this).addClass('selected');
+    $(this).find('.requirements').slideDown('fast');
+    buildings.selected = $(this).attr('data-object');
+  });
   $('#options').on('click', function(){
   	$('#options-menu').toggle();
   });
@@ -242,10 +251,6 @@ init : function(){
       delete localStorage['save'];
 	  location.reload();
 	}
-  });
-  $('#new-seed').on('click', function(){
-    world.seed = 0;
-	world.init();
   });
   $('body').on('keydown',function(e){
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
@@ -274,7 +279,6 @@ hook_villagers : function(){
     var v = villagers.population[$(this).attr('data-id')];
     if(inventory.selected && !v.enabled && inventory.in('tools',inventory.selected)){
       villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus);
-	  
     }else{
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
@@ -308,10 +312,37 @@ hook_villagers : function(){
   });
 },
 
+hook_settlements : function(){
+  $('.settlement').on('click',function(){
+    settlements.selected = parseInt($(this).attr('data-id'));
+    settlements.updateDisplay();
+  });
+  $('.settlement-grid').on('mouseenter',function(){
+    settlements.drawHover(parseInt($(this).attr('data-x')),parseInt($(this).attr('data-y')));
+  }).on('click',function(e){
+    if(!$(this).hasClass('hover-green')){
+      main.addMouseAlert("You can't build there",e);
+      return;
+    }
+    var s = settlements.occupied[settlements.selected];
+    var b = buildings.getBuilding(buildings.selected);
+    var canBuild = buildings.canBuild(buildings.selected,s);
+    if(!canBuild[0]){
+      main.addMouseAlert(canBuild[1],e);
+      return;
+    }
+    settlements.addBuilding(settlements.selected,buildings.selected,parseInt($(this).attr('data-x')),parseInt($(this).attr('data-y')));
+    settlements.updateDisplay();
+  });
+  $('#grid').on('mouseleave',function(){
+    settlements.noHover();
+  });
+},
+
 updateDisplay : function(){
   if(inventory.objects.blocks.wood.hasOwned){
     $('#make-planks').show();
-    if(main.sidebars_visible) $('#inventory').show();
+    if(main.inventory_visible) $('#inventory').show();
   }
   if(inventory.objects.blocks.plank.hasOwned){
     $('#make-crafting').show();
@@ -327,6 +358,7 @@ updateDisplay : function(){
     $('#tab-crafting').show();
     $('#tab-smelting').show();
     $('#tab-exploration').show();
+    $('#tab-settlements').show();
     if($('.work-tab.active').length !== 1){
       $('#tab-crafting').addClass('active');
     }
@@ -334,6 +366,15 @@ updateDisplay : function(){
   if(inventory.objects.items.apple.hasOwned){
     $('#get-villager').show();
     $('#get-villager').html('Get a villager (' + villagers.cost + ' apple' + ((villagers.cost > 1) ? 's' : '') + ')');
+  }
+},
+
+setSidebarVisiblity : function(bar,visiblity){
+  main[bar + '_visible'] = visiblity;
+  if(visiblity){
+    $('#' + bar).show();
+  }else{
+    $('#' + bar).hide();
   }
 }
 
