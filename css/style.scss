@@ -313,19 +313,27 @@ footer:hover{
 
 #settlements{
     display: none;
-    #settlement-list{
-        border: 1px solid $light;
-        width: 200px;
-        padding: 5px 10px;
-        float: left;
-        .settlement{
-            font-size: 11px;
-            box-sizing:border-box;
-            cursor:pointer;
-            padding:2px 5px;
-            &.selected{
-                background: $highlight;
-                border-radius: 4px;
+    #lists{
+        float:left;
+        width:220px;
+        h3{
+            margin:0 0 10px 0;
+        }
+        .list{
+            border: 1px solid $light;
+            width: 200px;
+            padding: 5px 10px;
+            float:left;
+            margin-bottom:10px;
+            .item{
+                font-size: 11px;
+                box-sizing:border-box;
+                cursor:pointer;
+                padding:2px 5px;
+                &.selected{
+                    background: $highlight;
+                    border-radius: 4px;
+                }
             }
         }
     }
@@ -344,6 +352,14 @@ footer:hover{
         border-bottom: 1px solid $darkest;
         &.new-row{
             clear: both;
+        }
+        &.hover-green{
+            background: #1E8D1E;
+            cursor:pointer;
+        }
+        &.hover-red{
+            background: #965050;
+            cursor:not-allowed;
         }
     }
 }

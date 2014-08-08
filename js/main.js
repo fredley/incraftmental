@@ -7,9 +7,11 @@ map_visible: false,
 onload : function(){
   inventory.init();
   villagers.init();
+  buildings.init();
   this.load();
-  buttons.init();
+  settlements.init();
   world.init();
+  buttons.init();
   window.setInterval(function(){main.tick()}, 1000);
 },
 
@@ -18,7 +20,6 @@ tick : function(){
   villagers.doVillagers();
   inventory.updateDisplay();
   buttons.updateDisplay();
-  settlements.updateDisplay();
   var saveEvery = parseInt($('#autosave').val());
   if (saveEvery !== 0 && this.ticks % saveEvery == 0) {
   	this.save();

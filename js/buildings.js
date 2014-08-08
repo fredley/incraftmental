@@ -1,4 +1,7 @@
 var buildings = {
+
+  selected: null,
+
   objects : {
     house        : { width: 2, height: 2,   symbol: 'H', houses: 0,  cost: {stone: 100,   cobble: 200,   plank: 400,   glass: 50 }},
     barn         : { width: 4, height: 8,   symbol: 'B', houses: 1,  cost: {stone: 100,   cobble: 800,   plank: 1000,  wood:  500}},
@@ -43,5 +46,11 @@ var buildings = {
         break;
     }
   },
+
+  init : function(){
+    for(var b in this.objects){
+      $('#buildings-list').append('<div class="building item" data-object="' + b + '">' + b.capitalize() + '</div>');
+    }
+  }
 
 };

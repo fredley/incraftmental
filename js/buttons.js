@@ -226,6 +226,16 @@ init : function(){
     var y = $(this).attr('data-y');
     world.move(x,y);
   });
+  $('.building').on('click',function(){
+    if($(this).hasClass('selected')){
+      $(this).removeClass('selected');
+      buildings.selected = null;
+      return;
+    }
+    $('.building').removeClass('selected');
+    $(this).addClass('selected');
+    buildings.selected = $(this).attr('data-object');
+  });
   $('#options').on('click', function(){
   	$('#options-menu').toggle();
   });
@@ -307,6 +317,12 @@ hook_settlements : function(){
   $('.settlement').on('click',function(){
     settlements.selected = parseInt($(this).attr('data-id'));
     settlements.updateDisplay();
+  });
+  $('.settlement-grid').on('mouseenter',function(){
+    settlements.drawHover(parseInt($(this).attr('data-x')),parseInt($(this).attr('data-y')));
+  });
+  $('#grid').on('mouseleave',function(){
+    settlements.noHover();
   });
 },
 

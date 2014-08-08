@@ -62,10 +62,11 @@ var settlements = {
   },
 
   updateDisplay : function(){
+    console.log('update');
     $('#settlement-list').html('');
     for(var i = 0; i < this.occupied.length; i++){
       var cls = (this.selected === i) ? 'selected' : '';
-      $('#settlement-list').append('<div class="settlement ' + cls + '" data-id=' + i + ' >' + this.occupied[i].name + '</div>');
+      $('#settlement-list').append('<div class="settlement item ' + cls + '" data-id=' + i + ' >' + this.occupied[i].name + '</div>');
     }
     if(this.selected !== null){
       this.draw(this.selected);
@@ -84,6 +85,36 @@ var settlements = {
       }
     }
     this.draw_buildings(s);
-  }
+  },
+
+  drawHover : function(x,y){
+    this.noHover();
+    if(buildings.selected === null) return;
+    var b = buildings.getBuilding(buildings.selected);
+    canBuild = true;
+    for(var i = x; i < x + b.width; i++){
+      for(var j = y; j < y + b.height; j++){
+        var el = $('.settlement-grid[data-x=' + i + '][data-y=' + j + ']');
+        if(el.length === 0){
+          canBuild = false;
+        }else{
+          canBuild = canBuild && el.html() == "";
+          el.addClass('grid-hover');
+        }
+      }
+    }
+    var cls = canBuild ? 'hover-green' : 'hover-red';
+    $('.grid-hover').addClass(cls);
+  },
+
+  noHover : function(){
+    $('.settlement-grid').removeClass('hover-green');
+    $('.settlement-grid').removeClass('hover-red');
+    $('.settlement-grid').removeClass('grid-hover');
+  },
+
+  init : function(){
+    this.updateDisplay();
+  },
 
 };

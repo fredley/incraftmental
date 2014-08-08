@@ -280,19 +280,25 @@ footer:hover {
 
 #settlements {
   display: none; }
-  #settlements #settlement-list {
-    border: 1px solid #999999;
-    width: 200px;
-    padding: 5px 10px;
-    float: left; }
-    #settlements #settlement-list .settlement {
-      font-size: 11px;
-      box-sizing: border-box;
-      cursor: pointer;
-      padding: 2px 5px; }
-      #settlements #settlement-list .settlement.selected {
-        background: #555555;
-        border-radius: 4px; }
+  #settlements #lists {
+    float: left;
+    width: 220px; }
+    #settlements #lists h3 {
+      margin: 0 0 10px 0; }
+    #settlements #lists .list {
+      border: 1px solid #999999;
+      width: 200px;
+      padding: 5px 10px;
+      float: left;
+      margin-bottom: 10px; }
+      #settlements #lists .list .item {
+        font-size: 11px;
+        box-sizing: border-box;
+        cursor: pointer;
+        padding: 2px 5px; }
+        #settlements #lists .list .item.selected {
+          background: #555555;
+          border-radius: 4px; }
   #settlements #grid {
     float: left;
     margin-left: 20px; }
@@ -307,3 +313,9 @@ footer:hover {
     border-bottom: 1px solid #444444; }
     #settlements .settlement-grid.new-row {
       clear: both; }
+    #settlements .settlement-grid.hover-green {
+      background: #1E8D1E;
+      cursor: pointer; }
+    #settlements .settlement-grid.hover-red {
+      background: #965050;
+      cursor: not-allowed; }
