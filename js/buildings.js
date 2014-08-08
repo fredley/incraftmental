@@ -19,8 +19,7 @@ var buildings = {
   canBuild : function(slug, settlement){
     for(var object in this.objects[slug].cost){
       if(inventory.getObject(object).quantity < this.objects[slug].cost[object]){
-        console.log('not enough ' + object);
-        return false;
+        return [false, 'Not enough ' + inventory.getObject(object).display];
       }
     }
     var houses = 0;
@@ -33,8 +32,8 @@ var buildings = {
         houses -= this.objects[building].houses;
       }
     }
-    if(this.objects[slug].houses > houses) return false;
-    return true;
+    if(this.objects[slug].houses > houses) return [false, 'Not enough houses'];
+    return [true,""];
   },
 
   getBuilding : function(slug){

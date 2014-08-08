@@ -328,8 +328,9 @@ hook_settlements : function(){
     }
     var s = settlements.occupied[settlements.selected];
     var b = buildings.getBuilding(buildings.selected);
-    if(!buildings.canBuild(buildings.selected,s)){
-      main.addMouseAlert("You don't have enough resources",e);
+    var canBuild = buildings.canBuild(buildings.selected,s);
+    if(!canBuild[0]){
+      main.addMouseAlert(canBuild[1],e);
       return;
     }
     settlements.addBuilding(settlements.selected,buildings.selected,parseInt($(this).attr('data-x')),parseInt($(this).attr('data-y')));
