@@ -62,7 +62,6 @@ var settlements = {
   },
 
   updateDisplay : function(){
-    console.log('update');
     $('#settlement-list').html('');
     for(var i = 0; i < this.occupied.length; i++){
       var cls = (this.selected === i) ? 'selected' : '';

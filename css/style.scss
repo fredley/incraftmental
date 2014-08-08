@@ -333,6 +333,17 @@ footer:hover{
                 &.selected{
                     background: $highlight;
                     border-radius: 4px;
+                    &.building{
+                        font-weight:bold;
+                        color:lighten($light,20);
+                        .requirements{
+                            font-weight:normal;
+                            color:$light;
+                        }
+                    }
+                }
+                .requirements{
+                    display: none;
                 }
             }
         }

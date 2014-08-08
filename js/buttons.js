@@ -227,13 +227,14 @@ init : function(){
     world.move(x,y);
   });
   $('.building').on('click',function(){
+    $('.building').removeClass('selected');
+    $('.requirements').slideUp('fast');
     if($(this).hasClass('selected')){
-      $(this).removeClass('selected');
       buildings.selected = null;
       return;
     }
-    $('.building').removeClass('selected');
     $(this).addClass('selected');
+    $(this).find('.requirements').slideDown('fast');
     buildings.selected = $(this).attr('data-object');
   });
   $('#options').on('click', function(){
@@ -320,6 +321,19 @@ hook_settlements : function(){
   });
   $('.settlement-grid').on('mouseenter',function(){
     settlements.drawHover(parseInt($(this).attr('data-x')),parseInt($(this).attr('data-y')));
+  }).on('click',function(e){
+    if(!$(this).hasClass('hover-green')){
+      main.addMouseAlert("You can't build there",e);
+      return;
+    }
+    var s = settlements.occupied[settlements.selected];
+    var b = buildings.getBuilding(buildings.selected);
+    if(!buildings.canBuild(buildings.selected,s)){
+      main.addMouseAlert("You don't have enough resources",e);
+      return;
+    }
+    settlements.addBuilding(settlements.selected,buildings.selected,parseInt($(this).attr('data-x')),parseInt($(this).attr('data-y')));
+    settlements.updateDisplay();
   });
   $('#grid').on('mouseleave',function(){
     settlements.noHover();

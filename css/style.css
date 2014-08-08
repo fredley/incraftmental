@@ -299,6 +299,14 @@ footer:hover {
         #settlements #lists .list .item.selected {
           background: #555555;
           border-radius: 4px; }
+          #settlements #lists .list .item.selected.building {
+            font-weight: bold;
+            color: #cccccc; }
+            #settlements #lists .list .item.selected.building .requirements {
+              font-weight: normal;
+              color: #999999; }
+        #settlements #lists .list .item .requirements {
+          display: none; }
   #settlements #grid {
     float: left;
     margin-left: 20px; }
