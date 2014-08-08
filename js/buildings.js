@@ -41,10 +41,11 @@ var buildings = {
   },
 
   build : function(slug){
-    // called when a new building is built
+    main.addAlert('Built a new ' + slug.capitalize());
     switch(slug){
       case 'house':
         villagers.addVillager();
+        main.addAlert('You got a new villager!');
         break;
     }
   },
