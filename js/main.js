@@ -102,6 +102,9 @@ window.onload = main.onload.bind(main);
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
+String.prototype.contains = function(s) {
+    return this.indexOf(s) > -1;
+}
 String.prototype.formatAnMultiple = function(pluralCount) {
   var prefix = '';
   var postfix = '';
