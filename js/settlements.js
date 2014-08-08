@@ -33,6 +33,7 @@ var settlements = {
 
   addBuilding : function(settlement,building,x,y){
     this.occupied[settlement].buildings.push({building:building,x:x,y:y});
+    buildings.build(building);
   },
 
   building_intersects : function(x,y,a,settlement){
