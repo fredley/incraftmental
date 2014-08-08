@@ -58,7 +58,7 @@ var world = {
     this.canvas = $('#world-div')[0];
     $('#blitCanvas').remove();
     this.context = this.canvas.getContext('2d');
-    this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px;" id="blitCanvas"></canvas>');
+    this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px; top:-1000px;" id="blitCanvas"></canvas>');
     $(document.body).append(this.blitCanvas);
     this.blitCanvas = this.blitCanvas[0];
     this.blitContext = this.blitCanvas.getContext('2d');
