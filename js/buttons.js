@@ -147,6 +147,12 @@ init : function(){
   	$("#" + $(this).attr('data-for')).show();
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
+	
+	if($(this).attr('data-for')=="exploration")
+		main.map_visible=true;
+	else
+		main.map_visible=false;
+	
     var craftSmelt = ['crafting','smelting'].indexOf($(this).attr('data-for')) > -1;
     buttons.setSidebarVisiblity('villagers',craftSmelt);
     buttons.setSidebarVisiblity('inventory',$(this).attr('data-for') !== 'exploration');
