@@ -25,7 +25,6 @@ var buildings = {
     var houses = 0;
     for(var b in settlement.buildings){
       var building = settlement.buildings[b].building;
-      console.log(building);
       if(building === 'house'){
         houses++;
       }else{
