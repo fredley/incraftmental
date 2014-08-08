@@ -50,18 +50,20 @@ var world = {
 
   init: function(){
     if(this.seed === undefined || this.seed === 0){
+		this.world_structures={};
   		this.seed = Math.random();
   	}
     noise.seed(this.seed);
     this.build();
     this.canvas = $('#world-div')[0];
+    $('#blitCanvas').remove();
     this.context = this.canvas.getContext('2d');
-    this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px;"></canvas>');
+    this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px; top:-1000px;" id="blitCanvas"></canvas>');
     $(document.body).append(this.blitCanvas);
     this.blitCanvas = this.blitCanvas[0];
     this.blitContext = this.blitCanvas.getContext('2d');
     this.renderBg();
-    this.render();
+    this.render(this.canvas);
   },
 
   renderBg: function(){
@@ -85,7 +87,8 @@ var world = {
   },
 
   render: function(){
-    this.context.fillStyle = this.color_dark;
+    this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
+	this.context.fillStyle = this.color_dark;
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.drawImage(this.blitCanvas, this.camX * 16, this.camY * 16);
     this.context.fillStyle = this.color_green;
