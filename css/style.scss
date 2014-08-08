@@ -359,8 +359,8 @@ footer:hover{
         background:$highlight;
         line-height: 20px;
         text-align: center;
-        border-right: 1px solid $darkest;
-        border-bottom: 1px solid $darkest;
+        margin: 1px;
+        box-sizing:border-box;
         &.new-row{
             clear: both;
         }
@@ -372,5 +372,9 @@ footer:hover{
             background: #965050;
             cursor:not-allowed;
         }
+        &.top-edge{    border-top:1px solid $light; }
+        &.right-edge{  border-right:1px solid $light; }
+        &.bottom-edge{ border-bottom:1px solid $light; }
+        &.left-edge{   border-left:1px solid $light; }
     }
 }

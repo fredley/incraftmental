@@ -55,7 +55,12 @@ var settlements = {
       var obj = buildings.getBuilding(settlement.buildings[b].building);
       for(var i = 0; i < obj.width; i++){
         for(var j = 0; j < obj.height; j++){
-          $('.settlement-grid[data-x=' + (i + settlement.buildings[b].x) + '][data-y=' + (j + settlement.buildings[b].y) + ']').html(obj.symbol);
+          var el = $('.settlement-grid[data-x=' + (i + settlement.buildings[b].x) + '][data-y=' + (j + settlement.buildings[b].y) + ']');
+          if(i == 0) el.addClass("left-edge");
+          if(j == 0) el.addClass("top-edge");
+          if(i == obj.width-1)  el.addClass("right-edge");
+          if(j == obj.height-1) el.addClass("bottom-edge");
+          el.html(obj.symbol);
         }
       }
     }

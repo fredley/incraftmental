@@ -317,8 +317,8 @@ footer:hover {
     background: #555555;
     line-height: 20px;
     text-align: center;
-    border-right: 1px solid #444444;
-    border-bottom: 1px solid #444444; }
+    margin: 1px;
+    box-sizing: border-box; }
     #settlements .settlement-grid.new-row {
       clear: both; }
     #settlements .settlement-grid.hover-green {
@@ -327,3 +327,11 @@ footer:hover {
     #settlements .settlement-grid.hover-red {
       background: #965050;
       cursor: not-allowed; }
+    #settlements .settlement-grid.top-edge {
+      border-top: 1px solid #999999; }
+    #settlements .settlement-grid.right-edge {
+      border-right: 1px solid #999999; }
+    #settlements .settlement-grid.bottom-edge {
+      border-bottom: 1px solid #999999; }
+    #settlements .settlement-grid.left-edge {
+      border-left: 1px solid #999999; }
