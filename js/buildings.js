@@ -10,15 +10,15 @@ var buildings = {
     mill         : { width: 4, height: 8,   symbol: 'B', houses: 1,  cost: {stone: 100,   cobble: 800,   plank: 1000,  wood:  500},
                    tick : function(){
                      if(inventory.objects.items.seeds.quantity > 100){
-                       inventory.objects.items.seeds.quantity -= 100;
-                       inventory.objects.items.wheat.quantity += 100;
+                       inventory.addObject('seeds',-100);
+                       inventory.addObject('wheat',100);
                      }
                    }},
     bakery       : { width: 6, height: 6,   symbol: 'M', houses: 1,  cost: {stone: 1000,  cobble: 500,   plank: 600,   wood:  300,  dirt: 5000},
                    tick : function(){
                      if(inventory.objects.items.wheat.quantity > 100){
-                       inventory.objects.items.wheat.quantity -= 100;
-                       inventory.objects.items.bread.quantity += 100;
+                       inventory.addObject('wheat',-100);
+                       inventory.addObject('bread',100);
                      }
                    }},
     church       : { width: 8, height: 4,   symbol: '^', houses: 2,  cost: {stone: 5000,  cobble: 1000,  plank:1000,   wood: 1000,  glass: 5000, gold_ingot: 100},
@@ -41,7 +41,7 @@ var buildings = {
                    tick : function(){
                      for(var slug in this.objects.tools['diamond_pick'].gives){
                        if(Math.random() < this.objects.tools['diamond_pick'].gives[slug]){
-                         this.addObject(slug,this.objects.tools[tool].bonus * this.objects.tools[tool].quantity * 100);
+                         inventory.addObject(slug,this.objects.tools[tool].bonus * this.objects.tools[tool].quantity * 100);
                        }
                      }
                    }},
