@@ -21,6 +21,7 @@ tick : function(){
   villagers.doVillagers();
   inventory.updateDisplay();
   buttons.updateDisplay();
+  settlements.tick();
   var saveEvery = parseInt($('#autosave').val());
   if (saveEvery !== 0 && this.ticks % saveEvery == 0) {
   	this.save();
@@ -62,8 +63,6 @@ load : function(){
   villagers.population = data["villagers"];
   villagers.cost = (data["villager_cost"]) ? data["villager_cost"] : 1;
   settlements.occupied = data["settlements"];
-  if(settlements.occupied===undefined)
-    settlements.occupied=[];
   world.seed = data["world_seed"];
 },
 

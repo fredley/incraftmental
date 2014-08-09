@@ -113,4 +113,13 @@ var settlements = {
     this.updateDisplay();
   },
 
+  doBuildings : function(){
+    for(var i = 0; i < this.occupied.length; i++){
+      for(var b in this.occupied[i].buildings){
+        var building = buildings.getBuilding(b);
+        b.tick();
+      }
+    }
+  }
+
 };
