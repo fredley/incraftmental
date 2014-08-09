@@ -114,6 +114,14 @@ var settlements = {
   },
 
   doBuildings : function(){
+    if(Math.random() < 0.0001){
+      //ZMOBIES!1
+      var index = Math.floor(Math.random() * choices.length);
+      var toDestroy = this.occupied[index];
+      main.addAlert(toDestroy.name + ' was destroyed by zombies!');
+      toDestroy.buildings = [];
+      this.updateDisplay();
+    }
     for(var i = 0; i < this.occupied.length; i++){
       for(var b in this.occupied[i].buildings){
         var building = buildings.getBuilding(this.occupied[i].buildings[b].building);

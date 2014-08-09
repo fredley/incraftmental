@@ -22,6 +22,7 @@ var buildings = {
                     }},
     church       : { width: 8, height: 4,   symbol: '^', houses: 2,  cost: {stone: 5000,  cobble: 1000,  plank:1000,   wood: 1000,  glass: 5000, gold_ingot: 100},
                     tick : function(){
+                      // saves half of village in case of zombie attack
 
                     }},
     school       : { width: 6, height: 4,   symbol: 'S', houses: 2,  cost: {stone: 8000,  cobble: 1000,  plank:3000,   wood: 5000,  glass: 3000},
