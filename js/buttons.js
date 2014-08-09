@@ -147,12 +147,6 @@ init : function(){
   	$("#" + $(this).attr('data-for')).show();
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
-	
-	if($(this).attr('data-for')=="exploration")
-		main.map_visible=true;
-	else
-		main.map_visible=false;
-	
     var craftSmelt = ['crafting','smelting'].indexOf($(this).attr('data-for')) > -1;
     buttons.setSidebarVisiblity('villagers',craftSmelt);
     buttons.setSidebarVisiblity('inventory',$(this).attr('data-for') !== 'exploration');
@@ -275,10 +269,14 @@ hook_inventory : function(){
 
 hook_villagers : function(){
   $('.villager').on('click',function(e){
-    if(!inventory.selected) return;
-    var v = villagers.population[$(this).attr('data-id')];
+    if(!inventory.selected){
+      main.addMouseAlert("You must select an item!",e);
+      return;
+    }
+    var slug = $(this).attr('data-id');
+    var v = villagers.population[slug];
     if(inventory.selected && !v.enabled && inventory.in('tools',inventory.selected)){
-      villagers.assignProfession($(this).attr('data-id'),inventory.getObject(inventory.selected).profession,inventory.getObject(inventory.selected).bonus);
+      villagers.assignProfession(slug,inventory.getObject(inventory.selected).profession,1);
     }else{
       if(v.profession){
         var o = inventory.getObject(inventory.selected);
@@ -291,7 +289,8 @@ hook_villagers : function(){
            v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
            v.profession == 'chef'       && (o.cooked_from || o.food && o.recipe) ||
            v.profession == 'adventurer' && o.mob_drop ){
-          villagers.assignObject($(this).attr('data-id'),inventory.selected);
+          inventory.addObject(inventory.selected,-10);
+          villagers.assignObject(slug,inventory.selected);
         }else{
           main.addMouseAlert('This villager can\'t work with that :(',e);
         }
@@ -302,8 +301,8 @@ hook_villagers : function(){
   });
   $('.pause').on('click',function(e){
     e.stopPropagation();
-    var v = villagers.population[$(this).attr('data-id')];
-    if(!v.profession){
+    var v = villagers.population[slug];
+    if(!v.profession && !v.enabled){
       main.addMouseAlert('You must give a villager a tool to enable it',e);
       return;
     }

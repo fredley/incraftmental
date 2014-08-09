@@ -19,9 +19,9 @@ onload : function(){
 tick : function(){
   inventory.doTools();
   villagers.doVillagers();
+  settlements.doBuildings();
   inventory.updateDisplay();
   buttons.updateDisplay();
-  settlements.tick();
   var saveEvery = parseInt($('#autosave').val());
   if (saveEvery !== 0 && this.ticks % saveEvery == 0) {
   	this.save();

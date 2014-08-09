@@ -76,7 +76,9 @@ var villagers = {
       'profession' : null,
       'level' : 0,
       'enabled': false,
-      'assigned': null
+      'assigned': null,
+      'actions': 0,
+      'hunger': 0
     });
     this.updateDisplay();
   },
@@ -109,6 +111,28 @@ var villagers = {
     for(var i=0; i<this.population.length; i++){
       var v = this.population[i];
       if(v.profession && v.enabled && v.assigned && Math.random() < Math.pow(0.2 * v.level,2)){
+        if(v.hunger === 0){
+          //try and eat, else break
+          var foods = [];
+          for(var group in inventory.objects){
+            for(var object in inventory.objects[group]){
+              if(inventory.objects[group][object].food > 1 && inventory.objects[group][object].quantity > 0){
+                foods.push([object,inventory.objects[group][object].food]);
+              }
+            }
+          }
+          if(foods.length == 0){
+            $('.villager[data-id="' + i + '""]').addClass('hungry');
+            break;
+          }else{
+            var toEat = randomChoice(foods);
+            inventory.addObject(toEat[0],-1);
+            v.hunger = toEat[1] * 10;
+            $('.villager[data-id="' + i + '""]').removeClass('hungry');
+          }
+        }
+        v.actions++;
+        v.hunger--;
         this.professions[v.profession](v);
       }
     }
