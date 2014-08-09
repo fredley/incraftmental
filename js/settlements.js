@@ -115,12 +115,24 @@ var settlements = {
 
   doBuildings : function(){
     if(Math.random() < 0.0001){
-      //ZMOBIES!1
+      //ZMOBIES!
       var index = Math.floor(Math.random() * choices.length);
       var toDestroy = this.occupied[index];
-      main.addAlert(toDestroy.name + ' was destroyed by zombies!');
-      toDestroy.buildings = [];
-      this.updateDisplay();
+      var hasChurch = 0;
+      var hasBarracks = 0;
+      for(var b in toDestroy.buildings){
+        if(toDestroy.buildings[b].building == 'church'){
+          hasChurch = 1;
+        }
+        if(toDestroy.buildings[b].building == 'barracks'){
+          hasBarracks = 1;
+        }
+      }
+      if(Math.random() > hasChurch * 0.5 && Math.random() > hasBarracks * 0.9){
+        main.addAlert(toDestroy.name + ' was destroyed by zombies!');
+        toDestroy.buildings = [];
+        this.updateDisplay();
+      }
     }
     for(var i = 0; i < this.occupied.length; i++){
       for(var b in this.occupied[i].buildings){
