@@ -301,7 +301,7 @@ hook_villagers : function(){
   });
   $('.pause').on('click',function(e){
     e.stopPropagation();
-    var v = villagers.population[slug];
+    var v = villagers.population[$(this).attr('data-id')];
     if(!v.profession && !v.enabled){
       main.addMouseAlert('You must give a villager a tool to enable it',e);
       return;

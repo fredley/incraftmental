@@ -73,6 +73,8 @@ button:disabled:hover {
   #villagers .villager {
     width: 300px;
     border-bottom: 1px dashed #555555; }
+    #villagers .villager.hungry {
+      color: #965050; }
 
 #get-villager,
 #make-planks,
@@ -324,7 +326,7 @@ footer:hover {
     #settlements .settlement-grid.new-row {
       clear: both; }
     #settlements .settlement-grid.hover-green {
-      background: #1E8D1E;
+      background: #1e8d1e;
       cursor: pointer; }
     #settlements .settlement-grid.hover-red {
       background: #965050;

@@ -6,18 +6,34 @@ var buildings = {
     house        : { width: 2, height: 2,   symbol: 'H', houses: 0,  cost: {stone: 100,   cobble: 200,   plank: 400,   glass: 50 },
                     tick : function(){ //nop
                     }},
+    blacksmith   : {width: 4, height: 4,   symbol: '*', houses: 2,  cost: {stone: 500,   cobble: 10000,   plank: 1000,  wood:  1000},
+                    tick : function(){
+                      if(Math.random() < 0.9) return;
+                      var smeltables = [];
+                      for(var group in inventory.objects){
+                        for(var object in inventory.objects[group]){
+                          var o = inventory.objects[group][object];
+                          if(o.smelts_to && o.quantity > 100){
+                            smeltables.push(object);
+                          }
+                        }
+                      }
+                      var toSmelt = randomChoice(smeltables);
+                      inventory.addObject(toSmelt,-100)
+                      inventory.addObject(inventory.getObject(toSmelt).smelts_to,40);
+                    }},
     mill         : { width: 4, height: 8,   symbol: 'B', houses: 1,  cost: {stone: 100,   cobble: 800,   plank: 1000,  wood:  500},
                     tick : function(){
                       if(inventory.objects.items.seeds.quantity > 100){
                         inventory.addObject('seeds',-100);
-                        inventory.addObject('wheat',100);
+                        inventory.addObject('wheat',40);
                       }
                     }},
     bakery       : { width: 6, height: 6,   symbol: 'M', houses: 1,  cost: {stone: 1000,  cobble: 500,   plank: 600,   wood:  300,  dirt: 5000},
                     tick : function(){
                       if(inventory.objects.items.wheat.quantity > 100){
                         inventory.addObject('wheat',-100);
-                        inventory.addObject('bread',100);
+                        inventory.addObject('bread',40);
                       }
                     }},
     church       : { width: 8, height: 4,   symbol: '^', houses: 2,  cost: {stone: 5000,  cobble: 1000,  plank:1000,   wood: 1000,  glass: 5000, gold_ingot: 100},

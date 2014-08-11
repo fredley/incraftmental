@@ -40,7 +40,7 @@ var villagers = {
       var tool = inventory.getObject(villager.assigned);
       for(var slug in tool.gives){
         if(Math.random() / 5 < tool.gives[slug]){
-          inventory.addObject(slug,tool.bonus);
+          inventory.addObject(slug,tool.bonus * 15);
         }
       }
 
@@ -110,29 +110,28 @@ var villagers = {
   doVillagers : function(){
     for(var i=0; i<this.population.length; i++){
       var v = this.population[i];
-      if(v.profession && v.enabled && v.assigned && Math.random() < Math.pow(0.2 * v.level,2)){
+      if(v.profession && v.enabled && v.assigned && Math.random() < 0.2 * v.level){
+        v.hunger = Math.max(0,v.hunger-1);
         if(v.hunger === 0){
-          //try and eat, else break
+          //try and eat, else skip
           var foods = [];
           for(var group in inventory.objects){
             for(var object in inventory.objects[group]){
-              if(inventory.objects[group][object].food > 1 && inventory.objects[group][object].quantity > 0){
+              if(inventory.objects[group][object].food > 1 && inventory.objects[group][object].quantity > 10){
                 foods.push([object,inventory.objects[group][object].food]);
               }
             }
           }
           if(foods.length == 0){
-            $('.villager[data-id="' + i + '""]').addClass('hungry');
-            break;
+            continue;
           }else{
             var toEat = randomChoice(foods);
-            inventory.addObject(toEat[0],-1);
+            inventory.addObject(toEat[0],-10);
             v.hunger = toEat[1] * 10;
-            $('.villager[data-id="' + i + '""]').removeClass('hungry');
+            $('.villager[data-id="' + i + '"]').removeClass('hungry');
           }
         }
         v.actions++;
-        v.hunger--;
         this.professions[v.profession](v);
       }
     }
@@ -144,7 +143,9 @@ var villagers = {
     var villagerText = "<h3>Villagers</h3>";
     for(villager in this.population){
       var v = this.population[villager];
-      villagerText += '<div class="item villager" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">';
+      villagerText += '<div class="item villager';
+      villagerText += v.hunger == 0 ? ' hungry' : '';
+      villagerText += '" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">';
       villagerText += (v.enabled) ? '*' : '>';
       villagerText += '</span> ' + v.name.capitalize();
       if(v.level > 0){

@@ -2,6 +2,8 @@ $light:#999;
 $dark:#555;
 $darkest:#444;
 $highlight:#555;
+$red:#965050;
+$green:#1E8D1E;
 .chromeframe {
     margin: 0.2em 0;
     background: $light;
@@ -82,6 +84,9 @@ button:disabled:hover{
     .villager{
         width:300px;
         border-bottom: 1px dashed $dark;
+        &.hungry{
+            color:$red;
+        }
     }
 }
 #get-villager,
@@ -367,11 +372,11 @@ footer:hover{
             clear: both;
         }
         &.hover-green{
-            background: #1E8D1E;
+            background:$green;
             cursor:pointer;
         }
         &.hover-red{
-            background: #965050;
+            background: $red;
             cursor:not-allowed;
         }
         &.top-edge{    border-top:1px solid $light; }
