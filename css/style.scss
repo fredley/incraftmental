@@ -46,6 +46,8 @@ button:disabled:hover{
     padding: 20px;
     position: absolute;
     top: 40px;
+    max-height: 80%;
+    overflow:scroll;
     .item{
         font-size: 11px;
         float: left;

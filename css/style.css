@@ -41,7 +41,9 @@ button:disabled:hover {
   width: 300px;
   padding: 20px;
   position: absolute;
-  top: 40px; }
+  top: 40px;
+  max-height: 80%;
+  overflow: scroll; }
   .pane .item {
     font-size: 11px;
     float: left;

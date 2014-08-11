@@ -23,7 +23,7 @@ var buildings = {
     church       : { width: 8, height: 4,   symbol: '^', houses: 2,  cost: {stone: 5000,  cobble: 1000,  plank:1000,   wood: 1000,  glass: 5000, gold_ingot: 100},
                     tick : function(){
                       // saves half of village in case of zombie attack
-
+                      //nop
                     }},
     school       : { width: 6, height: 4,   symbol: 'S', houses: 2,  cost: {stone: 8000,  cobble: 1000,  plank:3000,   wood: 5000,  glass: 3000},
                     tick : function(){
@@ -31,13 +31,15 @@ var buildings = {
                       if(Math.random() < 0.001){
                         var elligible = [];
                         for(var i in villagers.population){
-                          if(villagers.population[i].level < 3){
+                          if(villagers.population[i].level < 3 && villagers.population[i].profession){
                             elligible.push(i);
                           }
                         }
+                        if(elligible.length > 1){
+                          villagers.population[randomChoice(elligible)].level++;
+                          main.addAlert('One of your villagers was upgraded at school!');
+                        }
                       }
-                      villagers.population[randomChoice(elligible)].level++;
-                      main.addAlert('One of your villagers was upgraded at school!');
                     }},
     farm         : { width: 8, height: 8,   symbol: 'F', houses: 4,  cost: {stone: 1000,  cobble: 900,   plank:10000,  wood: 5000,  dirt: 50000, sand: 50000},
                     tick : function(){
@@ -70,7 +72,7 @@ var buildings = {
                       if(Math.random() < 0.001){
                         var elligible = [];
                         for(var i in villagers.population){
-                          if(villagers.population[i].level < 5){
+                          if(villagers.population[i].level < 5 && villagers.population[i].profession){
                             elligible.push(i);
                           }
                         }
