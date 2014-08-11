@@ -43,6 +43,7 @@ save : function(){
   data["villager_cost"] = villagers.cost;
   data["world_seed"] = world.seed;
   data["settlements"] = settlements.occupied;
+  data["smelt_rate"] = inventory.smelt_rate;
   localStorage["save"] = JSON.stringify(data);
 },
 
@@ -60,6 +61,7 @@ load : function(){
       }
     }
   }
+  inventory.smelt_rate = data["smelt_rate"];
   villagers.population = data["villagers"];
   villagers.cost = (data["villager_cost"]) ? data["villager_cost"] : 1;
   settlements.occupied = data["settlements"];
