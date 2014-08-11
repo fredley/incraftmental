@@ -195,6 +195,12 @@ init : function(){
   $(".work-tab").on('click',function(){
     $('.page').hide();
   	$("#" + $(this).attr('data-for')).show();
+	
+	if($(this).attr('data-for')=="exploration")
+		main.map_visible=true;
+	else
+		main.map_visible=false;
+	
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
     var craftSmelt = ['crafting','smelting'].indexOf($(this).attr('data-for')) > -1;
