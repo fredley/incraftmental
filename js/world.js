@@ -2,11 +2,11 @@ var world = {
   seed: 0,
   world_structures: {},
   sprites: {},
-  camX: -16,
-  camY: -16,
+  camX: 0,
+  camY: 0,
   destX: 0,
   destY: 0,
-  size: 100,
+  size: 40,//*/100,
   color_dark: '#333',
   color_light:'#ddd',
   color_green:'#285',
@@ -14,8 +14,9 @@ var world = {
   clutter_symbols:['.', ',', '\'', '`'],
 
   structures: {
-    pyramid:  {display:'Pyramid', symbol: '^', danger: 4, chance: 0.005},
-    cave:     {display:'Cave',    symbol: 'o', danger: 1, chance: 0.01},
+    pyramid:    {display:'Pyramid',    symbol: '^', danger: 4, chance: 0.005},
+    cave:       {display:'Cave',       symbol: 'o', danger: 1, chance: 0.01},
+    settlement: {display:'Settlement', symbol: '#', danger: 0, chance: 0.012},
   },
 
   calculateDanger: function(x, y){
@@ -25,8 +26,8 @@ var world = {
   build: function(){
     for (var y = 0; y < this.size; y++){
       for (var x = 0; x < this.size; x++){
-        var noise_value = Math.abs(noise.simplex2(x/5,y/5));
-        var danger = this.calculateDanger(x - this.size/2, y - this.size/2);
+        var noise_value = Math.abs(noise.simplex2((x+this.camX)/5,(y+this.camY)/5));
+        var danger = this.calculateDanger((x+this.camX) - this.size/2, (y+this.camY) - this.size/2);
         for (var slug in this.structures){
           var structure = this.structures[slug];
           var dangerDiff = (structure.danger) ? Math.abs(danger - structure.danger) : 0;
@@ -39,8 +40,8 @@ var world = {
         if (x + '_' + y in this.world_structures) continue;
         if (noise_value < 0.2){
           var clutter = {
-            style:  this.clutter_colors[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * this.clutter_colors.length)],
-            symbol: this.clutter_symbols[Math.floor(Math.abs(noise.simplex2(y/5,x/5)) * this.clutter_symbols.length)]
+            style:  this.clutter_colors[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.clutter_colors.length)],
+            symbol: this.clutter_symbols[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.clutter_symbols.length)]
           };
           this.world_structures[x + '_' + y] = clutter;
         }
@@ -50,15 +51,15 @@ var world = {
 
   init: function(){
     if(this.seed === undefined || this.seed === 0){
-		this.world_structures={};
-  		this.seed = Math.random();
+		this.seed = Math.random();
   	}
+	this.world_structures={};
     noise.seed(this.seed);
     this.build();
     this.canvas = $('#world-div')[0];
     $('#blitCanvas').remove();
     this.context = this.canvas.getContext('2d');
-    this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px; top:-1000px;" id="blitCanvas"></canvas>');
+    this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px; top: -1000px;" id="blitCanvas"></canvas>');
     $(document.body).append(this.blitCanvas);
     this.blitCanvas = this.blitCanvas[0];
     this.blitContext = this.blitCanvas.getContext('2d');
@@ -90,12 +91,14 @@ var world = {
     this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
 	this.context.fillStyle = this.color_dark;
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.context.drawImage(this.blitCanvas, this.camX * 16, this.camY * 16);
+    this.context.drawImage(this.blitCanvas, 0, 0);
     this.context.fillStyle = this.color_green;
     this.context.fillText('웃', 320, 240);
   },
 
   move: function(relX, relY){
+	relX=-relX;
+	relY=-relY;
     if (this.isMoving) return;
     var startX = this.camX;
     var startY = this.camY;
@@ -122,6 +125,7 @@ var world = {
       this.interp = undefined;
       this.start = undefined;
       this.timeEnd = undefined;
+	  world.init();
     }
   }
 };
