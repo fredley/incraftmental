@@ -59,6 +59,52 @@ craftCount : function(n,e) {
   }
 },
 
+smelt : function(){
+  var fuel, input, fuel_object, input_object;
+  var fuel_level = inventory.objects.blocks.furnace.fuel_level;
+  fuel   = $("#smelt-fuel").attr('data-object');
+  input  = $("#smelt-input").attr('data-object');
+  fuel_object = inventory.getObject(fuel);
+  input_object = inventory.getObject(input);
+  if(!input || (!fuel && fuel_level.cur <= 0) || (fuel_level.cur <= 0 && fuel_object.fuel_source == undefined) || input_object.smelts_to == undefined){
+    main.addAlert("Smelting stopped");
+    inventory.smelting = false;
+    $('#smelt').html('SMELT');
+    return;
+  }
+  if($("#smelt-product").attr('data-object')){
+    inventory.addObject($("#smelt-product").attr('data-object'),1);
+    $("#smelt-product").removeAttr('data-object');
+    $("#smelt-product").html('');
+  }
+  if(fuel_level.cur <= 0){
+    fuel_level.max = fuel_object.fuel_source;
+    fuel_level.cur = fuel_level.max;
+    $('#fuel-line .bar').css('top',0);
+    if(fuel_object.quantity >= 10){
+      fuel_object.quantity -= 10;
+    }else{
+      $("#smelt-fuel").removeAttr('data-object');
+      $("#smelt-fuel").html('');
+    }
+  }
+  fuel_level.cur--;
+  if(input_object.quantity >= 10){
+    input_object.quantity -= 10;
+  }else{
+    $("#smelt-input").removeAttr('data-object');
+    $("#smelt-input").html('');
+  }
+  $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},10000,'linear');
+  $('#smelt-progress .bar').animate({'left': 0},10000,'linear',function(){
+    $(this).css('left','-90px');
+    $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
+    $("#smelt-product").append($('#blocks .block.' + input_object.smelts_to).clone());
+    setTimeout(function(){buttons.smelt();},500);
+  });
+  inventory.updateDisplay();
+},
+
 init : function(){
   $('#get-wood').on('click',function(){
     inventory.addObject('wood');
@@ -121,6 +167,10 @@ init : function(){
       }
       return;
     }
+    if(inventory.smelting){
+      main.addMouseAlert('Smelting in progress!',e);
+      return;
+    }
     if($(this).attr('data-object')){
       $(this).html("");
       inventory.addObject($(this).attr('data-object'),10);
@@ -153,9 +203,17 @@ init : function(){
     var width = craftSmelt ? 500 : 800;
     $('#work-area').css('width',width);
   });
+
   $('#smelt').on('click',function(e){
     if(inventory.smelting){
-      main.addMouseAlert("Smelting already in progress!",e);
+      $('.smelt-square.input').each(function(){
+        if($(this).attr('data-object')){
+          $(this).html('');
+          inventory.addObject($(this).attr('data-object'),10);
+          $(this).removeAttr('data-object');
+          inventory.updateDisplay();
+        }
+      });
       return;
     }
   	var fuel, input, output, timer;
@@ -183,26 +241,9 @@ init : function(){
       main.addMouseAlert("Furnace is full!",e);
       return;
     }
-  	if(fuel_level.cur <= 0){
-  	  fuel_level.max = inventory.getObject(fuel).fuel_source;
-  	  fuel_level.cur = fuel_level.max;
-      $('#fuel-line .bar').css('top',0);
-      $("#smelt-fuel").removeAttr('data-object');
-      $("#smelt-fuel").html('');
-  	}
-  	fuel_level.cur--;
-    $("#smelt-input").removeAttr('data-object');
-    $("#smelt-input").html('');
+    $('#smelt').html('STOP');
     inventory.smelting = true;
-    $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},10000,'linear');
-    $('#smelt-progress .bar').animate({'left': 0},10000,'linear',function(){
-      $(this).css('left','-90px');
-      inventory.smelting = false;
-      $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
-      $("#smelt-product").append($('#blocks .block.' + output).clone());
-      main.addAlert('Smelting Completed');
-    });
-    inventory.updateDisplay();
+  	buttons.smelt();
   });
   $('#craft').on('click',function(e) {
     buttons.craftCount(1,e);
