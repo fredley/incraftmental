@@ -95,8 +95,8 @@ smelt : function(){
     $("#smelt-input").removeAttr('data-object');
     $("#smelt-input").html('');
   }
-  $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},10000,'linear');
-  $('#smelt-progress .bar').animate({'left': 0},10000,'linear',function(){
+  $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},inventory.smelt_rate,'linear');
+  $('#smelt-progress .bar').animate({'left': 0},inventory.smelt_rate,'linear',function(){
     $(this).css('left','-90px');
     $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
     $("#smelt-product").append($('#blocks .block.' + input_object.smelts_to).clone());
