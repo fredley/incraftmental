@@ -8,19 +8,8 @@ var buildings = {
                     }},
     blacksmith   : {width: 4, height: 4,   symbol: '*', houses: 2,  cost: {stone: 500,   cobble: 10000,   plank: 1000,  wood:  1000},
                     tick : function(){
-                      if(Math.random() < 0.9) return;
-                      var smeltables = [];
-                      for(var group in inventory.objects){
-                        for(var object in inventory.objects[group]){
-                          var o = inventory.objects[group][object];
-                          if(o.smelts_to && o.quantity > 100){
-                            smeltables.push(object);
-                          }
-                        }
-                      }
-                      var toSmelt = randomChoice(smeltables);
-                      inventory.addObject(toSmelt,-100)
-                      inventory.addObject(inventory.getObject(toSmelt).smelts_to,40);
+                      // increases smelting rate
+                      //nop
                     }},
     mill         : { width: 4, height: 8,   symbol: 'B', houses: 1,  cost: {stone: 100,   cobble: 800,   plank: 1000,  wood:  500},
                     tick : function(){
@@ -127,6 +116,9 @@ var buildings = {
       case 'house':
         villagers.addVillager();
         main.addAlert('You got a new villager!');
+        break;
+      case 'blacksmith':
+        inventory.smelt_rate = inventory.smelt_rate * 0.75;
         break;
     }
   },

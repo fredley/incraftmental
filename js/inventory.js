@@ -2,6 +2,7 @@ var inventory = {
 
   selected : null,
   smelting : false,
+  smelt_rate : 10000,
 
   objects: {
 
