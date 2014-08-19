@@ -4,29 +4,52 @@ var world = {
   sprites: {},
   camX: 0,
   camY: 0,
+  posX: 20,
+  posY: 15,
   size: 40,
   t: 0,
+  blocked: [0,0,0,0], // NESW
   color_dark: '#333',
   color_light:'#ddd',
   color_green:'#285',
   clutter_colors:['#862','#531'],
   clutter_symbols:['.', ',', '\'', '`'],
 
+  danger: 0,
+
   structures: {
-    pyramid:    {display:'Pyramid',    symbol: '^', danger: 4, chance: 0.005},
-    cave:       {display:'Cave',       symbol: 'o', danger: 1, chance: 0.01},
-    settlement: {display:'Settlement', symbol: '#', danger: 0, chance: 0.012},
+    home:       {display:'Home',       symbol: 'H', color: '#0f0', danger: 0, chance: 0},
+    wall:       {display:'Wall',       symbol: 'X', color: '#555', danger: 0, chance: 0},
+    pyramid:    {display:'Pyramid',    symbol: '^', color: '#f94', danger: 4, chance: 0.005},
+    cave:       {display:'Cave',       symbol: 'o', color: '#999', danger: 1, chance: 0.01},
+    settlement: {display:'Settlement', symbol: '#', color: '#060', danger: 0, chance: 0.012},
   },
 
   calculateDanger: function(x, y){
-    return Math.floor(Math.sqrt(x * x + y * y) / 6);
+    var x2 = (x+this.camX) - this.size/2;
+    var y2 = (y+this.camY) - this.size/2;
+    return Math.floor(Math.sqrt(x2 * x2 + y2 * y2) / 6);
+  },
+
+  canMove: function(rX,rY){
+    if(rY == -1) return !this.blocked[0];
+    if(rX == 1)  return !this.blocked[1];
+    if(rY == 1)  return !this.blocked[2];
+    if(rX == -1) return !this.blocked[3];
   },
 
   build: function(){
+    this.blocked = [0,0,0,0];
     for (var y = 0; y < this.size; y++){
       for (var x = 0; x < this.size; x++){
+        if((x - this.posX + this.camX) == 0 && (y - this.posY + this.camY) == 0){
+          this.world_structures[x + '_' + y] = this.structures['home'];
+        }
         var noise_value = Math.abs(noise.simplex2((x+this.camX)/5,(y+this.camY)/5));
-        var danger = this.calculateDanger((x+this.camX) - this.size/2, (y+this.camY) - this.size/2);
+        var danger = this.calculateDanger(x,y);
+        if(x == this.posX && y == this.posY){
+          this.danger = danger;
+        }
         for (var slug in this.structures){
           var structure = this.structures[slug];
           var dangerDiff = (structure.danger) ? Math.abs(danger - structure.danger) : 0;
@@ -36,10 +59,17 @@ var world = {
             break;
           }
         }
-        if (x + '_' + y in this.world_structures) continue;
-        if (noise_value < 0.2){
+        if(x + '_' + y in this.world_structures){
+          // nop
+        }else if (noise_value < 0.1 * danger){
+          this.world_structures[x + '_' + y] = this.structures['wall'];
+          if(x == this.posX && y == this.posY - 1) this.blocked[0] = 1;
+          if(x == this.posX + 1 && y == this.posY) this.blocked[1] = 1;
+          if(x == this.posX && y == this.posY + 1) this.blocked[2] = 1;
+          if(x == this.posX - 1 && y == this.posY) this.blocked[3] = 1;
+        }else if (noise_value < 0.2){
           var clutter = {
-            style:  this.clutter_colors[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.clutter_colors.length)],
+            color:  this.clutter_colors[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.clutter_colors.length)],
             symbol: this.clutter_symbols[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.clutter_symbols.length)]
           };
           this.world_structures[x + '_' + y] = clutter;
@@ -75,8 +105,8 @@ var world = {
     for (var _pos in this.world_structures){
       var pos = _pos.split('_');
       var struct = this.world_structures[_pos];
-      if (struct.style)
-        bl.fillStyle = struct.style;
+      if (struct.color)
+        bl.fillStyle = struct.color;
       else
         bl.fillStyle = this.color_light;
       if (struct.symbol)
@@ -92,13 +122,14 @@ var world = {
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
     this.context.drawImage(this.blitCanvas, 0 - (this.t * this.relX * 16), 0 - (this.t * this.relY * 16));
     this.context.fillStyle = this.color_green;
-    this.context.fillText('웃', 320, 240);
+    this.context.fillText('웃', this.posX * 16, this.posY * 16);
   },
 
   move: function(relX, relY){
-    this.relX=-relX;
-    this.relY=-relY;
     if (this.isMoving) return;
+    if (!this.canMove(relX,relY)) return;
+    this.relX = relX;
+    this.relY = relY;
     var startX = this.camX;
     var startY = this.camY;
     var _world = this;

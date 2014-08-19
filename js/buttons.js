@@ -196,12 +196,12 @@ init : function(){
   $(".work-tab").on('click',function(){
     $('.page').hide();
   	$("#" + $(this).attr('data-for')).show();
-	
+
 	if($(this).attr('data-for')=="exploration")
 		main.map_visible=true;
 	else
 		main.map_visible=false;
-	
+
     $('.work-tab').removeClass('active');
     $(this).addClass('active');
     var craftSmelt = ['crafting','smelting'].indexOf($(this).attr('data-for')) > -1;
@@ -297,9 +297,11 @@ init : function(){
   $('body').on('keydown',function(e){
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
       // Because everyone loves stupid optimisation
-      var x =  (e.keyCode % 2)      * (e.keyCode - 38) * -1;
-      var y = ((e.keyCode % 2) - 1) * (e.keyCode - 39);
+      var x =  (e.keyCode % 2)      * (e.keyCode - 38);
+      var y = ((e.keyCode % 2) - 1) * (e.keyCode - 39) * -1;
       world.move(x,y);
+      e.preventDefault();
+      e.stopPropagation();
     }
   });
   this.hook_inventory();
