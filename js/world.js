@@ -4,9 +4,8 @@ var world = {
   sprites: {},
   camX: 0,
   camY: 0,
-  destX: 0,
-  destY: 0,
-  size: 40,//*/100,
+  size: 40,
+  t: 0,
   color_dark: '#333',
   color_light:'#ddd',
   color_green:'#285',
@@ -51,9 +50,9 @@ var world = {
 
   init: function(){
     if(this.seed === undefined || this.seed === 0){
-		this.seed = Math.random();
-  	}
-	this.world_structures={};
+      this.seed = Math.random();
+    }
+    this.world_structures={};
     noise.seed(this.seed);
     this.build();
     this.canvas = $('#world-div')[0];
@@ -89,16 +88,16 @@ var world = {
 
   render: function(){
     this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
-	this.context.fillStyle = this.color_dark;
+    this.context.fillStyle = this.color_dark;
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    this.context.drawImage(this.blitCanvas, 0, 0);
+    this.context.drawImage(this.blitCanvas, 0 - (this.t * this.relX * 16), 0 - (this.t * this.relY * 16));
     this.context.fillStyle = this.color_green;
     this.context.fillText('웃', 320, 240);
   },
 
   move: function(relX, relY){
-	relX=-relX;
-	relY=-relY;
+    this.relX=-relX;
+    this.relY=-relY;
     if (this.isMoving) return;
     var startX = this.camX;
     var startY = this.camY;
@@ -107,25 +106,26 @@ var world = {
     this.start = new Date().getTime();
     this.timeEnd = this.start + 1000;
     this.interp = (function(t){
-      this.camX = startX + t * relX;
-      this.camY = startY + t * relY;
+      this.camX = startX + t * this.relX;
+      this.camY = startY + t * this.relY;
     }).bind(this);
     window.requestAnimationFrame(this.moveStep.bind(this));
   },
 
   moveStep: function(){
     var curTime = new Date().getTime();
-    var t = Math.min(1,((curTime - this.start) / (this.timeEnd - this.start)) * 4);
-    this.interp(t);
+    this.t = Math.min(1,((curTime - this.start) / (this.timeEnd - this.start)) * 4);
+    this.interp(this.t);
     this.render();
-    if (t < 1){
+    if(this.t < 1){
       window.requestAnimationFrame(this.moveStep.bind(this));
-    } else {
+    }else{
       this.isMoving = false;
       this.interp = undefined;
       this.start = undefined;
       this.timeEnd = undefined;
-	  world.init();
+      this.t = 0;
+      world.init();
     }
   }
 };
