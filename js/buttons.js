@@ -100,7 +100,8 @@ smelt : function(){
     $(this).css('left','-90px');
     $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
     $("#smelt-product").append($('#blocks .block.' + input_object.smelts_to).clone());
-    setTimeout(function(){buttons.smelt();},500);
+    var reset_time = (fuel_level.cur == 0) ? 500 : 50;
+    setTimeout(function(){buttons.smelt();},reset_time);
   });
   inventory.updateDisplay();
 },
