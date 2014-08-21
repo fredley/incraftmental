@@ -66,8 +66,9 @@ var world = {
           this.world_structures[x + '_' + y] = this.structures['home'];
           continue;
         }
-        if(x + '_' + y in this.placed_structures){
-          this.world_structures[x + '_' + y] = this.structures[this.placed_structures[x + '_' + y]];
+        var key = (this.posX - x - this.camX) + '_' + (this.posY - y - this.camY);
+        if(key in this.placed_structures){
+          this.world_structures[x + '_' + y] = this.structures[this.placed_structures[key]];
           continue;
         }
         var noise_value = Math.abs(noise.simplex2((x+this.camX)/20,(y+this.camY)/20));
@@ -181,5 +182,20 @@ var world = {
       this.t = 0;
       world.init();
     }
+  },
+
+  place: function(item){
+    var key = this.posX + '_' + this.posY;
+    if(key in this.world_structures){
+      if($.inArray(this.world_structures[key].symbol,this.clutter_symbols) < 0){
+        return false;
+      }
+    }
+    if(key in this.placed_structures){
+      return false;
+    }
+    this.placed_structures[(-1 * this.camX) + '_' + (-1 * this.camY)] = item;
+    this.draw();
+    return true;
   }
 };
