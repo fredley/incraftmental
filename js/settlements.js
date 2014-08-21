@@ -116,7 +116,7 @@ var settlements = {
   doBuildings : function(){
     if(Math.random() < 0.0001){
       //ZMOBIES!
-      var index = Math.floor(Math.random() * choices.length);
+      var index = Math.floor(Math.random() * this.occupied.length);
       var toDestroy = this.occupied[index];
       var hasChurch = 0;
       var hasBarracks = 0;
