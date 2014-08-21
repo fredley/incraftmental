@@ -42,6 +42,13 @@ var world = {
     if(rX == -1) return !this.blocked[3];
   },
 
+  blockAt: function(x,y){
+    if(x == this.posX && y == this.posY - 1) this.blocked[0] = 1;
+    if(x == this.posX + 1 && y == this.posY) this.blocked[1] = 1;
+    if(x == this.posX && y == this.posY + 1) this.blocked[2] = 1;
+    if(x == this.posX - 1 && y == this.posY) this.blocked[3] = 1;
+  },
+
   build: function(){
     this.blocked = [0,0,0,0];
     for (var y = 0; y < this.size; y++){
@@ -63,10 +70,7 @@ var world = {
         }
         if(noise_value < 0.2 * Math.min(danger,1)){
           this.world_structures[x + '_' + y] = this.wall;
-          if(x == this.posX && y == this.posY - 1) this.blocked[0] = 1;
-          if(x == this.posX + 1 && y == this.posY) this.blocked[1] = 1;
-          if(x == this.posX && y == this.posY + 1) this.blocked[2] = 1;
-          if(x == this.posX - 1 && y == this.posY) this.blocked[3] = 1;
+          this.blockAt(x,y);
           continue;
         }
         if (noise_value > 0.6 && noise_value < 0.9){
@@ -78,6 +82,7 @@ var world = {
         }
         if(noise_value >= 0.9){
           this.world_structures[x + '_' + y] = this.water;
+          this.blockAt(x,y);
         }
       }
     }
