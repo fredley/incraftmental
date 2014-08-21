@@ -19,15 +19,20 @@ var world = {
 
   danger: 0,
 
-  home:       {display:'Home',       symbol: 'H', color: '#0f0'},
-  wall:       {display:'Wall',       symbol: 'X', color: '#666'},
-  water:      {display:'Water',      symbol: '~', color: '#55f'},
+  structures:{
+    home:       {display:'Home',       symbol: 'H', color: '#0f0'},
+    wall:       {display:'Wall',       symbol: 'X', color: '#666'},
+    water:      {display:'Water',      symbol: '~', color: '#55f'},
+    torch:      {display:'Torch',      symbol: 'i', color: '#ff0'},
+  },
 
-  structures: {
+  gen_structures: {
     cave:       {display:'Cave',       symbol: 'o', color: '#999'},
     pyramid:    {display:'Pyramid',    symbol: '^', color: '#f94'},
     settlement: {display:'Settlement', symbol: '#', color: '#3ff'},
   },
+
+  placed_structures: {},
 
   calculateDanger: function(x, y){
     var x2 = (x+this.camX) - this.size/2;
@@ -58,18 +63,22 @@ var world = {
           this.danger = danger;
         }
         if((x - this.posX + this.camX) == 0 && (y - this.posY + this.camY) == 0){
-          this.world_structures[x + '_' + y] = this.home;
+          this.world_structures[x + '_' + y] = this.structures['home'];
+          continue;
+        }
+        if(x + '_' + y in this.placed_structures){
+          this.world_structures[x + '_' + y] = this.structures[this.placed_structures[x + '_' + y]];
           continue;
         }
         var noise_value = Math.abs(noise.simplex2((x+this.camX)/20,(y+this.camY)/20));
         var struct_noise= Math.abs(noise.simplex2((x+this.camX),(y+this.camY)));
         if(struct_noise > 0.995){
-          var struct = this.structures[Object.keys(this.structures)[Math.floor(noise_value * Object.keys(this.structures).length)]];
+          var struct = this.gen_structures[Object.keys(this.gen_structures)[Math.floor(noise_value * Object.keys(this.gen_structures).length)]];
           this.world_structures[x + '_' + y] = struct;
           continue;
         }
         if(noise_value < 0.2 * Math.min(danger,1)){
-          this.world_structures[x + '_' + y] = this.wall;
+          this.world_structures[x + '_' + y] = this.structures['wall'];
           this.blockAt(x,y);
           continue;
         }
@@ -81,7 +90,7 @@ var world = {
           this.world_structures[x + '_' + y] = clutter;
         }
         if(noise_value >= 0.9){
-          this.world_structures[x + '_' + y] = this.water;
+          this.world_structures[x + '_' + y] = this.structures['water'];
           this.blockAt(x,y);
         }
       }
@@ -94,14 +103,18 @@ var world = {
     }
     this.world_structures={};
     noise.seed(this.seed);
-    this.build();
     this.canvas = $('#world-div')[0];
-    $('#blitCanvas').remove();
     this.context = this.canvas.getContext('2d');
+    $('#blitCanvas').remove();
     this.blitCanvas = $('<canvas width="1024" height="1024" style="position: absolute; left: -5000px; top: -1000px;" id="blitCanvas"></canvas>');
     $(document.body).append(this.blitCanvas);
     this.blitCanvas = this.blitCanvas[0];
     this.blitContext = this.blitCanvas.getContext('2d');
+    this.draw();
+  },
+
+  draw: function(){
+    this.build();
     this.renderBg();
     this.render(this.canvas);
   },
