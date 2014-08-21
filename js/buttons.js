@@ -299,6 +299,9 @@ init : function(){
 	  location.reload();
 	}
   });
+  $('#shade').on('click',function(){
+    $(this).hide();
+  });
   $('body').on('keydown',function(e){
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
       // Because everyone loves stupid optimisation

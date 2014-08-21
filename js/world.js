@@ -181,6 +181,10 @@ var world = {
       this.timeEnd = undefined;
       this.t = 0;
       world.init();
+      if(Math.random() < 0.5){
+        console.log('encounter!');
+        main.showPopup('encounter');
+      }
     }
   },
 

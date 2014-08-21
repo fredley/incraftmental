@@ -103,6 +103,12 @@ addMouseAlert : function(text,e){
     alert.remove();
   });
   $('body').append(alert);
+},
+
+showPopup : function(id){
+  $('#popup').html('');
+  $('#popup').append($('.'+id).clone());
+  $('#shade').show();
 }
 
 };
