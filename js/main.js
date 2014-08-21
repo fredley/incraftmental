@@ -44,6 +44,9 @@ save : function(){
   data["world_seed"] = world.seed;
   data["settlements"] = settlements.occupied;
   data["smelt_rate"] = inventory.smelt_rate;
+  data["structures"] = world.placed_structures;
+  data["camX"] = world.camX;
+  data["camY"] = world.camY;
   localStorage["save"] = JSON.stringify(data);
 },
 
@@ -66,6 +69,9 @@ load : function(){
   villagers.cost = (data["villager_cost"]) ? data["villager_cost"] : 1;
   settlements.occupied = data["settlements"];
   world.seed = data["world_seed"];
+  world.camX = data["camX"];
+  world.camY = data["camY"];
+  world.placed_structures = data["structures"];
 },
 
 addAlert : function(text){
