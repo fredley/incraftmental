@@ -266,6 +266,11 @@ init : function(){
     var y = $(this).attr('data-y');
     world.move(x,y);
   });
+  $('#place-torch').on('click',function(e){
+    if(!world.place('torch')){
+      main.addMouseAlert("You can't place that there",e);
+    }
+  });
   $('.building').on('click',function(){
     $('.building').removeClass('selected');
     $('.requirements').slideUp('fast');

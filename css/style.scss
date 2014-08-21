@@ -41,6 +41,9 @@ button:disabled:hover{
     color:$light;
     background: $dark;
 }
+button:focus{
+    outline:0;
+}
 .pane{
     display: none;
     border:1px solid $light;
@@ -311,6 +314,11 @@ footer:hover{
                 left:35px;
             }
         }
+    }
+    .explore-actions{
+        float: right;
+        clear: right;
+        margin-top: 40px;
     }
     .inner {
         margin-top: 0;

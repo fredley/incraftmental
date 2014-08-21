@@ -35,6 +35,9 @@ button:disabled:hover {
   color: #999999;
   background: #555555; }
 
+button:focus {
+  outline: 0; }
+
 .pane {
   display: none;
   border: 1px solid #999999;
@@ -278,6 +281,10 @@ footer:hover {
       #exploration .controls button.down {
         top: 70px;
         left: 35px; }
+  #exploration .explore-actions {
+    float: right;
+    clear: right;
+    margin-top: 40px; }
   #exploration .inner {
     margin-top: 0;
     padding: 15px; }
