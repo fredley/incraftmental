@@ -1,13 +1,13 @@
 .chromeframe {
   margin: 0.2em 0;
-  background: #999999;
-  color: #444444;
+  background: #999;
+  color: #444;
   padding: 0.2em 0; }
 
 body {
-  background: #444444;
+  background: #444;
   font-family: monospace;
-  color: #999999;
+  color: #999;
   font-size: 14px;
   line-height: 1.4; }
 
@@ -15,10 +15,10 @@ a {
   color: #0b0; }
 
 button {
-  background: #555555;
-  border: 1px solid #999999;
+  background: #555;
+  border: 1px solid #999;
   border-radius: 0;
-  color: #999999;
+  color: #999;
   cursor: pointer;
   margin: 5px 0 0 5px;
   border-radius: 4px;
@@ -33,7 +33,7 @@ button {
       background: transparent;
       color: #666; }
   button .progress {
-    background: #555555;
+    background: #555;
     width: 100%;
     height: 100%;
     position: absolute;
@@ -43,7 +43,7 @@ button {
     display: none; }
 
 button:hover {
-  color: #999999;
+  color: #999;
   background: dimgray; }
 
 button:focus {
@@ -51,7 +51,7 @@ button:focus {
 
 .pane {
   display: none;
-  border: 1px solid #999999;
+  border: 1px solid #999;
   width: 300px;
   padding: 20px;
   position: absolute;
@@ -65,7 +65,7 @@ button:focus {
     cursor: pointer;
     padding: 2px 5px; }
     .pane .item.selected {
-      background: #555555;
+      background: #555;
       border-radius: 4px; }
   .pane h3 {
     margin: 0;
@@ -79,14 +79,14 @@ button:focus {
   #inventory .inventory-item {
     width: 150px; }
     #inventory .inventory-item.selected {
-      background: #555555;
+      background: #555;
       border-radius: 4px; }
 
 #villagers {
   right: 390px; }
   #villagers .villager {
     width: 300px;
-    border-bottom: 1px dashed #555555; }
+    border-bottom: 1px dashed #555; }
     #villagers .villager.hungry {
       color: #965050; }
 
@@ -103,10 +103,10 @@ button:focus {
   position: absolute;
   margin: 30px 0px;
   z-index: 9001;
-  border: 1px solid #999999;
+  border: 1px solid #999;
   left: 15px;
   top: 15px;
-  background: #444444;
+  background: #444;
   padding: 10px; }
 
 #tabs {
@@ -117,9 +117,9 @@ button:focus {
 
 .work-tab {
   float: left;
-  border-top: 1px solid #999999;
-  border-left: 1px solid #999999;
-  border-right: 1px solid #999999;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  border-right: 1px solid #999;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 2px 10px;
@@ -129,12 +129,12 @@ button:focus {
   height: 20px;
   line-height: 20px; }
   .work-tab.active {
-    border-bottom: 1px solid #444444; }
+    border-bottom: 1px solid #444; }
 
 #work-area {
   float: left;
   clear: both;
-  border: 1px solid #999999;
+  border: 1px solid #999;
   padding: 10px;
   width: 500px;
   margin-top: 40px;
@@ -154,8 +154,8 @@ pre.block {
 #crafting {
   display: none; }
   #crafting #crafting-square {
-    border-top: 1px solid #999999;
-    border-left: 1px solid #999999;
+    border-top: 1px solid #999;
+    border-left: 1px solid #999;
     width: 345px;
     height: 345px;
     margin: 30px 15px;
@@ -164,9 +164,9 @@ pre.block {
     width: 115px;
     height: 115px;
     float: left;
-    border-bottom: 1px solid #999999;
-    border-right: 1px solid #999999;
-    background: #555555;
+    border-bottom: 1px solid #999;
+    border-right: 1px solid #999;
+    background: #555;
     padding: 7px 8px;
     box-sizing: border-box;
     cursor: pointer; }
@@ -190,16 +190,16 @@ pre.block {
     float: left;
     box-sizing: border-box; }
     #smelting .smelt-square.input {
-      border: 1px solid #999999;
-      background: #555555;
+      border: 1px solid #999;
+      background: #555;
       cursor: pointer;
       padding: 7px 8px; }
   #smelting .line {
-    border: 1px solid #999999;
+    border: 1px solid #999;
     position: relative;
     overflow: hidden; }
   #smelting .bar {
-    background: #999999;
+    background: #999;
     position: absolute; }
   #smelting #smelt-progress {
     margin-top: 45px;
@@ -226,21 +226,21 @@ pre.block {
     margin: 30px 15px; }
 
 #alerts {
-  background: #444444;
+  background: #444;
   position: absolute;
   bottom: 15px;
   left: 15px;
-  border: 1px solid #999999;
+  border: 1px solid #999;
   padding: 5px;
   width: 300px; }
   #alerts .alert {
-    border-bottom: 1px dashed #555555; }
+    border-bottom: 1px dashed #555; }
 
 .mouse-alert {
   position: absolute;
   z-index: 99;
-  background: #444444;
-  border: 1px solid #999999;
+  background: #444;
+  border: 1px solid #999;
   padding: 2px 5px; }
 
 footer {
@@ -262,12 +262,13 @@ footer:hover {
 #exploration {
   display: none; }
   #exploration canvas {
-    border: 1px solid #999999;
-    background: #555555;
+    border: 1px solid #999;
+    background: #555;
     margin: 10px;
     margin-bottom: 0px; }
   #exploration .controls {
     float: right;
+    clear: right;
     width: 80px;
     height: 80px;
     margin-right: 10px;
@@ -296,7 +297,7 @@ footer:hover {
   #exploration .explore-actions {
     float: right;
     clear: right;
-    margin-top: 40px; }
+    margin: 40px 0 20px; }
   #exploration .inner {
     margin-top: 0;
     padding: 15px; }
@@ -309,7 +310,7 @@ footer:hover {
     #settlements #lists h3 {
       margin: 0 0 10px 0; }
     #settlements #lists .list {
-      border: 1px solid #999999;
+      border: 1px solid #999;
       width: 200px;
       padding: 5px 10px;
       float: left;
@@ -320,14 +321,14 @@ footer:hover {
         cursor: pointer;
         padding: 2px 5px; }
         #settlements #lists .list .item.selected {
-          background: #555555;
+          background: #555;
           border-radius: 4px; }
           #settlements #lists .list .item.selected.building {
             font-weight: bold;
             color: #cccccc; }
             #settlements #lists .list .item.selected.building .requirements {
               font-weight: normal;
-              color: #999999; }
+              color: #999; }
         #settlements #lists .list .item .requirements {
           display: none; }
   #settlements #grid {
@@ -337,7 +338,7 @@ footer:hover {
     width: 20px;
     height: 20px;
     float: left;
-    background: #555555;
+    background: #555;
     line-height: 20px;
     text-align: center;
     margin: 1px;
@@ -345,19 +346,19 @@ footer:hover {
     #settlements .settlement-grid.new-row {
       clear: both; }
     #settlements .settlement-grid.hover-green {
-      background: #1e8d1e;
+      background: #1E8D1E;
       cursor: pointer; }
     #settlements .settlement-grid.hover-red {
       background: #965050;
       cursor: not-allowed; }
     #settlements .settlement-grid.top-edge {
-      border-top: 1px solid #999999; }
+      border-top: 1px solid #999; }
     #settlements .settlement-grid.right-edge {
-      border-right: 1px solid #999999; }
+      border-right: 1px solid #999; }
     #settlements .settlement-grid.bottom-edge {
-      border-bottom: 1px solid #999999; }
+      border-bottom: 1px solid #999; }
     #settlements .settlement-grid.left-edge {
-      border-left: 1px solid #999999; }
+      border-left: 1px solid #999; }
 
 #shade {
   position: fixed;
@@ -376,8 +377,8 @@ footer:hover {
   margin-left: -400px;
   width: 800px;
   min-height: 400px;
-  background: #444444;
-  border: 1px solid #999999;
+  background: #444;
+  border: 1px solid #999;
   z-index: 3;
   padding: 20px 40px;
   box-sizing: border-box; }
@@ -402,8 +403,10 @@ footer:hover {
   .encounter .combat-log .msg {
     height: 20px;
     width: 100%;
-    border-top: 1px solid #555555;
+    border-top: 1px solid #555;
     top: 300px;
     position: absolute;
     box-sizing: border-box;
     padding-left: 10px; }
+
+/*# sourceMappingURL=style.css.map */

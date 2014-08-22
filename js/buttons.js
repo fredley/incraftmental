@@ -267,6 +267,11 @@ init : function(){
     var y = $(this).attr('data-y');
     world.move(x,y);
   });
+  $('.explore_mine').on('click',function(){
+    var x = $(this).attr('data-x');
+    var y = $(this).attr('data-y');
+    world.mine(x,y);
+  });
   $('#place-torch').on('click',function(e){
     if(!world.place('torch')){
       main.addMouseAlert("You can't place that there",e);

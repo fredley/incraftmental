@@ -1,7 +1,6 @@
 var world = {
   seed: 0,
   world_structures: {},
-  sprites: {},
   camX: 0,
   camY: 0,
   posX: 20,
@@ -10,20 +9,22 @@ var world = {
   relY: 0,
   size: 40,
   t: 0,
-  blocked: [0,0,0,0], // NESW
-  color_dark: '#333',
+  color_dark: '#333', 
   color_light:'#ddd',
   color_green:'#285',
-  clutter_colors:['#285','#582','#592','#295','#4a6','#6a4'],
-  clutter_symbols:['.', ',', '\'', '`'],
+  grass_colors:['#285','#582','#592','#295','#4a6','#6a4'],
+  grass_symbols:['.', ',', '\'', '`'],
 
   danger: 0,
+  isMoving: false,
+  isMining: false,
 
   structures:{
     home:       {display:'Home',       symbol: 'H', color: '#0f0'},
     wall:       {display:'Wall',       symbol: 'X', color: '#666'},
     water:      {display:'Water',      symbol: '~', color: '#55f'},
     torch:      {display:'Torch',      symbol: 'i', color: '#ff0'},
+    mine:       {display:'Mine',       symbol: ' ', color: '#eee'},
   },
 
   gen_structures: {
@@ -40,18 +41,17 @@ var world = {
     return Math.min(4,Math.floor(Math.sqrt(x2 * x2 + y2 * y2) / 10));
   },
 
-  canMove: function(rX,rY){
-    if(rY == -1) return !this.blocked[0];
-    if(rX == 1)  return !this.blocked[1];
-    if(rY == 1)  return !this.blocked[2];
-    if(rX == -1) return !this.blocked[3];
+  blockAt: function(rX,rY){
+    var block = this.world_structures[(this.posX + parseInt(rX)) + '_' + (this.posY + parseInt(rY))];
+    return (typeof(block) === 'undefined') ? false : block;
   },
 
-  blockAt: function(x,y){
-    if(x == this.posX && y == this.posY - 1) this.blocked[0] = 1;
-    if(x == this.posX + 1 && y == this.posY) this.blocked[1] = 1;
-    if(x == this.posX && y == this.posY + 1) this.blocked[2] = 1;
-    if(x == this.posX - 1 && y == this.posY) this.blocked[3] = 1;
+  canMove: function(rX,rY){
+    var struct = this.blockAt(rX,rY);
+    if (struct && ['X','~'].indexOf(struct.symbol) > -1){
+      return false;
+    }
+    return true;
   },
 
   build: function(){
@@ -81,19 +81,17 @@ var world = {
         }
         if(noise_value < 0.2 * Math.min(danger,1)){
           this.world_structures[x + '_' + y] = this.structures['wall'];
-          this.blockAt(x,y);
           continue;
         }
         if (noise_value > 0.6 && noise_value < 0.9){
-          var clutter = {
-            color:  this.clutter_colors[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.clutter_colors.length)],
-            symbol: this.clutter_symbols[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.clutter_symbols.length)]
+          var grass = {
+            color:  this.grass_colors[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.grass_colors.length)],
+            symbol: this.grass_symbols[Math.floor(Math.abs(noise.simplex2((y+this.camY)/5,(x+this.camX)/5)) * this.grass_symbols.length)]
           };
-          this.world_structures[x + '_' + y] = clutter;
+          this.world_structures[x + '_' + y] = grass;
         }
         if(noise_value >= 0.9){
           this.world_structures[x + '_' + y] = this.structures['water'];
-          this.blockAt(x,y);
         }
       }
     }
@@ -149,14 +147,21 @@ var world = {
     this.context.fillText('웃', this.posX * 16, this.posY * 16);
   },
 
-  move: function(relX, relY){
-    if (this.isMoving) return;
-    if (!this.canMove(relX,relY)) return;
+  mine: function(rX,rY){
+    var block = this.blockAt(rX,rY);
+    if(!block || block.symbol !== 'X') return;
+    this.isMining = true;
+    this.move(rX,rY,true);
+  },
+
+  move: function(relX,relY,force){
+    force = (typeof(force) === 'undefined') ? false : force;
+    if (!force && this.isMoving) return;
+    if (!force && !this.canMove(relX,relY)) return;
     this.relX = relX;
     this.relY = relY;
     var startX = this.camX;
     var startY = this.camY;
-    var _world = this;
     this.isMoving = true;
     this.start = new Date().getTime();
     this.timeEnd = this.start + 1000;
@@ -180,6 +185,10 @@ var world = {
       this.start = undefined;
       this.timeEnd = undefined;
       this.t = 0;
+      if(this.isMining){
+        this.place('mine',true);
+        this.isMining = false;
+      }
       world.draw();
       if(Math.random() < 0.5){
         combat.startCombat(this.danger);
@@ -187,14 +196,15 @@ var world = {
     }
   },
 
-  place: function(item){
+  place: function(item,force){
+    force = (typeof(force) === 'undefined') ? false : force;
     var key = this.posX + '_' + this.posY;
-    if(key in this.world_structures){
-      if($.inArray(this.world_structures[key].symbol,this.clutter_symbols) < 0){
+    if(!force && key in this.world_structures){
+      if($.inArray(this.world_structures[key].symbol,this.grass_symbols) < 0){
         return false;
       }
     }
-    if(key in this.placed_structures){
+    if(!force && key in this.placed_structures){
       return false;
     }
     this.placed_structures[(-1 * this.camX) + '_' + (-1 * this.camY)] = item;

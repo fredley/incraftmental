@@ -299,7 +299,8 @@ footer:hover{
         margin-bottom: 0px;
     }
     .controls {
-        float: right;
+        float:right;
+        clear:right;
         width:80px;
         height:80px;
         margin-right:10px;
@@ -334,7 +335,7 @@ footer:hover{
     .explore-actions{
         float: right;
         clear: right;
-        margin-top: 40px;
+        margin: 40px 0 20px;
     }
     .inner {
         margin-top: 0;
