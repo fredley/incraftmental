@@ -262,6 +262,7 @@ init : function(){
     buttons.craftCount(100,e);
   });
   $('.explore_move').on('click',function(){
+    if(combat.inCombat) return;
     var x = $(this).attr('data-x');
     var y = $(this).attr('data-y');
     world.move(x,y);
@@ -300,10 +301,15 @@ init : function(){
 	}
   });
   $('#shade').on('click',function(){
+    if(combat.inCombat) return;
     $(this).hide();
+  });
+  $('#popup').on('click',function(e){
+    e.stopPropagation();
   });
   $('body').on('keydown',function(e){
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
+      if(combat.inCombat) return;
       // Because everyone loves stupid optimisation
       var x =  (e.keyCode % 2)      * (e.keyCode - 38);
       var y = ((e.keyCode % 2) - 1) * (e.keyCode - 39) * -1;
@@ -393,6 +399,25 @@ hook_settlements : function(){
   });
   $('#grid').on('mouseleave',function(){
     settlements.noHover();
+  });
+},
+
+hook_encounter : function(){
+  var popup = $('#shade .encounter');
+  popup.find('.fight').on('click',function(e){
+    if($(this).hasClass('disabled')) return;
+    combat.fight();
+    $(this).addClass('disabled');
+    var progress = $(this).find('.progress');
+    progress.css('left','-100%');
+    progress.show();
+    progress.animate({'left':'0%'},300,function(){
+      $(this).hide();
+      $(this).parent().removeClass('disabled');
+    })
+  });
+  popup.find('.run').on('click',function(e){
+    combat.run();
   });
 },
 

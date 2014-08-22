@@ -16,6 +16,7 @@
     <script src="js/villagers.js"></script>
     <script src="js/buttons.js"></script>
     <script src="js/world.js"></script>
+    <script src="js/combat.js"></script>
     <script src="js/buildings.js"></script>
     <script src="js/settlements.js"></script>
     <script src="js/main.js"></script>
@@ -124,9 +125,27 @@
   </div>
   <div id='popups'>
   <div class='encounter'>
-    <h3>You are attacked by a zmobie!</h3>
-    <button class='attack'>Attack it!</button>
-    <button class='run'>Run Away!</button>
+    <h3>You are attacked by a <span class='mob-name'></span>!</h3>
+    <div class='encounter-stats'>
+      <div class='buttons'>
+        <button class='fight'>
+          Fight it!
+          <div class='progress'></div>
+        </button>
+        <button class='run'>Run Away!</button>
+      </div>
+      <div class='stats-pane'>
+        <h4>You</h4>
+        <div class='stat-title'>HP:</div><div class='stat hp'></div>
+        <div class='stat-title'>Attack:</div><div class='stat attack'></div>
+      </div>
+      <div class='stats-pane'>
+        <h4 class='mob-name'></h4>
+        <div class='stat-title'>HP:</div><div class='stat mob-hp'></div>
+        <div class='stat-title'>Attack:</div><div class='stat mob-attack'></div>
+      </div>
+    </div>
+    <div class='combat-log'></div>
   </div>
   </div>
   <div id='blocks'>
