@@ -180,7 +180,7 @@ var world = {
       this.start = undefined;
       this.timeEnd = undefined;
       this.t = 0;
-      world.init();
+      world.draw();
       if(Math.random() < 0.5){
         combat.startCombat(this.danger);
       }
