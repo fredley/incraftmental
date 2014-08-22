@@ -56,6 +56,7 @@ var world = {
 
   build: function(){
     this.blocked = [0,0,0,0];
+    this.world_structures={};
     for (var y = 0; y < this.size; y++){
       for (var x = 0; x < this.size; x++){
         var danger = this.calculateDanger(x,y);
@@ -102,7 +103,6 @@ var world = {
     if(this.seed === undefined || this.seed === 0){
       this.seed = Math.random();
     }
-    this.world_structures={};
     noise.seed(this.seed);
     this.canvas = $('#world-div')[0];
     this.context = this.canvas.getContext('2d');
