@@ -150,6 +150,7 @@ var world = {
   mine: function(rX,rY){
     var block = this.blockAt(rX,rY);
     if(!block || block.symbol !== 'X') return;
+    inventory.addObject('iron_pickaxe',-10);
     this.isMining = true;
     this.move(rX,rY,true);
   },
@@ -190,7 +191,9 @@ var world = {
         this.isMining = false;
       }
       world.draw();
-      if(Math.random() < 0.5){
+      var struct = this.blockAt(0,0);
+      var torch = (struct && struct.symbol === 'i');
+      if(!torch && Math.random() < 0.5){
         combat.startCombat(this.danger);
       }
     }

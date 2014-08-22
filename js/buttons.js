@@ -267,14 +267,24 @@ init : function(){
     var y = $(this).attr('data-y');
     world.move(x,y);
   });
-  $('.explore_mine').on('click',function(){
+  $('.explore_mine').on('click',function(e){
+    if(inventory.getObject('iron_pickaxe').quantity < 10){
+      main.addMouseAlert('You need 10 iron pickaxes to mine',e);
+      return;
+    }
     var x = $(this).attr('data-x');
     var y = $(this).attr('data-y');
     world.mine(x,y);
   });
   $('#place-torch').on('click',function(e){
+    if(inventory.getObject('torch').quantity < 10){
+      main.addMouseAlert('You need 10 torches to light up the area',e);
+      return;
+    }
     if(!world.place('torch')){
-      main.addMouseAlert("You can't place that there",e);
+      main.addMouseAlert("You can't place a torch there",e);
+    }else{
+      inventory.addObject('torch',-10);
     }
   });
   $('.building').on('click',function(){

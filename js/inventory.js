@@ -82,7 +82,7 @@ var inventory = {
       diamond_shovel :  {display:'Diamond Shovel',  profession: 'labourer',   recipe: 'd  |  |' , bonus:5, gives: {dirt:0.8, flint:0.05, gravel:0.1, sand:0.2, clay:0.1}                            },
       wooden_pickaxe :  {display:'Wooden Pickaxe',  profession: 'smith',      recipe: 'PPP |  |', bonus:1, gives: {cobble:0.5, coal:0.05}                                                           },
       stone_pickaxe :   {display:'Stone Pickaxe',   profession: 'smith',      recipe: 'CCC |  |', bonus:2, gives: {cobble:0.8, coal:0.1, iron_ore:0.05}                                             },
-      iron_picaxe :     {display:'Iron Pickaxe',    profession: 'smith',      recipe: 'iii |  |', bonus:3, gives: {cobble:0.8, coal:0.1, iron_ore:0.1, gold_ore:0.01}                               },
+      iron_pickaxe :    {display:'Iron Pickaxe',    profession: 'smith',      recipe: 'iii |  |', bonus:3, gives: {cobble:0.8, coal:0.1, iron_ore:0.1, gold_ore:0.01}                               },
       gold_pickaxe :    {display:'Golden Pickaxe',  profession: 'smith',      recipe: 'ggg |  |', bonus:4, gives: {cobble:0.8, coal:0.1, iron_ore:0.1, gold_ore:0.02, diamond: 0.01}                },
       diamond_pickaxe : {display:'Diamond Pickaxe', profession: 'smith',      recipe: 'ddd |  |', bonus:5, gives: {cobble:0.8, coal:0.1, iron_ore:0.2, gold_ore:0.05, diamond: 0.02, redstone: 0.05}},
       wooden_axe :      {display:'Wooden Axe',      profession: 'builder',    recipe: 'PP P|  |', bonus:1, gives: {wood:0.5, apple:0.001}                                                           },
