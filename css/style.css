@@ -396,4 +396,14 @@ footer:hover {
   height: 300px;
   background: #2f2f2f;
   float: left;
-  margin-left: 10px; }
+  margin-left: 10px;
+  position: relative;
+  overflow: hidden; }
+  .encounter .combat-log .msg {
+    height: 20px;
+    width: 100%;
+    border-top: 1px solid #555555;
+    top: 300px;
+    position: absolute;
+    box-sizing: border-box;
+    padding-left: 10px; }

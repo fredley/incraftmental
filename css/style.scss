@@ -451,5 +451,16 @@ footer:hover{
         background: $sunk;
         float: left;
         margin-left: 10px;
+        position: relative;
+        overflow:hidden;
+        .msg{
+            height:20px;
+            width:100%;
+            border-top:1px solid $highlight;
+            top:300px;
+            position: absolute;
+            box-sizing: border-box;
+            padding-left:10px;
+        }
     }
 }

@@ -40,6 +40,7 @@ var combat = {
   },
 
   startCombat: function (danger) {
+    console.log('start combat');
     this.inCombat = true;
     this.fighting = this.getMob(danger);
     this.mobhp = this.mobs[this.fighting].hp;
@@ -47,7 +48,9 @@ var combat = {
     main.showPopup('encounter');
     buttons.hook_encounter();
     this.mobAttack = setInterval(function(){
-      combat.hp = Math.max(0,combat.hp - combat.mobs[combat.fighting].attack);
+      var mob = combat.mobs[combat.fighting];
+      combat.hp = Math.max(0,combat.hp - mob.attack);
+      combat.logMessage('The ' + combat.fighting.capitalize() + ' hit you for ' + mob.attack + ' points');
       if(combat.hp == 0){
         combat.lose();
         return;
@@ -59,14 +62,20 @@ var combat = {
   endCombat: function (){
     this.inCombat = false;
     this.fighting = null;
-    $('#popup').html('');
-    $('#shade').hide();
+    $('#popup .fight').addClass('disabled');
+    $('#popup .run').addClass('disabled');
     clearInterval(this.mobAttack);
+  },
+
+  logMessage: function(msg){
+    $('#popup .combat-log').append('<div class="msg">' + msg + '</div>');
+    $('#popup .msg').animate({'top':'-=20'},100,function(){});
   },
 
   fight: function(){
     if(this.canAttack){
       this.mobhp = Math.max(0, this.mobhp - this.attack);
+      this.logMessage('You hit the ' + this.fighting.capitalize() + ' for ' + this.attack + ' points');
       if(this.mobhp == 0){
         this.win();
         return;
@@ -87,10 +96,12 @@ var combat = {
   },
 
   win: function(){
+    combat.logMessage('You won the fight!');
     this.endCombat();
   },
 
   lose: function(){
+    combat.logMessage('You lost the fight!');
     this.endCombat();
   },
 

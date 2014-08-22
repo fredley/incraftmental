@@ -413,7 +413,9 @@ hook_encounter : function(){
     progress.show();
     progress.animate({'left':'0%'},300,function(){
       $(this).hide();
-      $(this).parent().removeClass('disabled');
+      if(combat.inCombat){
+        $(this).parent().removeClass('disabled');
+      }
     })
   });
   popup.find('.run').on('click',function(e){
