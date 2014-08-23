@@ -1,15 +1,16 @@
 var buttons = {
 
-getRecipeFromCraftingGrid : function() {
+getRecipeFromCraftingGrid : function(){
   var code = '';
   var needed = {};
   $('.craft-square').each(function(){
-    if($(this).attr('data-object')){
-      code += inventory.getObject($(this).attr('data-object')).symbol;
-      if($(this).attr('data-object') in needed){
-        needed[$(this).attr('data-object')]++;
+    var data = $(this).attr('data-object');
+    if(data){
+      code += inventory.getObject(data).symbol;
+      if(data in needed){
+        needed[data]++;
       }else{
-        needed[$(this).attr('data-object')] = 1;
+        needed[data] = 1;
       }
     }else{
       code += ' ';
@@ -19,7 +20,7 @@ getRecipeFromCraftingGrid : function() {
   return {code:code,needed:needed};
 },
 
-craftCount : function(n,e) {
+craftCount : function(n,e){
   var recipe = this.getRecipeFromCraftingGrid();
   var item = inventory.getObjectFromRecipe(recipe.code);
   if(!item){
