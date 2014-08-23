@@ -133,7 +133,6 @@ var inventory = {
 
   addObject : function(slug,quantity){
     if(typeof(quantity)==='undefined') quantity = 1;
-
     for(var group in this.objects){
       if(slug in this.objects[group]){
         this.objects[group][slug].quantity += quantity;

@@ -455,11 +455,13 @@ updateDisplay : function(){
   if(inventory.objects.blocks.furnace.hasOwned){
     $('#tab-crafting').show();
     $('#tab-smelting').show();
-    $('#tab-exploration').show();
-    $('#tab-settlements').show();
     if($('.work-tab.active').length !== 1){
       $('#tab-crafting').addClass('active');
     }
+  }
+  if(combat.unlocked()){
+    $('#tab-exploration').show();
+    $('#tab-settlements').show();
   }
   if(inventory.objects.items.apple.hasOwned){
     $('#get-villager').show();

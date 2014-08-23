@@ -144,4 +144,12 @@ var combat = {
     world.draw();
   },
 
+  unlocked: function(){
+    return inventory.objects.tools.wooden_sword.hasOwned ||
+           inventory.objects.tools.stone_sword.hasOwned ||
+           inventory.objects.tools.iron_sword.hasOwned ||
+           inventory.objects.tools.gold_sword.hasOwned ||
+           inventory.objects.tools.diamond_sword.hasOwned;
+  },
+
 };
