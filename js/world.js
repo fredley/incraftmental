@@ -192,8 +192,7 @@ var world = {
       }
       world.draw();
       var struct = this.blockAt(0,0);
-      var torch = (struct && struct.symbol === 'i');
-      if(!torch && Math.random() < 0.5){
+      if(!struct && struct !== ' ' && Math.random() < 0.5){
         combat.startCombat(this.danger);
       }
     }
