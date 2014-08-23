@@ -3,7 +3,7 @@ var combat = {
   hp: 20,
   maxhp: 20,
   mobhp: 0,
-  attack: 1,
+  // TODO
   fighting: null, // save this, so that quitting during a fight is a disadvantage
   canAttack: true,
   mobAttack: null,
@@ -29,14 +29,44 @@ var combat = {
     }
   },
 
+  getAttack: function(){
+    if(inventory.objects.tools.diamond_sword.quantity > 0) return 5;
+    if(inventory.objects.tools.gold_sword.quantity > 0)    return 4;
+    if(inventory.objects.tools.iron_sword.quantity > 0)    return 3;
+    if(inventory.objects.tools.stone_sword.quantity > 0)   return 2;
+    if(inventory.objects.tools.wooden_sword.quantity > 0)  return 1;
+    return 0;
+  },
+
+  getDefence: function(){
+    var classes = ['leather','iron','gold','diamond'];
+    var types = ['helmet','leggings','chest','boots'];
+    var value = 0;
+    for (type in types){
+      var pieceValue = 0;
+      for(cls in classes){
+        pieceValue = (inventory.objects.armour[classes[cls] + '_' + types[type]].quantity > 0) ? cls + 1 : pieceValue;
+      }
+      value += pieceValue;
+    }
+    return value;
+  },
+
+  reduceDamage: function(d){
+    return Math.round(d - this.getDefence() / 10);
+  },
+
   draw: function (el){
     if(typeof(el) === 'undefined') el = $('#shade .encounter');
     var mob = this.mobs[this.fighting];
     el.find('.mob-name').html(this.fighting.capitalize());
     el.find('.hp').html(this.hp + '/' + this.maxhp);
-    el.find('.attack').html(this.attack);
+    el.find('.attack').html(this.getAttack());
     el.find('.mob-hp').html(this.mobhp + '/' + mob.hp);
     el.find('.mob-attack').html(mob.attack);
+    if(inventory.objects.tools.bow.quantity > 0){
+      el.find('.fight-ranged').show();
+    }
   },
 
   startCombat: function (danger) {
@@ -50,7 +80,7 @@ var combat = {
     this.mobAttack = setInterval(function(){
       var mob = combat.mobs[combat.fighting];
       combat.hp = Math.max(0,combat.hp - mob.attack);
-      combat.logMessage('The ' + combat.fighting.capitalize() + ' hit you for ' + mob.attack + ' points');
+      combat.logMessage('The ' + combat.fighting.capitalize() + ' hit you for ' + combat.reduceDamage(mob.attack) + ' points');
       if(combat.hp == 0){
         combat.lose();
         return;
@@ -72,10 +102,15 @@ var combat = {
     $('#popup .msg').animate({'top':'-=20'},100,function(){});
   },
 
-  fight: function(){
+  fight: function(ranged){
+    var attack = (ranged) ? 1 : this.getAttack();
     if(this.canAttack){
-      this.mobhp = Math.max(0, this.mobhp - this.attack);
-      this.logMessage('You hit the ' + this.fighting.capitalize() + ' for ' + this.attack + ' points');
+      if(attack == 0){
+        this.logMessage("Without a sword you do no damage to the " + this.fighting.capitalize());
+      }else{
+        this.mobhp = Math.max(0, this.mobhp - attack);
+        this.logMessage('You hit the ' + this.fighting.capitalize() + ' for ' + attack + ' points');
+      }
       if(this.mobhp == 0){
         this.win();
         return;
@@ -103,6 +138,10 @@ var combat = {
   lose: function(){
     combat.logMessage('You lost the fight!');
     this.endCombat();
+    world.camX = 0;
+    world.camY = 0;
+    this.hp = this.maxhp;
+    world.draw();
   },
 
 };

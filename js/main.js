@@ -47,6 +47,7 @@ save : function(){
   data["structures"] = world.placed_structures;
   data["camX"] = world.camX;
   data["camY"] = world.camY;
+  data["hp"] = combat.hp;
   localStorage["save"] = JSON.stringify(data);
 },
 
@@ -72,6 +73,7 @@ load : function(){
   world.camX = data["camX"];
   world.camY = data["camY"];
   world.placed_structures = data["structures"];
+  combat.hp = data["hp"];
 },
 
 addAlert : function(text){

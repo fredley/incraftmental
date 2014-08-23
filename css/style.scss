@@ -112,7 +112,8 @@ button:focus{
 #make-crafting,
 #alerts,
 #popups,
-#blocks{
+#blocks,
+.fight-ranged{
     display:none;
 }
 #options-menu{
@@ -462,6 +463,7 @@ footer:hover{
             position: absolute;
             box-sizing: border-box;
             padding-left:10px;
+            overflow-x:hidden;
         }
     }
 }

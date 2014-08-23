@@ -95,7 +95,8 @@ button:focus {
 #make-crafting,
 #alerts,
 #popups,
-#blocks {
+#blocks,
+.fight-ranged {
   display: none; }
 
 #options-menu {
@@ -407,6 +408,7 @@ footer:hover {
     top: 300px;
     position: absolute;
     box-sizing: border-box;
-    padding-left: 10px; }
+    padding-left: 10px;
+    overflow-x: hidden; }
 
 /*# sourceMappingURL=style.css.map */

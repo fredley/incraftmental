@@ -406,7 +406,7 @@ hook_encounter : function(){
   var popup = $('#shade .encounter');
   popup.find('.fight').on('click',function(e){
     if($(this).hasClass('disabled')) return;
-    combat.fight();
+    combat.fight(false);
     $(this).addClass('disabled');
     var progress = $(this).find('.progress');
     progress.css('left','-100%');
@@ -416,7 +416,21 @@ hook_encounter : function(){
       if(combat.inCombat){
         $(this).parent().removeClass('disabled');
       }
-    })
+    });
+  });
+  popup.find('.fight-ranged').on('click',function(e){
+    if($(this).hasClass('disabled')) return;
+    combat.fight(true);
+    $(this).addClass('disabled');
+    var progress = $(this).find('.progress');
+    progress.css('left','-100%');
+    progress.show();
+    progress.animate({'left':'0%'},500,function(){
+      $(this).hide();
+      if(combat.inCombat){
+        $(this).parent().removeClass('disabled');
+      }
+    });
   });
   popup.find('.run').on('click',function(e){
     combat.run();

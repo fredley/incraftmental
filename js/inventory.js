@@ -102,7 +102,7 @@ var inventory = {
     armour : {
       leather_helmet :   {display:'Leather Cap',        recipe:'llll l'   },
       leather_chest :    {display:'Leather Tunic',      recipe:'l lllllll'},
-      leather_pants :    {display:'Leather Pants',      recipe:'llll ll l'},
+      leather_leggings : {display:'Leather Pants',      recipe:'llll ll l'},
       leather_boots :    {display:'Leather Boots',      recipe:'l ll l'   },
       iron_helmet :      {display:'Iron Helmet',        recipe:'iiii i'   },
       iron_chest :       {display:'Iron Chestplate',    recipe:'i iiiiiii'},
