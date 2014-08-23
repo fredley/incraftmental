@@ -437,6 +437,12 @@ hook_encounter : function(){
   });
 },
 
+hook_adventure: function(){
+  $('.move_adventure').on('click',function(){
+    adventure.go($(this).attr('data-direction'));
+  });
+},
+
 updateDisplay : function(){
   if(inventory.objects.blocks.wood.hasOwned){
     $('#make-planks').show();

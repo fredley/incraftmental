@@ -21,6 +21,7 @@ var world = {
 
   structures:{
     home:       {display:'Home',       symbol: 'H', color: '#0f0'},
+    settlement: {display:'Settlement', symbol: 'H', color: '#0ff'},
     wall:       {display:'Wall',       symbol: 'X', color: '#666'},
     water:      {display:'Water',      symbol: '~', color: '#55f'},
     torch:      {display:'Torch',      symbol: 'i', color: '#ff0'},
@@ -28,9 +29,9 @@ var world = {
   },
 
   gen_structures: {
-    cave:       {display:'Cave',       symbol: 'o', color: '#999'},
-    pyramid:    {display:'Pyramid',    symbol: '^', color: '#f94'},
-    settlement: {display:'Settlement', symbol: '#', color: '#3ff'},
+    cave:       {display:'Dark Cave',            symbol: 'o', color: '#a99', danger:1},
+    ruin:       {display:'Spooky Ruin',          symbol: '#', color: '#f94', danger:2},
+    settlement: {display:'Abandoned Settlement', symbol: 'H', color: '#f33', danger:3},
   },
 
   placed_structures: {},
@@ -192,8 +193,11 @@ var world = {
       }
       world.draw();
       var struct = this.blockAt(0,0);
-      if(!struct && struct !== ' ' && Math.random() < 0.5){
+      if(!struct && Math.random() < 0.5){
         combat.startCombat(this.danger);
+      }
+      if(struct && struct.danger){
+        adventure.startAdventure(struct.danger);
       }
     }
   },

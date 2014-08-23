@@ -18,6 +18,7 @@
     <script src="js/world.js"></script>
     <script src="js/combat.js"></script>
     <script src="js/buildings.js"></script>
+    <script src="js/adventure.js"></script>
     <script src="js/settlements.js"></script>
     <script src="js/main.js"></script>
   </head>
@@ -131,7 +132,7 @@
     <div id="popup"></div>
   </div>
   <div id='popups'>
-  <div class='encounter'>
+  <div class='popup encounter'>
     <h3>You are attacked by a <span class='mob-name'></span>!</h3>
     <div class='encounter-stats'>
       <div class='buttons'>
@@ -157,6 +158,15 @@
       </div>
     </div>
     <div class='combat-log'></div>
+  </div>
+  <div class='popup adventure'>
+    <h3>You find yourself lost in a <span class='adventure-name'></span>, where do you go?</h3>
+    <p class='adventure-text'></p>
+    <div class='buttons'>
+      <button class='move_adventure' data-direction='L'>Go Left</button>
+      <button class='move_adventure' data-direction='F'>Go Forward</button>
+      <button class='move_adventure' data-direction='R'>Go Right</button>
+    </div>
   </div>
   </div>
   <div id='blocks'>

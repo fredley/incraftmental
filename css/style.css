@@ -384,16 +384,16 @@ footer:hover {
   padding: 20px 40px;
   box-sizing: border-box; }
 
-.encounter .encounter-stats {
+.popup .encounter-stats {
   width: 300px;
   float: left; }
-  .encounter .encounter-stats .stats-pane {
+  .popup .encounter-stats .stats-pane {
     width: 150px;
     float: left; }
-    .encounter .encounter-stats .stats-pane .stat-title, .encounter .encounter-stats .stats-pane .stat {
+    .popup .encounter-stats .stats-pane .stat-title, .popup .encounter-stats .stats-pane .stat {
       width: 75px;
       float: left; }
-.encounter .combat-log {
+.popup .combat-log {
   width: 400px;
   height: 300px;
   background: #2f2f2f;
@@ -401,7 +401,7 @@ footer:hover {
   margin-left: 10px;
   position: relative;
   overflow: hidden; }
-  .encounter .combat-log .msg {
+  .popup .combat-log .msg {
     height: 20px;
     width: 100%;
     border-top: 1px solid #555;

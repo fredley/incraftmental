@@ -56,9 +56,10 @@ var combat = {
     return Math.round(d - this.getDefence() / 10);
   },
 
-  draw: function (el){
+  draw: function(el){
     if(typeof(el) === 'undefined') el = $('#shade .encounter');
     var mob = this.mobs[this.fighting];
+    if(!mob) return;
     el.find('.mob-name').html(this.fighting.capitalize());
     el.find('.hp').html(this.hp + '/' + this.maxhp);
     el.find('.attack').html(this.getAttack());
@@ -69,27 +70,29 @@ var combat = {
     }
   },
 
-  startCombat: function (danger) {
-    console.log('start combat');
+  startCombat: function(danger){
     this.inCombat = true;
     this.fighting = this.getMob(danger);
     this.mobhp = this.mobs[this.fighting].hp;
     this.draw($('#popups .encounter'));
     main.showPopup('encounter');
     buttons.hook_encounter();
+    var self = this;
+    console.log(self);
     this.mobAttack = setInterval(function(){
-      var mob = combat.mobs[combat.fighting];
-      combat.hp = Math.max(0,combat.hp - mob.attack);
-      combat.logMessage('The ' + combat.fighting.capitalize() + ' hit you for ' + combat.reduceDamage(mob.attack) + ' points');
-      if(combat.hp == 0){
-        combat.lose();
+      var mob = self.mobs[self.fighting];
+      console.log(self);
+      self.hp = Math.max(0,self.hp - mob.attack);
+      self.logMessage('The ' + self.fighting.capitalize() + ' hit you for ' + self.reduceDamage(mob.attack) + ' points');
+      if(self.hp == 0){
+        self.lose();
         return;
       }
-      combat.draw();
+      self.draw();
     },600);
   },
 
-  endCombat: function (){
+  endCombat: function(){
     this.inCombat = false;
     this.fighting = null;
     $('#popup .fight').addClass('disabled');
@@ -134,6 +137,12 @@ var combat = {
   win: function(){
     combat.logMessage('You won the fight!');
     this.endCombat();
+    if(adventure.inAdventure){
+      console.log('adventure!!');
+      setTimeout(function(){
+        adventure.wonFight();
+      },1000);
+    }
   },
 
   lose: function(){

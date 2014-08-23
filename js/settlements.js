@@ -8,14 +8,15 @@ var settlements = {
     while(this.nameUsed()){
       name = this.generateName(name);
     }
-    return {
+    this.occupied.push{
       name: name,
-      x: x, // coordinates in the world
+      x: x,
       y: y,
       height: height,
       width: width,
-      buildings: [] // e.g. { type: 'house', x: 0, y: 0 }
+      buildings: []
     };
+    return name;
   },
 
   generateName : function(){
