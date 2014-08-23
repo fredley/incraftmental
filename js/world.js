@@ -20,8 +20,8 @@ var world = {
   isMining: false,
 
   structures:{
-    home:       {display:'Home',       symbol: 'H', color: '#0f0'},
-    settlement: {display:'Settlement', symbol: 'H', color: '#0ff'},
+    home:       {display:'Home',       symbol: 'H', color: '#0f0', heals: true},
+    settlement: {display:'Settlement', symbol: 'H', color: '#0ff', heals: true},
     wall:       {display:'Wall',       symbol: 'X', color: '#666'},
     water:      {display:'Water',      symbol: '~', color: '#55f'},
     torch:      {display:'Torch',      symbol: 'i', color: '#ff0'},
@@ -199,9 +199,15 @@ var world = {
       var struct = this.blockAt(0,0);
       if(!struct && Math.random() < 0.5){
         combat.startCombat(this.danger);
+        return;
       }
       if(struct && struct.danger){
         adventure.startAdventure(struct.slug,struct.danger);
+        return;
+      }
+      if(struct && struct.heals){
+        combat.hp = combat.maxhp;
+        main.addAlert('You were healed!');
       }
     }
   },
@@ -210,7 +216,8 @@ var world = {
     force = (typeof(force) === 'undefined') ? false : force;
     var key = this.posX + '_' + this.posY;
     if(!force && key in this.world_structures){
-      if($.inArray(this.world_structures[key].symbol,this.grass_symbols) < 0){
+      if($.inArray(this.world_structures[key].symbol,this.grass_symbols) < 0 &&
+        this.world_structures[key].symbol !== ' '){
         return false;
       }
     }

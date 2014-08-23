@@ -9,16 +9,19 @@ var combat = {
   mobAttack: null,
 
   mobs : {
-    zombie:   { hp: 10, attack: 1 },
-    skeleton: { hp: 15, attack: 2 },
-    spider:   { hp: 10, attack: 3 },
-    enderman: { hp: 20, attack: 5 },
+    zombie:   { hp: 10, attack: 1, drops: { slug:'iron', quantity:50, display: 'iron ingots'}},
+    skeleton: { hp: 15, attack: 2, drops: { slug:'bonemeal', quantity:100, display: 'hunks of bonemeal'}},
+    spider:   { hp: 10, attack: 3, drops: { slug:'string', quantity:50, display: 'pieces of string'}},
+    enderman: { hp: 20, attack: 5, drops: { slug:'diamond', quantity:100, display: 'diamonds'}},
+    creeper:  { hp: 2,  attack: 10,drops: { slug:'gunpowder', quantity:100, display: 'bits of gunpowder'}},
   },
 
   getMob: function (danger) {
     var roll = Math.random();
     roll += danger * 0.1;
-    if (roll < 0.5) {
+    if(roll < 0.05){
+      return 'creeper';
+    }else if(roll < 0.5) {
       return 'zombie';
     }else if(roll < 1){
       return 'skeleton';
@@ -129,7 +132,10 @@ var combat = {
   },
 
   win: function(){
-    combat.logMessage('You won the fight!');
+    this.logMessage('You won the fight!');
+    var drops = this.mobs[this.fighting].drops;
+    inventory.addObject(drops.slug,drops.quantity);
+    this.logMessage('The ' + this.fighting.capitalize() + ' dropped ' + drops.quantity + ' ' + drops.display + '.');
     this.endCombat();
     if(adventure.inAdventure){
       setTimeout(function(){
@@ -141,7 +147,7 @@ var combat = {
   },
 
   lose: function(){
-    combat.logMessage('You lost the fight!');
+    this.logMessage('You lost the fight!');
     this.endCombat();
     world.camX = 0;
     world.camY = 0;
