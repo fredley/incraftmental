@@ -233,14 +233,18 @@ init : function(){
     inventory.smelting = true;
   	buttons.smelt();
   });
-  $('#craft').on('click',function(e) {
-    buttons.craftCount(1,e);
+  $('.craft').on('click',function(e){
+    buttons.craftCount(parseInt($(this).attr('data-count')),e);
   });
-  $('#craft_10').on('click',function(e) {
-    buttons.craftCount(10,e);
-  });
-  $('#craft_100').on('click',function(e) {
-    buttons.craftCount(100,e);
+  $('#clear').on('click',function(e){
+    $('.craft-square').each(function(){
+      var data = $(this).attr('data-object');
+      if(data){
+        inventory.addObject(data,10);
+        $(this).html('');
+        $(this).removeAttr('data-object');
+      }
+    });
   });
   $('.explore_move').on('click',function(){
     if(combat.inCombat) return;
