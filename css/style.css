@@ -57,7 +57,7 @@ button:focus {
   position: absolute;
   top: 40px;
   max-height: 80%;
-  overflow: scroll; }
+  overflow-y: scroll; }
   .pane .item {
     font-size: 11px;
     float: left;
