@@ -39,13 +39,11 @@ var combat = {
   },
 
   getDefence: function(){
-    var classes = ['leather','iron','gold','diamond'];
-    var types = ['helmet','leggings','chest','boots'];
     var value = 0;
-    for (type in types){
+    for (type in inventory.armourTypes){
       var pieceValue = 0;
-      for(cls in classes){
-        pieceValue = (inventory.objects.armour[classes[cls] + '_' + types[type]].quantity > 0) ? cls + 1 : pieceValue;
+      for(material in inventory.armourMaterials){
+        pieceValue = (inventory.objects.armour[inventory.armourMaterials[material] + '_' + inventory.armourTypes[type]].quantity > 0) ? cls + 1 : pieceValue;
       }
       value += pieceValue;
     }
@@ -150,6 +148,21 @@ var combat = {
     this.hp = this.maxhp;
     world.draw();
     $('#shade .close-button').show();
+    var weaponMaterial = false;
+    for(var material in inventory.toolMaterials){
+      if(inventory.objects.tools[inventory.toolMaterials[material] + '_sword'].quantity > 0){
+        weaponMaterial = material;
+      }
+    }
+    if(weaponMaterial){
+      inventory.addObject(weaponMaterial + '_sword',-1);
+      this.logMessage('You lost your sword!');
+    }
+    var torchLoss = Math.floor(Math.random() * inventory.objects.blocks.torch.quantity * 0.2);
+    if(torchLoss > 0){
+      inventory.addObject('torch', -1 * torchLoss);
+      this.logMessage('You lost ' + torchLoss + ' torches');
+    }
   },
 
   unlocked: function(){

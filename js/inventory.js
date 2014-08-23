@@ -119,6 +119,10 @@ var inventory = {
     }
   },
 
+  toolMaterials: ['wooden','stone','iron','gold','diamond'],
+  armourMaterials: ['leather','iron','gold','diamond'],
+  armourTypes: ['helmet','leggings','chest','boots'],
+
   init : function(){
     for(var group in this.objects){
       for(var object in this.objects[group]){
@@ -132,9 +136,8 @@ var inventory = {
   },
 
   hasOwnedTool: function(type){
-    var materials = ['wooden','stone','iron','gold','diamond'];
-    for(var material in materials){
-      if(this.objects.tools[materials[material] + '_' + type].hasOwned) return true;
+    for(var material in this.toolMaterials){
+      if(this.objects.tools[this.toolMaterials[material] + '_' + type].hasOwned) return true;
     }
     return false;
   },
