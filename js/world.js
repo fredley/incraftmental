@@ -36,6 +36,10 @@ var world = {
 
   placed_structures: {},
 
+  distance: function(){
+    Math.floor(Math.sqrt(this.camX * this.camX + this.camY * this.camY) / 10);
+  },
+
   calculateDanger: function(x, y){
     var x2 = (x+this.camX) - this.size/2;
     var y2 = (y+this.camY) - this.size/2;

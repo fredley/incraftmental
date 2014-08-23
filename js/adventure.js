@@ -58,7 +58,8 @@ var adventure = {
     this.inAdventure = false;
     this.lastAction = "You manage to find the exit!";
     if(this.name === 'settlement'){
-      var name = settlements.generate();
+      var size = Math.min(16,2 * world.distance);
+      var name = settlements.generate(world.camX,world.camY,size,size);
       this.lastAction += " You decide to name your new settlement " + name + ".";
       main.addAlert("You founded a new settlement!");
     }

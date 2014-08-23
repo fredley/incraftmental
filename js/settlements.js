@@ -8,14 +8,14 @@ var settlements = {
     while(this.nameUsed()){
       name = this.generateName(name);
     }
-    this.occupied.push{
+    this.occupied.push({
       name: name,
       x: x,
       y: y,
       height: height,
       width: width,
       buildings: []
-    };
+    });
     return name;
   },
 
