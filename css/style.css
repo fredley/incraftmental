@@ -100,6 +100,15 @@ button:focus {
 .close-button {
   display: none; }
 
+#buttons button {
+  display: block;
+  float: left; }
+
+#start-buttons {
+  float: left;
+  margin: 0;
+  padding: 0; }
+
 #options-menu {
   display: none;
   position: absolute;

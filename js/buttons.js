@@ -101,7 +101,9 @@ init : function(){
   $('#make-crafting').on('click',function(){
     if (inventory.canCraft('crafting_table')) {
 	  inventory.craft('crafting_table');
-	  main.addAlert('Made a Crafting Table!');
+    main.addAlert('Made a Crafting Table!');
+    main.addAlert('Click on items in your inventory to select them.');
+    $('#start-buttons').slideUp();
 	}
   });
   $('#get-villager').on('click',function(e){
@@ -112,6 +114,9 @@ init : function(){
       buttons.updateDisplay();
       inventory.updateDisplay();
       villagers.updateDisplay();
+      if(villagers.popuplation.length === 1){
+        main.addAlert('Click a villager to assign it');
+      }
     }else{
       main.addMouseAlert('Not enough Apples! :(',e);
     }
@@ -460,7 +465,7 @@ updateDisplay : function(){
     if($('.work-tab.active').length === 0){
       $('#crafting').show();
     }
-    $('#work-area').show();
+    $('#start-buttons').hide();
   }
   if(inventory.objects.blocks.furnace.hasOwned){
     $('#tab-crafting').show();
