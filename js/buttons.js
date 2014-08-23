@@ -1,6 +1,6 @@
 var buttons = {
 
-getRecipeFromCraftingGrid : function(){
+craftCount : function(n,e){
   var code = '';
   var needed = {};
   $('.craft-square').each(function(){
@@ -17,22 +17,17 @@ getRecipeFromCraftingGrid : function(){
     }
   });
   code = code.trim();
-  return {code:code,needed:needed};
-},
-
-craftCount : function(n,e){
-  var recipe = this.getRecipeFromCraftingGrid();
-  var item = inventory.getObjectFromRecipe(recipe.code);
+  var item = inventory.getObjectFromRecipe(code);
   if(!item){
     main.addMouseAlert('That\'s not a valid recipe :(',e);
     return;
   }
   var count = n;
-  for(material in recipe.needed){
-    count = Math.floor(Math.min(count,inventory.getObject(material).quantity / (10 * recipe.needed[material])));
+  for(material in needed){
+    count = Math.floor(Math.min(count,inventory.getObject(material).quantity / (10 * needed[material])));
   }
-  for(material in recipe.needed){
-    inventory.addObject(material,recipe.needed[material] * count * -10);
+  for(material in needed){
+    inventory.addObject(material,needed[material] * count * -10);
   }
   if(count !== n){
     $('.craft-square').html('');
