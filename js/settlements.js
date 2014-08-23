@@ -3,19 +3,21 @@ var settlements = {
   occupied : [],
   selected : null,
 
-  generate : function(x,y,height,width){
+  generate : function(size){
     var name = this.generateName();
     while(this.nameUsed()){
       name = this.generateName(name);
     }
     this.occupied.push({
       name: name,
-      x: x,
-      y: y,
-      height: height,
-      width: width,
+      x: world.camX,
+      y: world.camY,
+      height: size,
+      width: size,
       buildings: []
     });
+    this.updateDisplay();
+    world.place('settlement',true);
     return name;
   },
 

@@ -12,6 +12,7 @@ var adventure = {
     this.danger = danger;
     this.attemptCode = '';
     this.name = name;
+    console.log(name);
     this.lastAction = 'You find yourself in a ' + world.gen_structures[name].display + ', at a fork in the path. Which way do you go?';
     this.generateEscapeCode();
     this.draw();
@@ -27,8 +28,13 @@ var adventure = {
 
   go: function(code){
     this.attemptCode += code;
-    if(this.attemptCode === this.escapeCode) this.escape();
-    if(this.escapeCode.indexOf(this.attemptCode) !== 0) this.attemptCode = '';
+    if(this.attemptCode === this.escapeCode){
+      this.escape();
+      return;
+    }
+    if(this.escapeCode.indexOf(this.attemptCode) !== 0){
+      this.attemptCode = (this.escapeCode.indexOf(code) === 0) ? code : '';
+    }
     switch(code){
       case 'L':
         this.lastAction = "You turn left";
@@ -40,7 +46,7 @@ var adventure = {
         this.lastAction = "You carry straight on";
         break;
     }
-    if(Math.random() < 0.5){
+    if(Math.random() < 0.0){
         combat.startCombat(this.danger);
         this.lastAction += ", and having defeated your foe, come to a fork in the path. Which way do you go?";
         return;
@@ -59,7 +65,7 @@ var adventure = {
     this.lastAction = "You manage to find the exit!";
     if(this.name === 'settlement'){
       var size = Math.min(16,2 * world.distance);
-      var name = settlements.generate(world.camX,world.camY,size,size);
+      var name = settlements.generate(size);
       this.lastAction += " You decide to name your new settlement " + name + ".";
       main.addAlert("You founded a new settlement!");
     }

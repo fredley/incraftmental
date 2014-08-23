@@ -29,9 +29,9 @@ var world = {
   },
 
   gen_structures: {
-    cave:       {display:'Dark Cave',            symbol: 'o', color: '#a99', danger:1},
-    ruin:       {display:'Spooky Ruin',          symbol: '#', color: '#f94', danger:2},
-    settlement: {display:'Abandoned Settlement', symbol: 'H', color: '#f33', danger:3},
+    cave:       {slug:'cave',       display:'Dark Cave',            symbol: 'o', color: '#a99', danger:1},
+    ruin:       {slug:'ruin',       display:'Spooky Ruin',          symbol: '#', color: '#f94', danger:2},
+    settlement: {slug:'settlement', display:'Abandoned Settlement', symbol: 'H', color: '#f33', danger:3},
   },
 
   placed_structures: {},
@@ -201,7 +201,7 @@ var world = {
         combat.startCombat(this.danger);
       }
       if(struct && struct.danger){
-        adventure.startAdventure(struct.danger);
+        adventure.startAdventure(struct.slug,struct.danger);
       }
     }
   },
