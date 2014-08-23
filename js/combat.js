@@ -95,6 +95,7 @@ var combat = {
     $('#popup .fight').addClass('disabled');
     $('#popup .run').addClass('disabled');
     clearInterval(this.mobAttack);
+    this.draw();
   },
 
   logMessage: function(msg){
