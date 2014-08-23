@@ -300,10 +300,6 @@ init : function(){
 	  location.reload();
 	}
   });
-  $('#shade').on('click',function(){
-    if(combat.inCombat) return;
-    $(this).hide();
-  });
   $('#popup').on('click',function(e){
     e.stopPropagation();
   });
@@ -435,11 +431,19 @@ hook_encounter : function(){
   popup.find('.run').on('click',function(e){
     combat.run();
   });
+  popup.find('.close-button').on('click',function(){
+    $('#shade').hide();
+  });
 },
 
 hook_adventure: function(){
-  $('.move_adventure').on('click',function(){
+  var popup = $('#shade .adventure');
+  popup.find('.move_adventure').on('click',function(){
+    if($(this).hasClass('disabled')) return;
     adventure.go($(this).attr('data-direction'));
+  });
+  popup.find('.close-button').on('click',function(){
+    $('#shade').hide();
   });
 },
 

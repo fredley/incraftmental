@@ -137,6 +137,8 @@ var combat = {
       setTimeout(function(){
         adventure.wonFight();
       },1000);
+    }else{
+      $('#shade .close-button').show();
     }
   },
 
@@ -147,6 +149,7 @@ var combat = {
     world.camY = 0;
     this.hp = this.maxhp;
     world.draw();
+    $('#shade .close-button').show();
   },
 
   unlocked: function(){

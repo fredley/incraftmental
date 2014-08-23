@@ -79,9 +79,10 @@ var adventure = {
     el.find('.adventure-text').html(this.lastAction);
     if(this.inAdventure){
       $('.adventure_move').removeClass('disabled');
-      buttons.hook_adventure();
     }else{
       $('.adventure_move').addClass('disabled');
+      $('#shade .close-button').show();
     }
+    buttons.hook_adventure();
   }
 };

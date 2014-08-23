@@ -96,7 +96,8 @@ button:focus {
 #alerts,
 #popups,
 #blocks,
-.fight-ranged {
+.fight-ranged,
+.close-button {
   display: none; }
 
 #options-menu {
