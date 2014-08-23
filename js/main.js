@@ -121,17 +121,6 @@ String.prototype.capitalize = function() {
 String.prototype.contains = function(s) {
     return this.indexOf(s) > -1;
 }
-String.prototype.formatAnMultiple = function(pluralCount) {
-  var prefix = '';
-  var postfix = '';
-  if (pluralCount > 1){
-    prefix = pluralCount + ' ';
-    postfix = 's';
-  }else{
-    prefix = (['A','E','I','O','U'].indexOf(this[0]) > -1) ? 'an ' : 'a ';
-  }
-  return prefix + this + postfix;
-}
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

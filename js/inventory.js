@@ -126,6 +126,7 @@ var inventory = {
         item.quantity = 0;
         item.hasOwned = false;
         item.slug = object;
+        item.yield = (item.yield) ? item.yield : 1;
       }
     }
   },
