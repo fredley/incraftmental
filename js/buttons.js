@@ -467,6 +467,8 @@ updateDisplay : function(){
   }
   if(combat.unlocked()){
     $('#tab-exploration').show();
+  }
+  if(settlements.occupied.length > 0){
     $('#tab-settlements').show();
   }
   if(inventory.objects.items.apple.hasOwned){
