@@ -334,41 +334,53 @@ hook_inventory : function(){
 
 hook_villagers : function(){
   $('.villager').on('click',function(e){
-    if(!inventory.selected){
-      main.addMouseAlert("You must select an item!",e);
-      return;
-    }
     var slug = $(this).attr('data-id');
     var v = villagers.population[slug];
-    if(inventory.selected && !v.enabled && inventory.in('tools',inventory.selected)){
-      villagers.assignProfession(slug,inventory.getObject(inventory.selected).profession,1);
+    if(!v.profession){
+      main.selectedVillager = slug;
+      main.showPopup('villager-assign');
+      var el = $('#shade .villager-assign');
+      el.find('.villager-name').html(v.name);
+      el.find('.villager-choice').each(function(){
+        if(!inventory.hasOwnedTool($(this).attr('data-tool'))){
+          $(this).addClass('disabled');
+          $(this).append('<div class="disabled-text">Unlock this villager type by crafting a ' + $(this).attr('data-tool') + '</div>');
+        }
+      });
+      el.find('button').on('click',function(){
+        villagers.assignProfession(slug,$(this).parent().parent().attr('data-choice'),1);
+        $('#shade').hide();
+      });
+      return;
+    }
+    if(!inventory.selected){
+      main.addMouseAlert("You must select an item to assign!",e);
+      return;
+    }
+    var o = inventory.getObject(inventory.selected);
+    if(o.quantity < 10){
+      main.addMouseAlert('You must have 10 of an object to assign it',e);
+      return;
+    }
+    if(v.profession == 'smith'      && o.smelts_to && !o.food ||
+       v.profession == 'builder'    && o.recipe    && !o.food ||
+       v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
+       v.profession == 'chef'       && (o.cooked_from || o.food && o.recipe) ||
+       v.profession == 'adventurer' && o.mob_drop ){
+      inventory.addObject(inventory.selected,-10);
+      villagers.assignObject(slug,inventory.selected);
     }else{
-      if(v.profession){
-        var o = inventory.getObject(inventory.selected);
-        if(o.quantity < 10){
-          main.addMouseAlert('You must have 10 of an object to assign it',e);
-          return;
-        }
-        if(v.profession == 'smith'      && o.smelts_to && !o.food ||
-           v.profession == 'builder'    && o.recipe    && !o.food ||
-           v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
-           v.profession == 'chef'       && (o.cooked_from || o.food && o.recipe) ||
-           v.profession == 'adventurer' && o.mob_drop ){
-          inventory.addObject(inventory.selected,-10);
-          villagers.assignObject(slug,inventory.selected);
-        }else{
-          main.addMouseAlert('This villager can\'t work with that :(',e);
-        }
-      }else{
-        main.addMouseAlert('Select a tool to assign a villager.',e);
-      }
+      main.addMouseAlert('This villager can\'t work with that :(',e);
     }
   });
   $('.pause').on('click',function(e){
-    e.stopPropagation();
     var v = villagers.population[$(this).attr('data-id')];
-    if(!v.profession && !v.enabled){
-      main.addMouseAlert('You must give a villager a tool to enable it',e);
+    if(!v.profession){
+      return;
+    }
+    e.stopPropagation();      
+    if(!v.assigned){
+      main.addMouseAlert('You must assign an item to a villager to enable it.',e);
       return;
     }
     v.enabled = !v.enabled;

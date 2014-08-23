@@ -131,6 +131,14 @@ var inventory = {
     }
   },
 
+  hasOwnedTool: function(type){
+    var materials = ['wooden','stone','iron','gold','diamond'];
+    for(var material in materials){
+      if(this.objects.tools[materials[material] + '_' + type].hasOwned) return true;
+    }
+    return false;
+  },
+
   addObject : function(slug,quantity){
     if(typeof(quantity)==='undefined') quantity = 1;
     for(var group in this.objects){
