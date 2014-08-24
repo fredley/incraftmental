@@ -107,6 +107,9 @@ button:focus{
         }
     }
 }
+#buttons button{
+    float:left;
+}
 #get-villager,
 #make-planks,
 #make-crafting,
@@ -116,10 +119,6 @@ button:focus{
 .fight-ranged,
 .close-button{
     display:none;
-}
-#buttons button{
-    display: block;
-    float:left;
 }
 #start-buttons{
     float:left;

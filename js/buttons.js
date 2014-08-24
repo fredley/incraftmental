@@ -114,7 +114,7 @@ init : function(){
       buttons.updateDisplay();
       inventory.updateDisplay();
       villagers.updateDisplay();
-      if(villagers.popuplation.length === 1){
+      if(villagers.poplation.length === 1){
         main.addAlert('Click a villager to assign it');
       }
     }else{
