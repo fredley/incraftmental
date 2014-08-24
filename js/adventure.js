@@ -12,7 +12,6 @@ var adventure = {
     this.danger = danger;
     this.attemptCode = '';
     this.name = name;
-    console.log(name);
     this.lastAction = 'You find yourself in a ' + world.gen_structures[name].display + ', at a fork in the path. Which way do you go?';
     this.generateEscapeCode();
     this.draw();
@@ -60,11 +59,11 @@ var adventure = {
   },
 
   escape: function(){
-    console.log('escaped!');
     this.inAdventure = false;
     this.lastAction = "You manage to find the exit!";
     if(this.name === 'settlement'){
-      var size = Math.min(16,2 * world.distance);
+      var size = Math.min(16,2 * world.distance());
+      console.log(size);
       var name = settlements.generate(size);
       this.lastAction += " You decide to name your new settlement " + name + ".";
       main.addAlert("You founded a new settlement!");
