@@ -117,7 +117,7 @@ var villagers = {
           var foods = [];
           for(var group in inventory.objects){
             for(var object in inventory.objects[group]){
-              if(inventory.objects[group][object].food > 1 && inventory.objects[group][object].quantity > 10){
+              if(inventory.objects[group][object].food > 1 && inventory.objects[group][object].quantity >= 10){
                 foods.push([object,inventory.objects[group][object].food]);
               }
             }
