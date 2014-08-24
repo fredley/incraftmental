@@ -58,6 +58,10 @@ var adventure = {
     this.draw();
   },
 
+  lostFight: function(){
+    this.inAdventure = false;
+  },
+
   escape: function(){
     this.inAdventure = false;
     this.lastAction = "You manage to find the exit!";
@@ -72,15 +76,16 @@ var adventure = {
   },
 
   draw: function(){
+    console.log(this.inAdventure);
     main.showPopup('adventure');
     el = $('#shade .adventure');
     el.find('.adventure-name').html(this.name);
     el.find('.adventure-text').html(this.lastAction);
     if(this.inAdventure){
-      $('.adventure_move').removeClass('disabled');
+      el.find('.move_adventure').removeClass('disabled');
     }else{
-      $('.adventure_move').addClass('disabled');
-      $('#shade .close-button').show();
+      el.find('.move_adventure').addClass('disabled');
+      el.find('.close-button').show();
     }
     buttons.hook_adventure();
   }

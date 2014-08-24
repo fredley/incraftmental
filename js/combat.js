@@ -155,6 +155,9 @@ var combat = {
     this.hp = this.maxhp;
     world.draw();
     $('#shade .close-button').show();
+    if(adventure.inAdventure){
+      adventure.lostFight();
+    }
     var weaponMaterial = false;
     for(var material in inventory.toolMaterials){
       if(inventory.objects.tools[inventory.toolMaterials[material] + '_sword'].quantity > 0){
