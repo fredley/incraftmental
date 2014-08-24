@@ -117,7 +117,7 @@ var villagers = {
           var foods = [];
           for(var group in inventory.objects){
             for(var object in inventory.objects[group]){
-              if(inventory.objects[group][object].food > 1 && inventory.objects[group][object].quantity >= 10){
+              if(inventory.objects[group][object].food > 0 && inventory.objects[group][object].quantity >= 10){
                 foods.push([object,inventory.objects[group][object].food]);
               }
             }
@@ -128,7 +128,6 @@ var villagers = {
             var toEat = randomChoice(foods);
             inventory.addObject(toEat[0],-10);
             v.hunger = toEat[1] * 10;
-            $('.villager[data-id="' + i + '"]').removeClass('hungry');
           }
         }
         v.actions++;
@@ -140,11 +139,13 @@ var villagers = {
 
   updateDisplay : function(){
     if(!main.villagers_visible) return;
-    var villagerText = "<h3>Villagers</h3>";
+    var villagerText = "<h3>Villagers</h3>"
+    var hungry = false;
     for(villager in this.population){
       var v = this.population[villager];
       villagerText += '<div class="item villager';
       villagerText += v.hunger == 0 ? ' hungry' : '';
+      hungry = hungry || v.hunger == 0;
       villagerText += '" data-id="' + villager + '"><span class="pause" data-id="' + villager + '">';
       villagerText += (v.enabled) ? '*' : '>';
       villagerText += '</span> ' + v.name.capitalize();
@@ -156,6 +157,7 @@ var villagers = {
       }
       villagerText += '</div>';
     }
+    if(hungry) villagerText += '<div class="hunger-warning">One of your villagers is hungry! Get 10 of any food item and they\'ll carry on working.</div>';
     $('#villagers').html(villagerText);
     if(this.population.length > 0){
       $('#villagers').show();

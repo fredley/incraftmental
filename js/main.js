@@ -4,6 +4,7 @@ ticks : 0,
 villagers_visible: true,
 inventory_visible: true,
 map_visible: false,
+ticker: null,
 
 onload : function(){
   inventory.init();
@@ -13,7 +14,15 @@ onload : function(){
   settlements.init();
   world.init();
   buttons.init();
-  window.setInterval(function(){main.tick()}, 1000);
+  this.ticker = setInterval(function(){main.tick()}, 1000);
+},
+
+pause: function(){
+  if(this.ticker) clearInterval(this.ticker);
+},
+
+resume: function(){
+  this.ticker = setInterval(function(){main.tick()},1000);
 },
 
 tick : function(){
