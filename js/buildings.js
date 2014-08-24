@@ -111,6 +111,10 @@ var buildings = {
   },
 
   build : function(slug){
+    var building = this.getBuilding(slug);
+    for(item in building.cost){
+      inventory.addObject(item,-1 * building.cost[item]);
+    }
     main.addAlert('Built a new ' + slug.capitalize());
     switch(slug){
       case 'house':
