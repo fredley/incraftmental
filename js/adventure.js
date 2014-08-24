@@ -67,7 +67,6 @@ var adventure = {
     this.lastAction = "You manage to find the exit!";
     if(this.name === 'settlement'){
       var size = Math.min(16,2 * world.distance());
-      console.log(size);
       var name = settlements.generate(size);
       this.lastAction += " You decide to name your new settlement " + name + ".";
       main.addAlert("You founded a new settlement!");
@@ -76,7 +75,6 @@ var adventure = {
   },
 
   draw: function(){
-    console.log(this.inAdventure);
     main.showPopup('adventure');
     el = $('#shade .adventure');
     el.find('.adventure-name').html(this.name);

@@ -46,7 +46,7 @@ var combat = {
     for (type in inventory.armourTypes){
       var pieceValue = 0;
       for(material in inventory.armourMaterials){
-        pieceValue = (inventory.objects.armour[inventory.armourMaterials[material] + '_' + inventory.armourTypes[type]].quantity > 0) ? cls + 1 : pieceValue;
+        pieceValue = (inventory.objects.armour[inventory.armourMaterials[material] + '_' + inventory.armourTypes[type]].quantity > 0) ? material + 1 : pieceValue;
       }
       value += pieceValue;
     }

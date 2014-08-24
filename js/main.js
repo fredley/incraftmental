@@ -91,7 +91,8 @@ load : function(){
   adventure.inAdventure = data["inAdventure"];
   var danger = world.calculateDanger(world.posX,world.posY);
   if(adventure.inAdventure){
-    adventure.startAdventure(danger);
+    world.init();
+    adventure.startAdventure(world.blockAt(0,0).slug,danger);
   }else if(combat.inCombat){
     combat.startCombat(danger,combat.fighting);
   }
