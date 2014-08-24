@@ -78,7 +78,7 @@ var villagers = {
       'enabled': false,
       'assigned': null,
       'actions': 0,
-      'hunger': 0
+      'hunger': 10
     });
     this.updateDisplay();
   },
