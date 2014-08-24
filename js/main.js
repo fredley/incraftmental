@@ -151,3 +151,6 @@ function randomChoice(choices) {
   var index = Math.floor(Math.random() * choices.length);
   return choices[index];
 }
+function logBase(x, y) {
+    return Math.log(x) / Math.log(y);
+}

@@ -153,6 +153,10 @@ var world = {
   },
 
   mine: function(rX,rY){
+    if(inventory.getObject('iron_pickaxe').quantity < 10){
+      main.addMouseAlert('You need 10 iron pickaxes to mine',{pageX:350,pageY:350});
+      return;
+    }
     var block = this.blockAt(rX,rY);
     if(!block || block.symbol !== 'X') return;
     inventory.addObject('iron_pickaxe',-10);
@@ -163,7 +167,12 @@ var world = {
   move: function(relX,relY,force){
     force = (typeof(force) === 'undefined') ? false : force;
     if (!force && this.isMoving) return;
-    if (!force && !this.canMove(relX,relY)) return;
+    if (!force && !this.canMove(relX,relY)){
+      if(this.blockAt(relX,relY).symbol === 'X'){
+        this.mine(relX,relY);
+      }
+      return;
+    }
     this.relX = relX;
     this.relY = relY;
     var startX = this.camX;

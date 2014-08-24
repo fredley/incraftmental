@@ -45,8 +45,8 @@ var inventory = {
       feather :         {display:'Feather',         symbol: 'f', mob_drop:1                                         },
       gunpowder :       {display:'Gunpowder',       symbol: 'x', mob_drop:1                                         },
       seeds :           {display:'Seeds',           symbol: ':'                                                     },
-      wheat :           {display:'Wheat',           symbol: ';', recipe: ':::', yield:3   , food: 2                 },
-      bread :           {display:'Bread',           symbol: 'b', recipe: ';;;'            , food: 5                 },
+      wheat :           {display:'Wheat',           symbol: ';', recipe: ':::', yield:3   , food: 1                 },
+      bread :           {display:'Bread',           symbol: 'b', recipe: ';;;', yield:3   , food: 15                },
       flint :           {display:'Flint',           symbol: 'Y'                                                     },
       porkchop :        {display:'Raw Porkchop',    symbol: 'q', mob_drop:1, smelts_to: 'cooked_porkchop'           },
       cooked_porkchop : {display:'Cooked Porkchop', symbol: 'Q', cooked_from: 'porkchop'  , food: 16                },
@@ -229,7 +229,7 @@ var inventory = {
       if(this.objects.tools[tool].quantity < 1) continue;
       for(var slug in this.objects.tools[tool].gives){
         if(Math.random() < this.objects.tools[tool].gives[slug]){
-          this.addObject(slug,this.objects.tools[tool].bonus * this.objects.tools[tool].quantity);
+          this.addObject(slug,Math.floor(this.objects.tools[tool].bonus * logBase((Math.pow(this.objects.tools[tool].quantity,2) + 1),2)/2));
         }
       }
     }

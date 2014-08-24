@@ -114,7 +114,7 @@ init : function(){
       buttons.updateDisplay();
       inventory.updateDisplay();
       villagers.updateDisplay();
-      if(villagers.poplation.length === 1){
+      if(villagers.population.length === 1){
         main.addAlert('Click a villager to assign it');
       }
     }else{
@@ -257,15 +257,6 @@ init : function(){
     var y = $(this).attr('data-y');
     world.move(x,y);
   });
-  $('.explore_mine').on('click',function(e){
-    if(inventory.getObject('iron_pickaxe').quantity < 10){
-      main.addMouseAlert('You need 10 iron pickaxes to mine',e);
-      return;
-    }
-    var x = $(this).attr('data-x');
-    var y = $(this).attr('data-y');
-    world.mine(x,y);
-  });
   $('#place-torch').on('click',function(e){
     if(inventory.getObject('torch').quantity < 10){
       main.addMouseAlert('You need 10 torches to light up the area',e);
@@ -314,9 +305,33 @@ init : function(){
       // Because everyone loves stupid optimisation
       var x =  (e.keyCode % 2)      * (e.keyCode - 38);
       var y = ((e.keyCode % 2) - 1) * (e.keyCode - 39) * -1;
-      world.move(x,y);
+      $('.explore_move.' + x + '_' + y).click();
       e.preventDefault();
       e.stopPropagation();
+      return;
+    }
+    switch(e.keyCode){
+      case 65: //A
+        if(!combat.inCombat) return;
+        $('#shade .fight').click();
+        break;
+      case 66: //B
+        if(!combat.inCombat) return;
+        if($('#shade .fight-ranged:visible').length < 1) return;
+        $('#shade .fight-ranged').click();
+        break;
+      case 67: //C
+        if($('#shade .close-button').length < 1) return;
+        $('#shade .close-button').click();
+        break;
+      case 80: //P
+        if(!main.map_visible) return;
+        $('#place-torch').click();
+        break;
+      case 82: //R
+        if(!combat.inCombat) return;
+        $('#shade .run').click();
+        break;
     }
   });
   this.hook_inventory();

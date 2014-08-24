@@ -127,7 +127,7 @@ var villagers = {
           }else{
             var toEat = randomChoice(foods);
             inventory.addObject(toEat[0],-10);
-            v.hunger = toEat[1];
+            v.hunger = toEat[1] * 2;
           }
         }
         v.actions++;
