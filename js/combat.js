@@ -70,9 +70,9 @@ var combat = {
     }
   },
 
-  startCombat: function(danger){
+  startCombat: function(danger,mob){
     this.inCombat = true;
-    this.fighting = this.getMob(danger);
+    this.fighting = (mob) ? mob :this.getMob(danger);
     this.mobhp = this.mobs[this.fighting].hp;
     this.draw($('#popups .encounter'));
     main.showPopup('encounter');
@@ -129,6 +129,7 @@ var combat = {
       return;
     }
     this.endCombat();
+    $('#shade .close-button').show();
   },
 
   win: function(){

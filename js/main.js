@@ -48,6 +48,9 @@ save : function(){
   data["camX"] = world.camX;
   data["camY"] = world.camY;
   data["hp"] = combat.hp;
+  data["inCombat"] = combat.inCombat;
+  data["fighting"] = combat.fighting;
+  data["inAdventure"] = adventure.inAdventure;
   localStorage["save"] = JSON.stringify(data);
 },
 
@@ -74,6 +77,15 @@ load : function(){
   world.camY = data["camY"];
   world.placed_structures = data["structures"];
   combat.hp = data["hp"];
+  combat.inCombat = data["inCombat"];
+  combat.fighting = data["fighting"];
+  adventure.inAdventure = data["inAdventure"];
+  var danger = world.calculateDanger(world.posX,world.posY);
+  if(adventure.inAdventure){
+    adventure.startAdventure(danger);
+  }else if(combat.inCombat){
+    combat.startCombat(danger,combat.fighting);
+  }
 },
 
 addAlert : function(text){
