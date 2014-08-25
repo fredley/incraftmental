@@ -28,6 +28,8 @@ var world = {
     water:      {display:'Water',      symbol: '~', color: '#55f'},
     torch:      {display:'Torch',      symbol: 'i', color: '#ff0'},
     mine:       {display:'Mine',       symbol: ' ', color: '#eee'},
+    cave:       {display:'Cave',       symbol: 'o', color: '#9f9'},
+    ruin:       {display:'Ruin',       symbol: '#', color: '#9f6'},
   },
 
   gen_structures: {

@@ -74,6 +74,7 @@ var adventure = {
       this.lastAction += " You found an emerald on the way out!";
       main.addAlert("You found an emerald!");
       inventory.addObject('emerald',1);
+      world.place(this.name,true);
     }
     this.draw();
   },
