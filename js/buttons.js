@@ -380,16 +380,11 @@ hook_villagers : function(){
       return;
     }
     var o = inventory.getObject(inventory.selected);
-    if(o.quantity < 10){
-      main.addMouseAlert('You must have 10 of an object to assign it',e);
-      return;
-    }
     if(v.profession == 'smith'      && o.smelts_to ||
        v.profession == 'builder'    && o.recipe    && !o.food ||
        v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
        v.profession == 'chef'       && (o.cooks_to || o.food && o.recipe) ||
        v.profession == 'adventurer' && o.mob_drop ){
-      inventory.addObject(inventory.selected,-10);
       villagers.assignObject(slug,inventory.selected);
     }else{
       main.addMouseAlert('This villager can\'t work with that :(',e);
