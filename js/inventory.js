@@ -17,7 +17,7 @@ var inventory = {
       iron_ore:       {display:'Iron Ore'           , symbol: 'I'                        , smelts_to: 'iron_ingot'  },
       wood:           {display:'Wood'               , symbol: '='                        , fuel_source: 2           },
       glass:          {display:'Glass'              , symbol: '~'                                                   },
-      bed:            {display:'Bed'                , symbol: 'B', recipe:'WWPPP',                                  },
+      bed:            {display:'Bed'                , symbol: 'B', recipe:'WWWPPP',                                  },
       wool:           {display:'Wool'               , symbol: 'W'                                                   },
       tnt:            {display:'TNT'                , symbol: 'X', recipe:'xSxSxSxSx'                               },
       obsidian:       {display:'Obsidian'           , symbol: 'O'                                                   },
