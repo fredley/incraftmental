@@ -45,7 +45,7 @@ var adventure = {
         this.lastAction = "You carry straight on";
         break;
     }
-    if(Math.random() < 0.0){
+    if(Math.random() < 0.5){
         combat.startCombat(this.danger);
         this.lastAction += ", and having defeated your foe, come to a fork in the path. Which way do you go?";
         return;
