@@ -151,6 +151,7 @@ var villagers = {
     if(!main.villagers_visible) return;
     var villagerText = "<h3>Villagers</h3>"
     var hungry = false;
+    var showHelp = true;
     for(villager in this.population){
       var v = this.population[villager];
       villagerText += '<div class="item villager';
@@ -164,10 +165,12 @@ var villagers = {
       }
       if(v.profession){
         villagerText += (v.assigned) ? ' (' + inventory.getObject(v.assigned).display + ')' : ' (unassigned)';
+        showHelp = false;
       }
       villagerText += '</div>';
     }
-    if(hungry) villagerText += '<div class="hunger-warning">One of your villagers is hungry! Get 10 of any food item and they\'ll carry on working.</div>';
+    if(hungry) villagerText += '<div class="helptext warning">One of your villagers is hungry! Get 10 of any food item and they\'ll carry on working.</div>';
+    if(showHelp) villagerText += '<div class="helptext">Click a villager to choose a profession for them, or to assign them an object</div>';
     $('#villagers').html(villagerText);
     if(this.population.length > 0){
       $('#villagers').show();

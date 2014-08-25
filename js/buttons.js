@@ -107,7 +107,6 @@ init : function(){
     if (inventory.canCraft('crafting_table')) {
 	  inventory.craft('crafting_table');
     main.addAlert('Made a Crafting Table!');
-    main.addAlert('Click on items in your inventory to select them.');
     $('#start-buttons').slideUp();
 	}
   });
@@ -119,9 +118,6 @@ init : function(){
       buttons.updateDisplay();
       inventory.updateDisplay();
       villagers.updateDisplay();
-      if(villagers.population.length === 1){
-        main.addAlert('Click a villager to assign it');
-      }
     }else{
       main.addMouseAlert('Not enough Apples! :(',e);
     }

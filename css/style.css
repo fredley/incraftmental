@@ -58,6 +58,15 @@ button:focus {
   top: 40px;
   max-height: 80%;
   overflow-y: scroll; }
+  .pane .helptext {
+    float: left;
+    margin-top: 10px;
+    font-size: 11px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 1px solid #555; }
+    .pane .helptext.warning {
+      border: 1px solid #965050; }
   .pane .item {
     font-size: 11px;
     float: left;
@@ -89,13 +98,6 @@ button:focus {
     border-bottom: 1px dashed #555; }
     #villagers .villager.hungry {
       color: #965050; }
-  #villagers .hunger-warning {
-    float: left;
-    margin-top: 10px;
-    font-size: 11px;
-    border: 1px solid #965050;
-    border-radius: 10px;
-    padding: 5px 10px; }
 
 #buttons button {
   float: left; }

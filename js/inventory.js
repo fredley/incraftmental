@@ -262,6 +262,9 @@ var inventory = {
         inventoryText += groupText;
       }
     }
+    if(!this.selected && this.objects.blocks.crafting_table.hasOwned){
+      inventoryText += '<div class="helptext">Click an object to select it to use in crafting</div>';
+    }
     $('#inventory').html(inventoryText);
     buttons.hook_inventory();
   }

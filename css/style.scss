@@ -68,6 +68,17 @@ button:focus{
     top: 40px;
     max-height: 80%;
     overflow-y:scroll;
+    .helptext{
+        float:left;
+        margin-top: 10px;
+        font-size: 11px;
+        border-radius: 10px;
+        padding: 5px 10px;
+        border: 1px solid $highlight;
+        &.warning{
+            border: 1px solid $red;
+        }
+    }
     .item{
         font-size: 11px;
         float: left;
@@ -105,14 +116,6 @@ button:focus{
         &.hungry{
             color:$red;
         }
-    }
-    .hunger-warning{
-        float:left;
-        margin-top: 10px;
-        font-size: 11px;
-        border: 1px solid $red;
-        border-radius: 10px;
-        padding: 5px 10px;
     }
 }
 #buttons button{
