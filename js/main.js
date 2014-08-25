@@ -145,6 +145,9 @@ String.prototype.capitalize = function() {
 String.prototype.contains = function(s) {
     return this.indexOf(s) > -1;
 }
+String.prototype.replaceAt=function(index, character) {
+    return this.substr(0, index) + character + this.substr(index+character.length);
+}
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }

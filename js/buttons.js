@@ -16,11 +16,13 @@ craftCount : function(n,e){
       code += ' ';
     }
   });
-  code = code.trim();
-  var item = inventory.getObjectFromRecipe(code);
+  var item = inventory.getObjectFromRecipe(code.trim());
   if(!item){
-    main.addMouseAlert('That\'s not a valid recipe :(',e);
-    return;
+    item = inventory.getObjectFromRecipe(inventory.mirrorRecipe(code).trim());
+    if(!item){
+      main.addMouseAlert('That\'s not a valid recipe :(',e);
+      return;
+    }
   }
   var count = n;
   for(material in needed){

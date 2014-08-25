@@ -17,7 +17,7 @@ var inventory = {
       iron_ore:       {display:'Iron Ore'           , symbol: 'I'                        , smelts_to: 'iron_ingot'  },
       wood:           {display:'Wood'               , symbol: '='                        , fuel_source: 2           },
       glass:          {display:'Glass'              , symbol: '~'                                                   },
-      bed:            {display:'Bed'                , symbol: 'B', recipe:'WWWPPP',                                  },
+      bed:            {display:'Bed'                , symbol: 'B', recipe:'WWWPPP',                                 },
       wool:           {display:'Wool'               , symbol: 'W'                                                   },
       tnt:            {display:'TNT'                , symbol: 'X', recipe:'xSxSxSxSx'                               },
       obsidian:       {display:'Obsidian'           , symbol: 'O'                                                   },
@@ -192,6 +192,16 @@ var inventory = {
       }
     }
     return needed;
+  },
+
+  mirrorRecipe: function(recipe){
+    // must have un-trimmed recipe
+    for(var i=0;i<3;i++){
+      var holder = recipe[3*i];
+      recipe = recipe.replaceAt(3*i,recipe[3*i + 2]);
+      recipe = recipe.replaceAt(3*i + 2,holder);
+    }
+    return recipe;
   },
 
   canCraft : function(slug,quantity){
