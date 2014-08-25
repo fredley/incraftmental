@@ -8,6 +8,8 @@ var world = {
   relX: 0,
   relY: 0,
   size: 40,
+  spawnX: 0,
+  spawnY: 0,
   t: 0,
   color_dark: '#333', 
   color_light:'#ddd',
@@ -216,6 +218,8 @@ var world = {
       }
       if(struct && struct.heals){
         combat.hp = combat.maxhp;
+        this.spawnX = this.camX;
+        this.spawnY = this.camY;
         main.addAlert('You were healed!');
       }
     }

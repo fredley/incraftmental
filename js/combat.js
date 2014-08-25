@@ -151,8 +151,8 @@ var combat = {
   lose: function(){
     this.logMessage('You lost the fight!');
     this.endCombat();
-    world.camX = 0;
-    world.camY = 0;
+    world.camX = world.spawnX;
+    world.camY = world.spawnY;
     this.hp = this.maxhp;
     world.draw();
     $('#shade .close-button').show();
