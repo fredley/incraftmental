@@ -1,5 +1,7 @@
 var buttons = {
 
+keydown: false,
+
 craftCount : function(n,e){
   var code = '';
   var needed = {};
@@ -303,7 +305,12 @@ init : function(){
   $('#popup').on('click',function(e){
     e.stopPropagation();
   });
+  $('body').on('keyup',function(){
+    this.keydown = false;
+  });
   $('body').on('keydown',function(e){
+    if(this.keydown) return;
+    this.keydown = true;
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
       if(combat.inCombat) return;
       // Because everyone loves stupid optimisation
