@@ -83,8 +83,8 @@ var world = {
         }
         var noise_value = Math.abs(noise.simplex2((x+this.camX)/20,(y+this.camY)/20));
         var struct_noise= Math.abs(noise.simplex2((x+this.camX),(y+this.camY)));
-        if(struct_noise > 0.995){
-          var struct = this.gen_structures[Object.keys(this.gen_structures)[Math.floor(noise_value * Object.keys(this.gen_structures).length)]];
+        if(struct_noise > 0.95){
+          var struct = this.gen_structures[Object.keys(this.gen_structures)[Math.floor((noise_value * 10000) % Object.keys(this.gen_structures).length)]];
           this.world_structures[x + '_' + y] = struct;
           continue;
         }
