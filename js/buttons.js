@@ -383,9 +383,9 @@ hook_villagers : function(){
     }
     var o = inventory.getObject(inventory.selected);
     if(v.profession == 'smith'      && o.smelts_to ||
-       v.profession == 'builder'    && o.recipe    && !o.food ||
+       v.profession == 'builder'    && o.recipe    && o.food===undefined ||
        v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
-       v.profession == 'chef'       && (o.cooks_to || o.food && o.recipe) ||
+       v.profession == 'chef'       && (o.cooks_to || o.food!=undefined && o.recipe) ||
        v.profession == 'adventurer' && o.mob_drop ){
       villagers.assignObject(slug,inventory.selected);
     }else{
