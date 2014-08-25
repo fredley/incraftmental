@@ -246,6 +246,17 @@ var inventory = {
   },
 
   updateDisplay : function(){
+    if(main.map_visible){
+      var hudText = "";
+      var items = ['torch','iron_pickaxe','boat'];
+      for(var i in items){
+        var slug = items[i];
+        var object = inventory.getObject(slug);
+        hudText += '<div class="item"><b>' + object.display + "</b><br/>" + object.quantity + '</div>';
+      }
+      hudText += '<div class="item"><b>HP</b><br/>' + combat.hp + '/' + combat.maxhp + '</div>';
+      $('#hud').html(hudText);
+    }
     if(!main.inventory_visible) return;
     var inventoryText = "";
     for(var group in this.objects){

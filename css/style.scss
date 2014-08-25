@@ -363,7 +363,12 @@ footer:hover{
         padding: 15px;
     }
 }
-
+#hud{
+    float: right;
+    clear: right;
+    width: 100px;
+    font-size: 11px;
+}
 #settlements{
     display: none;
     #lists{
