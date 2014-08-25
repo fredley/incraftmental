@@ -136,7 +136,7 @@ var villagers = {
           }
         }
         v.actions++;
-        if(v.actions > (250 * Math.pow(2,v.level)) && v.level <= 5){
+        if(v.actions > (250 * Math.pow(2,v.level)) && v.level < 5){
           v.actions = 0;
           v.level++;
           main.addAlert(v.name + ' gained a level!');
