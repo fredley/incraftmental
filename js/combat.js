@@ -16,9 +16,14 @@ var combat = {
     spider:   { hp: 10, attack: 3, drops: { slug:'string', quantity:50, display: 'pieces of string'}},
     enderman: { hp: 20, attack: 5, drops: { slug:'diamond', quantity:100, display: 'diamonds'}},
     creeper:  { hp: 2,  attack: 10,drops: { slug:'gunpowder', quantity:100, display: 'bits of gunpowder'}},
+    pig:      { hp: 5,  attack: 0, drops: { slug:'porkchop', quantity:50, display: 'hunks of pork'}},
+    chicken:  { hp: 2,  attack: 0, drops: { slug:'egg', quantity:100, display: 'eggs. Wow'}}
   },
 
   getMob: function (danger) {
+    if(danger < 0){
+      return randomChoice(['pig','chicken']);
+    }
     var roll = Math.random();
     roll += danger * 0.1;
     if(roll < 0.05){

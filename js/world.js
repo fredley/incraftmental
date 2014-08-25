@@ -210,12 +210,16 @@ var world = {
       }
       world.draw();
       var struct = this.blockAt(0,0);
-      if(!struct && Math.random() < 0.5){
+      if((!struct || struct.symbol == ' ') && Math.random() < 0.5){
         combat.startCombat(this.danger);
         return;
       }
       if(struct && struct.danger){
         adventure.startAdventure(struct.slug,struct.danger);
+        return;
+      }
+      if(struct && this.grass_symbols.indexOf(struct.symbol) > -1 && Math.random() < 0.3){
+        combat.startCombat(-1);
         return;
       }
       if(struct && struct.heals){
