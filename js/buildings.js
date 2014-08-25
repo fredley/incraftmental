@@ -136,6 +136,9 @@ var buildings = {
       case 'blacksmith':
         inventory.smelt_rate = inventory.smelt_rate * 0.75;
         break;
+      case 'kennel':
+        combat.hasDog = true;
+        break;
     }
   },
 

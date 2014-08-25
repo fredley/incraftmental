@@ -57,6 +57,7 @@ save : function(){
   data["camX"] = world.camX;
   data["camY"] = world.camY;
   data["hp"] = combat.hp;
+  data["dog"] = combat.hasDog;
   data["inCombat"] = combat.inCombat;
   data["fighting"] = combat.fighting;
   data["inAdventure"] = adventure.inAdventure;
@@ -86,6 +87,7 @@ load : function(){
   world.camY = data["camY"];
   world.placed_structures = data["structures"];
   combat.hp = data["hp"];
+  combat.hasDog = data["dog"];
   combat.inCombat = data["inCombat"];
   combat.fighting = data["fighting"];
   adventure.inAdventure = data["inAdventure"];
