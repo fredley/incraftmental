@@ -69,11 +69,11 @@ var inventory = {
     },
 
     tools : {
-      wooden_sword :    {display:'Wooden Sword',    profession: 'adventurer', recipe: 'P  P  |' , bonus:1, gives: {porkchop:0.05}                                                                   },
-      stone_sword :     {display:'Stone Sword',     profession: 'adventurer', recipe: 'C  C  |' , bonus:2, gives: {porkchop:0.1, egg:0.1}                                                           },
-      iron_sword :      {display:'Iron Sword',      profession: 'adventurer', recipe: 'i  i  |' , bonus:3, gives: {porkchop:0.1, egg:0.1, feather:0.1, leather:0.1}                                 },
-      gold_sword :      {display:'Golden Sword',    profession: 'adventurer', recipe: 'g  g  |' , bonus:4, gives: {porkchop:0.1, egg:0.1, feather:0.1, leather:0.1, wool:0.1}                       },
-      diamond_sword :   {display:'Diamond Sword',   profession: 'adventurer', recipe: 'd  d  |' , bonus:5, gives: {porkchop:0.1, egg:0.1, feather:0.1, leather:0.1, wool:0.1, milk:0.1}             },
+      wooden_sword :    {display:'Wooden Sword',    profession: 'adventurer', recipe: 'P  P  |' , bonus:1, gives: {egg:0.1}                                                                         },
+      stone_sword :     {display:'Stone Sword',     profession: 'adventurer', recipe: 'C  C  |' , bonus:2, gives: {egg:0.1}                                                                         },
+      iron_sword :      {display:'Iron Sword',      profession: 'adventurer', recipe: 'i  i  |' , bonus:3, gives: {egg:0.1, feather:0.1}                                                            },
+      gold_sword :      {display:'Golden Sword',    profession: 'adventurer', recipe: 'g  g  |' , bonus:4, gives: {egg:0.1, feather:0.1, wool:0.1}                                                  },
+      diamond_sword :   {display:'Diamond Sword',   profession: 'adventurer', recipe: 'd  d  |' , bonus:5, gives: {egg:0.1, feather:0.1, wool:0.1, milk:0.1}                                        },
       wooden_shovel :   {display:'Wooden Shovel',   profession: 'labourer',   recipe: 'P  |  |' , bonus:1, gives: {dirt:0.5}                                                                        },
       stone_shovel :    {display:'Stone Shovel',    profession: 'labourer',   recipe: 'C  |  |' , bonus:2, gives: {dirt:0.8, flint:0.01, gravel:0.1, sand:0.2}                                      },
       iron_shovel :     {display:'Iron Shovel',     profession: 'labourer',   recipe: 'i  |  |' , bonus:3, gives: {dirt:0.8, flint:0.01, gravel:0.1, sand:0.2}                                      },
@@ -95,7 +95,7 @@ var inventory = {
       gold_hoe :        {display:'Gold Hoe',        profession: 'chef',       recipe: 'gg  |  |', bonus:4, gives: {seeds: 0.2, mushroom:0.1, cane:0.1}                                              },
       diamond_hoe :     {display:'Diamond Hoe',     profession: 'chef',       recipe: 'dd  |  |', bonus:5, gives: {seeds: 0.2, mushroom:0.1, cane:0.1}                                              },
       fishing_rod :     {display:'Fishing Rod',     profession: 'fisher',     recipe: '| |@| @' , bonus:1, gives: {fish:0.1}                                                                        },
-      bow :             {display:'Bow',             profession: 'hunter',     recipe: '|@| @ |@', bonus:1, gives: {gunpowder:0.1}                                                                   }
+      bow :             {display:'Bow',             profession: 'hunter',     recipe: '|@| @ |@', bonus:1, gives: {porkchop:0.1,leather:0.01}                                                       }
     },
 
     armour : {
