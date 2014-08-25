@@ -46,7 +46,7 @@ var combat = {
     for (type in inventory.armourTypes){
       var pieceValue = 0;
       for(material in inventory.armourMaterials){
-        pieceValue = (inventory.objects.armour[inventory.armourMaterials[material] + '_' + inventory.armourTypes[type]].quantity > 0) ? material + 1 : pieceValue;
+        pieceValue = (inventory.objects.armour[inventory.armourMaterials[material] + '_' + inventory.armourTypes[type]].quantity > 0) ? parseInt(material) + 1 : pieceValue;
       }
       value += pieceValue;
     }
@@ -54,7 +54,8 @@ var combat = {
   },
 
   reduceDamage: function(d){
-    return Math.round(d - this.getDefence() / 10);
+    d -= d*Math.random()*(this.getDefence() / 16);
+    return Math.round(d);
   },
 
   draw: function(el){
@@ -79,7 +80,7 @@ var combat = {
     buttons.hook_encounter();
     this.mobAttack = setInterval(function(){
       var mob = combat.mobs[combat.fighting];
-      combat.hp = Math.max(0,combat.hp - mob.attack);
+      combat.hp = Math.max(0,combat.hp - combat.reduceDamage(mob.attack));
       combat.logMessage('The ' + combat.fighting.capitalize() + ' hit you for ' + combat.reduceDamage(mob.attack) + ' points');
       if(combat.hp == 0){
         combat.lose();
