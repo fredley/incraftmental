@@ -48,7 +48,7 @@ var buildings = {
                     }},
     farm         : { width: 8, height: 8,   symbol: 'F', houses: 4,  cost: {stone: 1000,  cobble: 900,   plank:10000,  wood: 5000,  dirt: 50000, sand: 50000},
                     tick : function(){
-                      inventory.objects.items.seeds.quantity += 100;
+                      inventory.objects.items.wheat.quantity += 100;
                     }},
     barracks     : { width: 8, height: 8,   symbol: 'X', houses: 4,  cost: {stone: 10000, cobble: 900,   plank:1000,   wood: 5000,  iron_ingot: 1000, gold_ingot: 1000},
                     tick : function(){
