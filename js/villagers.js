@@ -20,15 +20,14 @@ var villagers = {
     chef : function(villager){
       // cook better(?) foods
       var food = inventory.getObject(villager.assigned);
-      if(food.cooked_from){
-        var from = inventory.getObject(food.cooked_from);
-        if(from.quantity >= 1){
-          inventory.addObject(villager.assigned,1);
-          inventory.addObject(food.cooked_from,-1);
+      if(food.cooks_to){
+        if(food.quantity >= villager.level){
+          inventory.addObject(villager.assigned,-1 * villager.level);
+          inventory.addObject(food.cooks_to,villager.level);
         }
       }else{
-        if(inventory.canCraft(villager.assigned)){
-          inventory.craft(villager.assigned);
+        if(inventory.canCraft(villager.assigned,villager.level)){
+          inventory.craft(villager.assigned,villager.level);
         }
       }
     },
