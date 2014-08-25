@@ -14,14 +14,14 @@ var buildings = {
     mill         : { width: 4, height: 8,   symbol: 'B', houses: 1,  cost: {stone: 100,   cobble: 800,   plank: 1000,  wood:  500},
                     tick : function(){
                       if(inventory.objects.items.seeds.quantity > 100){
-                        inventory.addObject('seeds',-100);
-                        inventory.addObject('wheat',40);
+                        inventory.addObject('wheat',-100);
+                        inventory.addObject('flour',40);
                       }
                     }},
     bakery       : { width: 6, height: 6,   symbol: 'M', houses: 1,  cost: {stone: 1000,  cobble: 500,   plank: 600,   wood:  300,  dirt: 5000},
                     tick : function(){
                       if(inventory.objects.items.wheat.quantity > 100){
-                        inventory.addObject('wheat',-100);
+                        inventory.addObject('flour',-100);
                         inventory.addObject('bread',40);
                       }
                     }},
