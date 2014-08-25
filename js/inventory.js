@@ -66,7 +66,7 @@ var inventory = {
       clock :           {display:'Clock',           symbol: '<', recipe: 'ggggrgggg'                                },
       fish :            {display:'Raw Fish',        symbol: 'z', cooks_to: 'cooked_fish'                            },
       cooked_fish :     {display:'Cooked Fish',     symbol: 'Z', food: 20                                           },
-      sugar :           {display:'Sugar',           symbol: ',', recipe: '/'                                        },
+      sugar :           {display:'Sugar',           symbol: ',', recipe: '/' , food: 0                              },
       bonemeal :        {display:'Bonemeal',        symbol: '#', mob_drop: 1                                        },
     },
 
