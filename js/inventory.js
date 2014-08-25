@@ -34,6 +34,7 @@ var inventory = {
       arrow :           {display:'Arrow',           symbol: '^', recipe: 'Y   |   f'                                },
       coal :            {display:'Coal',            symbol: 'c'                           , fuel_source: 8          },
       diamond :         {display:'Diamond',         symbol: 'd'                                                     },
+      emerald :         {display:'Emerald',         symbol: '>'                                                     },
       iron_ingot :      {display:'Iron Ingot',      symbol: 'i'                                                     },
       gold_ingot :      {display:'Gold Ingot',      symbol: 'g'                                                     },
       stick :           {display:'Stick',           symbol: '|', recipe: 'P  P', yield:4  , fuel_source: 1          },

@@ -70,6 +70,10 @@ var adventure = {
       var name = settlements.generate(size);
       this.lastAction += " You decide to name your new settlement " + name + ".";
       main.addAlert("You founded a new settlement!");
+    }else{
+      this.lastAction += " You found an emerald on the way out!";
+      main.addAlert("You found an emerald!");
+      inventory.addObject('emerald',1);
     }
     this.draw();
   },
