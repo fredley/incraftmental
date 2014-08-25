@@ -13,8 +13,8 @@ var villagers = {
       }
     },
     builder : function(villager){
-      if(inventory.canCraft(villager.assigned)){
-        inventory.craft(villager.assigned);
+      if(inventory.canCraft(villager.assigned,villager.level * 2)){
+        inventory.craft(villager.assigned,villager.level * 2);
       }
     },
     chef : function(villager){

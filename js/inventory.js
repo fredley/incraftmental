@@ -194,12 +194,13 @@ var inventory = {
     return needed;
   },
 
-  canCraft : function(slug){
+  canCraft : function(slug,quantity){
+    quantity = (quantity) ? quantity : 1;
     var object = this.getObject(slug);
     if(!object.recipe) return false;
     var needed = this.getIngredients(slug);
     for(var ingredient in needed){
-      if (this.getObject(ingredient).quantity < 10 * needed[ingredient]){
+      if (this.getObject(ingredient).quantity < 10 * needed[ingredient] * quantity){
         return false;
       }
     }
@@ -214,9 +215,6 @@ var inventory = {
       this.addObject(ingredient,-10 * needed[ingredient]);
     }
     this.addObject(slug,object.yield);
-    if(this.getObject(slug).on_craft !== undefined){
-      this.getObject(slug).on_craft();
-    }
     this.updateDisplay();
     buttons.updateDisplay();
   },
