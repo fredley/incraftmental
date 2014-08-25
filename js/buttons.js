@@ -47,7 +47,7 @@ smelt : function(){
   input  = $("#smelt-input").attr('data-object');
   fuel_object = inventory.getObject(fuel);
   input_object = inventory.getObject(input);
-  if(!input || (!fuel && fuel_level.cur <= 0) || (fuel_level.cur <= 0 && fuel_object.fuel_source == undefined) || input_object.smelts_to == undefined){
+  if(!input || (!fuel && fuel_level.cur <= 0) || (fuel_level.cur <= 0 && fuel_object.fuel_source == undefined) || (input_object.cooks_to == undefined && input_object.smelts_to == undefined)){
     main.addAlert("Smelting stopped");
     inventory.smelting = false;
     $('#smelt').html('SMELT');
@@ -79,8 +79,9 @@ smelt : function(){
   $('#fuel-line .bar').animate({'top':90 - (90 / fuel_level.max) * fuel_level.cur},inventory.smelt_rate,'linear');
   $('#smelt-progress .bar').animate({'left': 0},inventory.smelt_rate,'linear',function(){
     $(this).css('left','-90px');
-    $("#smelt-product").attr('data-object',inventory.getObject(input).smelts_to);
-    $("#smelt-product").append($('#blocks .block.' + input_object.smelts_to).clone());
+    var outBlock = (input_object.smelts_to) ? input_object.smelts_to : input_object.cooks_to;
+    $("#smelt-product").attr('data-object',outBlock);
+    $("#smelt-product").append($('#blocks .block.' + outBlock).clone());
     var reset_time = (fuel_level.cur == 0) ? 500 : 50;
     setTimeout(function(){buttons.smelt();},reset_time);
   });
@@ -221,7 +222,8 @@ init : function(){
       main.addMouseAlert("You must fuel the furnace!",e);
       return;
     }
-  	output = inventory.getObject(input).smelts_to;
+    var input_object = inventory.getObject(input);
+  	output = input_object.smelts_to ? input_object.smelts_to : input_object.cooks_to;
     if(fuel_level.cur <= 0 && inventory.getObject(fuel).fuel_source == undefined){
       main.addMouseAlert("That's not a valid fuel :(",e);
       return;
@@ -377,10 +379,10 @@ hook_villagers : function(){
       main.addMouseAlert('You must have 10 of an object to assign it',e);
       return;
     }
-    if(v.profession == 'smith'      && o.smelts_to && !o.food ||
+    if(v.profession == 'smith'      && o.smelts_to ||
        v.profession == 'builder'    && o.recipe    && !o.food ||
        v.profession == 'labourer'   && o.gives && !(inventory.selected.contains('sword') || inventory.selected.contains('bow')) ||
-       v.profession == 'chef'       && (o.cooked_from || o.food && o.recipe) ||
+       v.profession == 'chef'       && (o.cooks_to || o.food && o.recipe) ||
        v.profession == 'adventurer' && o.mob_drop ){
       inventory.addObject(inventory.selected,-10);
       villagers.assignObject(slug,inventory.selected);
