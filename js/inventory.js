@@ -40,7 +40,7 @@ var inventory = {
       bowl :            {display:'Bowl',            symbol: 'U', recipe: 'P P P'                                    },
       bucket :          {display:'Bucket',          symbol: 'u', recipe: 'i i i'                                    },
       mushroom :        {display:'Mushroom',        symbol: 'm', food: 1                                            },
-      stew :            {display:'Mushroom Stew',   symbol: 'V', recipe: 'm  m  b'         , food: 12               },
+      stew :            {display:'Mushroom Stew',   symbol: 'V', recipe: 'm  m  U'         , food: 12               },
       string :          {display:'String',          symbol: '@', mob_drop:1                                         },
       feather :         {display:'Feather',         symbol: 'f', mob_drop:1                                         },
       gunpowder :       {display:'Gunpowder',       symbol: 'x', mob_drop:1                                         },
