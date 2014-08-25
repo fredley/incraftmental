@@ -156,6 +156,17 @@ var world = {
     this.context.fillText('웃', this.posX * 16, this.posY * 16);
   },
 
+  sail: function(rX,rY){
+    if(inventory.getObject('boat').quantity < 10){
+      main.addMouseAlert('You need 10 boats to sail that way');
+      return;
+    }
+    var block = this.blockAt(rX,rY);
+    if(!block || block.symbol !== '~') return;
+    inventory.addObject('boat',-10);
+    this.move(rX,rY,true);
+  },
+
   mine: function(rX,rY){
     if(inventory.getObject('iron_pickaxe').quantity < 10){
       main.addMouseAlert('You need 10 iron pickaxes to mine');
@@ -174,6 +185,9 @@ var world = {
     if (!force && !this.canMove(relX,relY)){
       if(this.blockAt(relX,relY).symbol === 'X'){
         this.mine(relX,relY);
+      }
+      if(this.blockAt(relX,relY).symbol === '~'){
+        this.sail(relX,relY);
       }
       return;
     }
