@@ -308,7 +308,7 @@ init : function(){
     if(this.keydown) return;
     this.keydown = true;
     if(main.map_visible && e.keyCode >= 37 && e.keyCode <= 40){
-      if(combat.inCombat) return;
+      if(combat.inCombat || adventure.inAdventure) return;
       // Because everyone loves stupid optimisation
       var x =  (e.keyCode % 2)      * (e.keyCode - 38);
       var y = ((e.keyCode % 2) - 1) * (e.keyCode - 39) * -1;
