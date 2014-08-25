@@ -81,6 +81,10 @@ var villagers = {
       'hunger': 10
     });
     this.updateDisplay();
+    if(this.population.length > 4 && settlements.occupied.length == 0){
+      settlements.generate(4);
+      main.addAlert('Your villagers have decided to create a settlement!');
+    }
   },
 
   generateName : function(){

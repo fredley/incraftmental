@@ -4,7 +4,7 @@ var settlements = {
   selected : null,
 
   generate : function(size){
-    var name = this.generateName();
+    var name = (settlements.length == 0) ? 'Home' : this.generateName();
     while(this.nameUsed()){
       name = this.generateName(name);
     }
