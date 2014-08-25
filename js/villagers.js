@@ -56,9 +56,10 @@ var villagers = {
   levels : {
     1 : 'Novice',
     2 : 'Apprentice',
-    3 : '',
+    3 : 'Journeyman',
     4 : 'Master',
-    5 : 'Supreme'
+    5 : 'Supreme',
+    6 : 'Ultimate'
   },
 
   init : function(){
@@ -135,7 +136,7 @@ var villagers = {
           }
         }
         v.actions++;
-        if(v.actions > (250 * Math.pow(2,v.level)) && v.level < 5){
+        if(v.actions > (250 * Math.pow(2,v.level)) && v.level < 6){
           v.actions = 0;
           v.level++;
           main.addAlert(v.name + ' gained a level!');
