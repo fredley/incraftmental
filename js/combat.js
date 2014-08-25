@@ -7,6 +7,8 @@ var combat = {
   fighting: null, // save this, so that quitting during a fight is a disadvantage
   canAttack: true,
   mobAttack: null,
+  hasDog: false,
+  dogAttack: null,
 
   mobs : {
     zombie:   { hp: 10, attack: 1, drops: { slug:'iron_ingot', quantity:50, display: 'iron ingots'}},
@@ -88,6 +90,16 @@ var combat = {
       }
       combat.draw();
     },600);
+    if(!this.hasDog) return;
+    this.dogAttack = setInterval(function(){
+      combat.mobhp = Math.max(0,combat.mobhp - 1);
+      combat.logMessage('Your dog hit the ' + combat.fighting.capitalize() + ' for 1 point');
+      if(combat.mobhp == 0){
+        combat.win();
+        return;
+      }
+      combat.draw();
+    },350);
   },
 
   endCombat: function(){
@@ -97,6 +109,7 @@ var combat = {
     $('#popup .fight').addClass('disabled');
     $('#popup .run').addClass('disabled');
     clearInterval(this.mobAttack);
+    clearInterval(this.dogAttack);
   },
 
   logMessage: function(msg){
