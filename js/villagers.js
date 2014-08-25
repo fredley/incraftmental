@@ -2,6 +2,7 @@ var villagers = {
 
   population : [],
   cost : 1,
+  food_value: 5,
 
   professions : {
     smith : function(villager){
@@ -127,7 +128,7 @@ var villagers = {
           }else{
             var toEat = randomChoice(foods);
             inventory.addObject(toEat[0],-10);
-            v.hunger = toEat[1] * 2;
+            v.hunger = toEat[1] * this.food_value;
           }
         }
         v.actions++;
