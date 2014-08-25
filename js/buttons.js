@@ -319,25 +319,27 @@ init : function(){
     }
     switch(e.keyCode){
       case 65: //A
-        if(!combat.inCombat) return;
-        $('#shade .fight').click();
+        $('#shade .fight:visible').click();
         break;
       case 66: //B
-        if(!combat.inCombat) return;
-        if($('#shade .fight-ranged:visible').length < 1) return;
-        $('#shade .fight-ranged').click();
+        $('#shade .fight-ranged:visible').click();
         break;
       case 67: //C
-        if($('#shade .close-button:visible').length < 1) return;
         $('#shade .close-button:visible').click();
         break;
+      case 70: //F
+        $('#shade .move_adventure.forward:visible').click();
+        break;
+      case 76:
+        $('#shade .move_adventure.left:visible').click();
+        break;
       case 80: //P
-        if(!main.map_visible) return;
+        if(!main.map_visible || combat.inCombat || adventure.inAdventure) return;
         $('#place-torch').click();
         break;
       case 82: //R
-        if(!combat.inCombat) return;
-        $('#shade .run').click();
+        $('#shade .run:visible').click();
+        $('#shade .move_adventure.right:visible').click();
         break;
     }
   });
@@ -463,6 +465,10 @@ hook_encounter : function(){
     });
   });
   popup.find('.run').on('click',function(e){
+    if(adventure.inAdventure){
+      main.addMouseAlert("You can't run away!",e);
+      return;
+    }
     combat.run();
   });
   popup.find('.close-button').on('click',function(){
