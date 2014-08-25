@@ -126,7 +126,11 @@ var villagers = {
           if(foods.length == 0){
             continue;
           }else{
-            var toEat = randomChoice(foods);
+            foods.sort(function(a, b) {
+                a = a[1];b = b[1];
+                return a < b ? -1 : (a > b ? 1 : 0);
+            });
+            var toEat = foods.pop();
             inventory.addObject(toEat[0],-10);
             v.hunger = toEat[1] * this.food_value;
           }
