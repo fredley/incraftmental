@@ -18,7 +18,7 @@ var adventure = {
   },
 
   generateEscapeCode: function(){
-    var length = Math.floor(Math.random() * 3) + 2;
+    var length = Math.floor(Math.random() * 2) + 1;
     this.escapeCode = '';
     for(var i = 0;i < length; i++){
         this.escapeCode += randomChoice(['L','R','F']);
