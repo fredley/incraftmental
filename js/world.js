@@ -154,7 +154,7 @@ var world = {
 
   mine: function(rX,rY){
     if(inventory.getObject('iron_pickaxe').quantity < 10){
-      main.addMouseAlert('You need 10 iron pickaxes to mine',{pageX:350,pageY:350});
+      main.addMouseAlert('You need 10 iron pickaxes to mine');
       return;
     }
     var block = this.blockAt(rX,rY);

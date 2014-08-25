@@ -113,6 +113,7 @@ addAlert : function(text){
 },
 
 addMouseAlert : function(text,e){
+  if(!e || !e.pageX) e = {pageX:350,pageY:350};
   var alert = $('<div class="mouse-alert"></div>');
   alert.html(text);
   alert.css({
