@@ -229,7 +229,7 @@ var inventory = {
       if(this.objects.tools[tool].quantity < 1) continue;
       for(var slug in this.objects.tools[tool].gives){
         if(Math.random() < this.objects.tools[tool].gives[slug]){
-          this.addObject(slug,Math.floor(this.objects.tools[tool].bonus * logBase((Math.pow(this.objects.tools[tool].quantity,2) + 1),2)/2));
+          this.addObject(slug,Math.max(1,Math.floor(this.objects.tools[tool].bonus * logBase((Math.pow(this.objects.tools[tool].quantity,2) + 1),2)/2)));
         }
       }
     }

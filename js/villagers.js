@@ -86,7 +86,7 @@ var villagers = {
   generateName : function(){
     var name = "";
     var vowels = ["a","e","i","o","u"];
-    var consonants = ["b","ch","d","f","g","h","k","l","m","n","p","r","s","sh","t","th","v","z"];
+    var consonants = ["b","ch","d","f","g","h","sk","l","m","n","p","r","s","fl","t","th","v","z"];
     var length = randomInt(3,5);
     for(var i=0; i<=length; i++){
         name += (i % 2 == 0) ? randomChoice(consonants) : randomChoice(vowels);

@@ -9,7 +9,7 @@ var combat = {
   mobAttack: null,
 
   mobs : {
-    zombie:   { hp: 10, attack: 1, drops: { slug:'iron', quantity:50, display: 'iron ingots'}},
+    zombie:   { hp: 10, attack: 1, drops: { slug:'iron_ingot', quantity:50, display: 'iron ingots'}},
     skeleton: { hp: 15, attack: 2, drops: { slug:'bonemeal', quantity:100, display: 'hunks of bonemeal'}},
     spider:   { hp: 10, attack: 3, drops: { slug:'string', quantity:50, display: 'pieces of string'}},
     enderman: { hp: 20, attack: 5, drops: { slug:'diamond', quantity:100, display: 'diamonds'}},

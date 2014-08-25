@@ -321,8 +321,8 @@ init : function(){
         $('#shade .fight-ranged').click();
         break;
       case 67: //C
-        if($('#shade .close-button').length < 1) return;
-        $('#shade .close-button').click();
+        if($('#shade .close-button:visible').length < 1) return;
+        $('#shade .close-button:visible').click();
         break;
       case 80: //P
         if(!main.map_visible) return;
@@ -502,7 +502,11 @@ updateDisplay : function(){
     }
   }
   if(combat.unlocked()){
+    $('#tab-crafting').show();
     $('#tab-exploration').show();
+    if($('.work-tab.active').length !== 1){
+      $('#tab-crafting').addClass('active');
+    }
   }
   if(settlements.occupied.length > 0){
     $('#tab-settlements').show();
