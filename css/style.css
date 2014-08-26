@@ -49,6 +49,27 @@ button:hover {
 button:focus {
   outline: 0; }
 
+.item {
+  font-size: 11px;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 2px 5px;
+  clear: both; }
+  .item.selected {
+    background: #555;
+    border-radius: 4px; }
+    .item.selected.building {
+      font-weight: bold;
+      color: #cccccc; }
+      .item.selected.building .requirements {
+        font-weight: normal;
+        color: #999; }
+      .item.selected.building .description {
+        font-size: 10px;
+        margin: 3px 0px; }
+  .item .requirements {
+    display: none; }
+
 .pane {
   display: none;
   border: 1px solid #999;
@@ -67,15 +88,6 @@ button:focus {
     border: 1px solid #555; }
     .pane .helptext.warning {
       border: 1px solid #965050; }
-  .pane .item {
-    font-size: 11px;
-    float: left;
-    box-sizing: border-box;
-    cursor: pointer;
-    padding: 2px 5px; }
-    .pane .item.selected {
-      background: #555;
-      border-radius: 4px; }
   .pane h3 {
     margin: 0;
     clear: both;
@@ -340,25 +352,6 @@ footer:hover {
       padding: 5px 10px;
       float: left;
       margin-bottom: 10px; }
-      #settlements #lists .list .item {
-        font-size: 11px;
-        box-sizing: border-box;
-        cursor: pointer;
-        padding: 2px 5px; }
-        #settlements #lists .list .item.selected {
-          background: #555;
-          border-radius: 4px; }
-          #settlements #lists .list .item.selected.building {
-            font-weight: bold;
-            color: #cccccc; }
-            #settlements #lists .list .item.selected.building .requirements {
-              font-weight: normal;
-              color: #999; }
-            #settlements #lists .list .item.selected.building .description {
-              font-size: 10px;
-              margin: 3px 0px; }
-        #settlements #lists .list .item .requirements {
-          display: none; }
   #settlements #grid {
     float: left;
     margin-left: 20px; }

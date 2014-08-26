@@ -59,6 +59,33 @@ button:hover{
 button:focus{
     outline:0;
 }
+
+.item{
+    font-size: 11px;
+    box-sizing:border-box;
+    cursor:pointer;
+    padding:2px 5px;
+    clear: both;
+    &.selected{
+        background: $highlight;
+        border-radius: 4px;
+        &.building{
+            font-weight:bold;
+            color:lighten($light,20);
+            .requirements{
+                font-weight:normal;
+                color:$light;
+            }
+            .description{
+                font-size: 10px;
+                margin: 3px 0px;
+            }
+        }
+    }
+    .requirements{
+        display: none;
+    }
+}
 .pane{
     display: none;
     border:1px solid $light;
@@ -77,17 +104,6 @@ button:focus{
         border: 1px solid $highlight;
         &.warning{
             border: 1px solid $red;
-        }
-    }
-    .item{
-        font-size: 11px;
-        float: left;
-        box-sizing:border-box;
-        cursor:pointer;
-        padding:2px 5px;
-        &.selected{
-            background: $highlight;
-            border-radius: 4px;
         }
     }
     h3{
@@ -383,31 +399,6 @@ footer:hover{
             padding: 5px 10px;
             float:left;
             margin-bottom:10px;
-            .item{
-                font-size: 11px;
-                box-sizing:border-box;
-                cursor:pointer;
-                padding:2px 5px;
-                &.selected{
-                    background: $highlight;
-                    border-radius: 4px;
-                    &.building{
-                        font-weight:bold;
-                        color:lighten($light,20);
-                        .requirements{
-                            font-weight:normal;
-                            color:$light;
-                        }
-                        .description{
-                            font-size: 10px;
-                            margin: 3px 0px;
-                        }
-                    }
-                }
-                .requirements{
-                    display: none;
-                }
-            }
         }
     }
     #grid{

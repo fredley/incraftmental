@@ -21,6 +21,18 @@ var trading = {
     this.rates[b+'_'+a] += n;
   },
 
+  showPopup: function(){
+    for(var group in inventory.objects){
+      for(var object in inventory.objects[group]){
+        var o = inventory.getObject(object);
+        if(o.value){
+          $('.trade-pane').append('<div class="inventory-item item" data-object="' + object + '">' + o.display + '</div>');
+        }
+      }
+    }
+    main.showPopup('trading');
+  },
+
   tick: function(){
     if(ticker > updateEvery){
       for(rate in this.rates){
