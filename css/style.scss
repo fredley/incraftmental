@@ -519,6 +519,16 @@ footer:hover{
             background: rgba(0,0,0,0.8);
         }
     }
+    .trade-pane{
+        float: left;
+        width: 350px;
+        min-height: 100px;
+        overflow-y:scroll;
+        border: 1px solid $highlight;
+        &.trade-away{
+            margin-right:10px;
+        }
+    }
 }
 .underline{
     text-decoration: underline;

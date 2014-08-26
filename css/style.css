@@ -457,6 +457,14 @@ footer:hover {
     text-align: center;
     padding-top: 30px;
     background: rgba(0, 0, 0, 0.8); }
+.popup .trade-pane {
+  float: left;
+  width: 350px;
+  min-height: 100px;
+  overflow-y: scroll;
+  border: 1px solid #555; }
+  .popup .trade-pane.trade-away {
+    margin-right: 10px; }
 
 .underline {
   text-decoration: underline; }

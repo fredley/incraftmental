@@ -24,7 +24,7 @@ var inventory = {
       crafting_table: {display:'Crafting Table'     ,           symbol: 'T', recipe:'PP PP'        , fuel_source: 4           },
       furnace:        {display:'Furnace'            ,           symbol: 'F', recipe:'CCCC CCCC'    , fuel_level:{cur:0,max:0} },
       clay:           {display:'Clay'               , value: 5, symbol: '.'                        , smelts_to: 'brick'       },
-      cake:           {display:'Cake'                           symbol: '*', recipe: 'MMM,o,;;;'   , food: 20                 }
+      cake:           {display:'Cake'               ,           symbol: '*', recipe: 'MMM,o,;;;'   , food: 20                 }
     },
 
     items: {
