@@ -131,7 +131,7 @@ var settlements = {
           hasBarracks = 1;
         }
       }
-      if(Math.random() > hasChurch * 0.5 && Math.random() > hasBarracks * 0.9){
+      if(Math.random() > hasChurch * 0.5 && Math.random() > hasBarracks * 0.99){
         main.addAlert(toDestroy.name + ' was destroyed by zombies!');
         toDestroy.buildings = [];
         this.updateDisplay();

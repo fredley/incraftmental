@@ -354,6 +354,9 @@ footer:hover {
             #settlements #lists .list .item.selected.building .requirements {
               font-weight: normal;
               color: #999; }
+            #settlements #lists .list .item.selected.building .description {
+              font-size: 10px;
+              margin: 3px 0px; }
         #settlements #lists .list .item .requirements {
           display: none; }
   #settlements #grid {
