@@ -56,6 +56,7 @@ var settlements = {
           if(i == obj.width-1)  el.addClass("right-edge");
           if(j == obj.height-1) el.addClass("bottom-edge");
           el.html(obj.symbol);
+          el.addClass(settlement.buildings[b].building);
         }
       }
     }

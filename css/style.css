@@ -123,6 +123,15 @@ button:focus {
 .fight-ranged,
 .close-button {
   display: none; }
+  #get-villager.show,
+  #make-planks.show,
+  #make-crafting.show,
+  #alerts.show,
+  #popups.show,
+  #blocks.show,
+  .fight-ranged.show,
+  .close-button.show {
+    display: block; }
 
 #start-buttons {
   float: left;
@@ -380,6 +389,9 @@ footer:hover {
       border-bottom: 1px solid #999; }
     #settlements .settlement-grid.left-edge {
       border-left: 1px solid #999; }
+    #settlements .settlement-grid.factory, #settlements .settlement-grid.market {
+      background: #777777;
+      cursor: pointer; }
 
 #shade {
   position: fixed;

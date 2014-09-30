@@ -415,6 +415,14 @@ hook_settlements : function(){
   $('.settlement-grid').on('mouseenter',function(){
     settlements.drawHover(parseInt($(this).attr('data-x')),parseInt($(this).attr('data-y')));
   }).on('click',function(e){
+    if($(this).hasClass('market')){
+      main.showPopup('trading');
+      return;
+    }
+    if($(this).hasClass('factory')){
+      main.showPopup('factory-machine');
+      return;
+    }
     if(!$(this).hasClass('hover-green')){
       main.addMouseAlert("You can't build there",e);
       return;
@@ -471,9 +479,6 @@ hook_encounter : function(){
     }
     combat.run();
   });
-  popup.find('.close-button').on('click',function(){
-    $('#shade').hide();
-  });
 },
 
 hook_adventure: function(){
@@ -481,9 +486,6 @@ hook_adventure: function(){
   popup.find('.move_adventure').on('click',function(){
     if($(this).hasClass('disabled')) return;
     adventure.go($(this).attr('data-direction'));
-  });
-  popup.find('.close-button').on('click',function(){
-    $('#shade').hide();
   });
 },
 

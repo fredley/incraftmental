@@ -146,6 +146,9 @@ button:focus{
 .fight-ranged,
 .close-button{
     display:none;
+    &.show{
+        display: block;
+    }
 }
 #start-buttons{
     float:left;
@@ -429,6 +432,10 @@ footer:hover{
         &.right-edge{  border-right:1px solid $light; }
         &.bottom-edge{ border-bottom:1px solid $light; }
         &.left-edge{   border-left:1px solid $light; }
+        &.factory, &.market{
+            background:mix($light,$highlight);
+            cursor:pointer;
+        }
     }
 }
 #shade{

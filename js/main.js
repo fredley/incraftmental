@@ -136,6 +136,9 @@ showPopup : function(id){
   $('#popup').html('');
   $('#popup').append($('.'+id).clone());
   $('#shade').show();
+  $('#shade').find('.close-button').on('click',function(){
+    $('#shade').hide();
+  });
 }
 
 };
